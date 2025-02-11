@@ -16,26 +16,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Icon } from "../icon/Icon";
-import { Typography } from "../typography/Typography";
-import {
-  StyledIconBox,
-  StyledLabelBox,
-  StyledMuiBox
-} from "./OverviewCard.styles";
-import { OverviewCardProps } from "./types";
 
-export const OverviewCard = (props: OverviewCardProps) => {
-  const { label, icon, onClick } = props;
-  return (
-    <StyledMuiBox onClick={onClick}>
-      <StyledIconBox>{icon}</StyledIconBox>
-
-      <StyledLabelBox>
-        <Typography variant="body-medium">{label}</Typography>
-      </StyledLabelBox>
-
-      <Icon name="ChevronRight" />
-    </StyledMuiBox>
-  );
+type NavigationDropdownAccountProps = {
+  open: boolean;
+  onSignoutClicked: () => void;
+  onAccountSettingsClicked: () => void;
 };
+
+export type { NavigationDropdownAccountProps };

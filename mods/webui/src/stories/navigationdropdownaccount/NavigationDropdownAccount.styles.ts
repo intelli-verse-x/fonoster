@@ -16,23 +16,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-export const StyledBox = styled(Box)(({ theme }) => ({
+export const NavigationDropdownAccountContainer = styled("div")(() => ({
+  position: "relative"
+}));
+
+export const NavigationDropdownAccountContent = styled("div")<{
+  open: boolean;
+}>(({ open }) => ({
+  position: "absolute",
+  display: open ? "flex" : "none",
+  flexDirection: "column",
+  width: "251px",
+  boxShadow: "0px 5px 10px 0px #0000001A",
+  zIndex: 10,
+  padding: "10px 0px"
+}));
+
+export const NavigationDropdownAccountHeader = styled("div")(() => ({
   display: "flex",
   alignItems: "center",
+  height: "42px",
+  padding: "0px 10px"
+}));
+
+export const NavigationDropdownAccountMenuItem = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  height: "38px",
+  padding: "0px 10px",
   cursor: "pointer",
-  width: "fit-content",
-  color: theme.palette.secondary[500],
-
   "&:hover": {
-    color: theme.palette.secondary[800]
-  },
-
-  "&.disabled": {
-    color: theme.palette.secondary[200],
-    cursor: "not-allowed",
-    pointerEvents: "none"
+    backgroundColor: theme.palette.secondary[50]
   }
 }));
