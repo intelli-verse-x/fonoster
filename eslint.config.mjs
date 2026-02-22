@@ -24,6 +24,10 @@ import prettierConfig from 'eslint-config-prettier';
 import noLoopsPlugin from 'eslint-plugin-no-loops';
 import importPlugin from 'eslint-plugin-import';
 import headerPlugin from 'eslint-plugin-header'; export default [
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+
   eslint.configs.recommended,
   {
     files: ['mods/**/*.ts', 'mods/**/*.tsx'],
