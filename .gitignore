@@ -1,5 +1,4 @@
 node_modules/
-.env*
 !.env.example
 !.env.example.dev
 *.log
@@ -17,3 +16,4 @@ config/assistant*
 .next
 next-env.d.ts
 .npmrc
+config.bat

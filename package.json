@@ -77,6 +77,8 @@
   },
   "dependencies": {
     "@prisma/client": "^6.19.1",
+    "dotenv": "^8.2.0",
+    "node-fetch": "^3.3.2",
     "xstate": "5.17.3"
   },
   "devDependencies": {
