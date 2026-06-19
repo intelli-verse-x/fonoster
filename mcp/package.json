@@ -1,0 +1,11 @@
+{
+  "name": "fonoster-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP server for Fonoster voice + AI voice agents (Intelli-Verse engagement stack).",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "@fonoster/sdk": "0.18.1" },
+  "engines": { "node": ">=18" }
+}
