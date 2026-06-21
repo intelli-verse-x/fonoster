@@ -24,10 +24,6 @@ import prettierConfig from 'eslint-config-prettier';
 import noLoopsPlugin from 'eslint-plugin-no-loops';
 import importPlugin from 'eslint-plugin-import';
 import headerPlugin from 'eslint-plugin-header'; export default [
-import { createRequire } from 'module';
-
-const require = createRequire(import.meta.url);
-
   eslint.configs.recommended,
   {
     files: ['mods/**/*.ts', 'mods/**/*.tsx'],
@@ -125,6 +121,23 @@ const require = createRequire(import.meta.url);
         'memberSyntaxSortOrder': ['none', 'all', 'multiple', 'single'],
         'allowSeparatedGroups': true
       }]
+    }
+  },
+  {
+    files: ['mods/**/*.mjs', 'mods/**/*.cjs'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      globals: {
+        process: 'readonly',
+        console: 'readonly',
+        Buffer: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        require: 'readonly',
+        module: 'writable',
+        exports: 'writable'
+      }
     }
   },
   {
