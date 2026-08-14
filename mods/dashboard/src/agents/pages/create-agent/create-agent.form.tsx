@@ -117,7 +117,7 @@ export function CreateAgentForm({
           isLoadingDomains
             ? "Loading domains..."
             : domains.length === 0
-              ? "No domains found. Create one first."
+              ? "Create a domain first, then come back."
               : ""
         }
         allowClear={true}
@@ -132,7 +132,7 @@ export function CreateAgentForm({
       <Box sx={{ display: "flex", flexDirection: "column", gap: "12px" }}>
         <Select
           {...field}
-          label="Credentials"
+          label="Sign-in credentials"
           options={credentials.map(({ ref, name }) => ({
             value: ref,
             label: name
@@ -142,14 +142,14 @@ export function CreateAgentForm({
             isLoadingCredentials
               ? "Loading credentials..."
               : credentials.length === 0
-                ? "No credentials found. Create one first."
+                ? "Create credentials first, or add them below."
                 : ""
           }
           allowClear={true}
         />
         <ModalTrigger
           onClick={handleOpenCredentialsModal}
-          label="Create New Credentials"
+          label="Create new credentials"
         />
       </Box>
     ),
@@ -162,7 +162,7 @@ export function CreateAgentForm({
         <FormRoot onSubmit={form.handleSubmit(onSubmit)}>
           {/* Agent ID - Only show in edit mode */}
           {isEdit && initialValues?.ref && (
-            <ResourceIdField value={initialValues.ref} label="Agent Ref" />
+            <ResourceIdField value={initialValues.ref} label="Agent ID" />
           )}
 
           {/* Friendly Name */}
@@ -172,7 +172,7 @@ export function CreateAgentForm({
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input type="text" label="Friendly Name" {...field} />
+                  <Input type="text" label="Agent name" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -196,7 +196,7 @@ export function CreateAgentForm({
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input type="text" label="Username" {...field} />
+                  <Input type="text" label="SIP username" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -220,7 +220,7 @@ export function CreateAgentForm({
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input type="number" label="Max Contacts" {...field} />
+                  <Input type="number" label="Max contacts" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -233,7 +233,11 @@ export function CreateAgentForm({
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input type="number" label="Expires (seconds)" {...field} />
+                  <Input
+                    type="number"
+                    label="Registration expires (seconds)"
+                    {...field}
+                  />
                 </FormControl>
               </FormItem>
             )}
