@@ -18,11 +18,8 @@
  */
 
 import { useCallback } from "react";
-import { Box } from "@mui/material";
 import { useNavigate } from "react-router";
 
-import { Page } from "~/core/components/general/page/page";
-import { PageHeader } from "~/core/components/general/page/page-header";
 import { FormSubmitButton } from "~/core/components/design-system/ui/form-submit-button/form-submit-button";
 import { Button } from "~/core/components/design-system/ui/button/button";
 import { Tooltip } from "~/core/components/design-system/ui/tooltip/tooltip";
@@ -37,6 +34,10 @@ import { formatApplicationData } from "~/applications/services/format-applicatio
 import { useApplicationContext } from "~/applications/stores/application.store";
 import type { Form, Schema } from "./schemas/application-schema";
 import { useApplicationTestCall } from "~/applications/hooks/use-test-call";
+import {
+  ApplicationStudioLayout,
+  studioActionButtonSx
+} from "./application-studio-layout";
 
 export function CreateApplicationContainer() {
   /** The current workspace ID from route or context */
@@ -96,65 +97,63 @@ export function CreateApplicationContainer() {
   const { onTestCall, audioRef, isCalling, isLoadingCall, isAnswered, hangup } =
     useApplicationTestCall();
 
+  const actions = (
+    <>
+      <FormSubmitButton
+        size="small"
+        loadingText="Saving..."
+        sx={studioActionButtonSx}
+      >
+        Save
+      </FormSubmitButton>
+      <Tooltip
+        title={
+          application?.ref
+            ? "Test the application with a call"
+            : "Save the application first to enable test calls"
+        }
+        placement="left"
+      >
+        <Button
+          onClick={() => {
+            if (!application?.ref) return;
+            return isAnswered ? hangup() : onTestCall();
+          }}
+          variant="outlined"
+          size="small"
+          disabled={
+            !application?.ref || isLoadingCall || (isCalling && !isAnswered)
+          }
+          startIcon={
+            <Icon
+              name="Phone"
+              sx={{ fontSize: "16px !important", color: "inherit" }}
+            />
+          }
+          sx={studioActionButtonSx}
+        >
+          {application?.ref
+            ? isCalling && !isAnswered
+              ? "Calling..."
+              : isAnswered
+                ? "Hangup"
+                : "Test Call"
+            : "Save to test call"}
+        </Button>
+      </Tooltip>
+    </>
+  );
+
   return (
     <>
-      <Page variant="form">
-        <PageHeader
-          title="Create New Application"
-          description="An Application defines how your Voice AI behaves. Use Autopilot for LLM-based agents or External for custom logic."
-          onBack={{ label: "Back to voice applications", onClick: onGoBack }}
-          actions={
-            <Box sx={{ display: "flex", gap: 1, flexDirection: "column" }}>
-              {/* Submit application form */}
-              <FormSubmitButton size="small" loadingText="Saving...">
-                Save Voice Application
-              </FormSubmitButton>
-
-              {/* Run SIP test call */}
-              <Tooltip
-                title={
-                  application?.ref
-                    ? "Test the application with a call"
-                    : "Save the application first to enable test calls"
-                }
-                placement="left"
-              >
-                <Button
-                  onClick={() => {
-                    if (!application?.ref) return;
-
-                    return isAnswered ? hangup() : onTestCall();
-                  }}
-                  variant="outlined"
-                  size="small"
-                  disabled={isLoadingCall || (isCalling && !isAnswered)}
-                  startIcon={
-                    <Icon
-                      name="Phone"
-                      sx={{ fontSize: "16px !important", color: "inherit" }}
-                    />
-                  }
-                >
-                  {application?.ref
-                    ? isCalling && !isAnswered
-                      ? "Calling..."
-                      : isAnswered
-                        ? "Hangup"
-                        : "Test Call"
-                    : "Save to Test Call"}
-                </Button>
-              </Tooltip>
-            </Box>
-          }
-        />
-
-        {/* Application creation form */}
-        <Box sx={{ maxWidth: "440px" }}>
-          <CreateApplicationForm onSubmit={onSave} />
-        </Box>
-      </Page>
-
-      {/* Audio element to output test call audio via SIP */}
+      <ApplicationStudioLayout
+        title="New voice application"
+        description="Autopilot: the AI talks on the call. External: your server handles the call."
+        onBack={onGoBack}
+        actions={actions}
+      >
+        <CreateApplicationForm onSubmit={onSave} />
+      </ApplicationStudioLayout>
       <audio ref={audioRef} autoPlay />
     </>
   );

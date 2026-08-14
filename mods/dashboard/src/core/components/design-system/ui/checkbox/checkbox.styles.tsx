@@ -48,13 +48,13 @@ export const CheckboxLabel = styled(FormControlLabel)(({ theme }) => ({
 
 export const CheckboxRoot = styled(Checkbox)(({ theme }) => ({
   padding: "8px",
-  color: theme.palette.base["02"],
+  color: theme.palette.base["05"],
 
   "&.Mui-checked": {
-    color: theme.palette.base["02"]
+    color: theme.palette.brand.main
   },
 
   "&.MuiCheckbox-indeterminate": {
-    color: theme.palette.base["02"]
+    color: theme.palette.brand.main
   }
 }));

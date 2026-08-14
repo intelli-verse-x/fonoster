@@ -16,14 +16,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Page } from "~/core/components/general/page/page";
-import { PageHeader } from "~/core/components/general/page/page-header";
 import type { Route } from "./+types/edit-number.page";
 import { useCallback, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { FormProvider } from "~/core/contexts/form-context";
 import { FormSubmitButton } from "~/core/components/design-system/ui/form-submit-button/form-submit-button";
-import { Box } from "@mui/material";
 import {
   CreateNumberForm,
   type Schema
@@ -34,6 +31,11 @@ import { useWorkspaceId } from "~/workspaces/hooks/use-workspace-id";
 import { Splash } from "~/core/components/general/splash/splash";
 import { COUNTRIES } from "../create-number/create-number.const";
 import { getErrorMessage } from "~/core/helpers/extract-error-message";
+import { PRODUCT_NAME } from "~/core/brand/product";
+import {
+  ApplicationStudioLayout,
+  studioActionButtonSx
+} from "~/applications/pages/create-application/application-studio-layout";
 
 /**
  * Sets the metadata for the "Edit Number" page.
@@ -46,11 +48,11 @@ import { getErrorMessage } from "~/core/helpers/extract-error-message";
  */
 export function meta(_: Route.MetaArgs) {
   return [
-    { title: "Numbers | Fonoster" },
+    { title: `Edit number | ${PRODUCT_NAME}` },
     {
       name: "description",
       content:
-        "A Number is a PSTN phone number that can be used to make or receive calls."
+        "Change which voice app answers this number, and which trunk sends calls out."
     }
   ];
 }
@@ -157,27 +159,28 @@ export default function EditNumber() {
    */
   return (
     <FormProvider>
-      <Page variant="form">
-        <PageHeader
-          title="Edit Number"
-          description="A Number is a PSTN phone number that can be used to make or receive calls."
-          onBack={{ label: "Back to voice numbers", onClick: onGoBack }}
-          actions={
-            <FormSubmitButton size="small" loadingText="Saving...">
-              Save Number
-            </FormSubmitButton>
-          }
+      <ApplicationStudioLayout
+        title={data.name || "Edit number"}
+        description="Change which voice app answers this number, and which trunk sends calls out."
+        onBack={onGoBack}
+        backLabel="Back to numbers"
+        sideHint="Save after you change the voice app, trunk, or number name."
+        actions={
+          <FormSubmitButton
+            size="small"
+            loadingText="Saving..."
+            sx={studioActionButtonSx}
+          >
+            Save
+          </FormSubmitButton>
+        }
+      >
+        <CreateNumberForm
+          onSubmit={onSave}
+          initialValues={transformedData}
+          isEdit={true}
         />
-
-        {/* Form container with a max width for readability and consistent layout */}
-        <Box sx={{ maxWidth: "440px" }}>
-          <CreateNumberForm
-            onSubmit={onSave}
-            initialValues={transformedData}
-            isEdit={true}
-          />
-        </Box>
-      </Page>
+      </ApplicationStudioLayout>
     </FormProvider>
   );
 }

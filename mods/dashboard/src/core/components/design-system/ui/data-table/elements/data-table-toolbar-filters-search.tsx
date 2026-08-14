@@ -31,14 +31,14 @@ const InputRoot = styled(TextField)<{ $active?: boolean }>(
   ({ $active, theme }) => ({
     "& .MuiOutlinedInput-root": {
       paddingRight: "8px",
-      backgroundColor: theme.palette.base["07"],
-      maxHeight: "32px",
-      minWidth: "145px",
-      borderRadius: "4px",
+      backgroundColor: theme.palette.bg.muted,
+      maxHeight: "40px",
+      minWidth: "180px",
+      borderRadius: "10px",
       border: "1px solid transparent",
       borderColor: $active
         ? theme.palette.brand["04"]
-        : theme.palette.base["06"],
+        : theme.palette.base["07"],
       "& fieldset": {
         border: "none"
       },
@@ -51,12 +51,12 @@ const InputRoot = styled(TextField)<{ $active?: boolean }>(
     },
 
     "& .MuiInputBase-input": {
-      padding: "8px",
-      fontSize: "10px",
+      padding: "10px 12px",
+      fontSize: "13px",
       fontFamily: "Poppins",
       fontWeight: 500,
-      maxHeight: "32px",
-      color: theme.palette.base["02"],
+      maxHeight: "40px",
+      color: "#F4F7FF",
 
       "&::placeholder": {
         color: theme.palette.base["03"],

@@ -31,12 +31,13 @@ import { useCreateUser } from "~/auth/services/auth.service";
 import { useNavigate, useSubmit } from "react-router";
 import { getErrorMessage } from "~/core/helpers/extract-error-message";
 import { getGithubSignupUrl } from "~/auth/config/oauth";
+import { PRODUCT_NAME, PRODUCT_PARENT } from "~/core/brand/product";
 import { IS_CLOUD, IS_SIGNUP_ENABLED } from "~/core/sdk/stores/fonoster.config";
 
 export { action } from "../login/login.action";
 
 export function meta(_: Route.MetaArgs) {
-  return [{ title: "Sign Up | Fonoster" }];
+  return [{ title: `Sign Up | ${PRODUCT_NAME}` }];
 }
 
 export const schema = z.object({
@@ -134,19 +135,22 @@ export default function SignupPage() {
   }, [navigate]);
 
   return (
-    <Box
-      width="100%"
-      maxWidth="440px"
-      gap="40px"
-      display="flex"
-      flexDirection="column"
-    >
+    <Box width="100%" gap="20px" display="flex" flexDirection="column">
       <Typography
         variant="heading-large"
-        color="base.03"
-        sx={{ textAlign: "center" }}
+        sx={{ textAlign: "center", color: "#fff", fontWeight: 600 }}
       >
-        Sign up for Fonoster
+        Create account
+      </Typography>
+      <Typography
+        sx={{
+          textAlign: "center",
+          color: "base.04",
+          fontSize: 14,
+          mt: -1
+        }}
+      >
+        Join {PRODUCT_NAME} on {PRODUCT_PARENT}
       </Typography>
       <SignupForm {...{ form, onSubmit, onGithubAuth }} />
     </Box>

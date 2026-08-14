@@ -226,7 +226,7 @@ export function CreateTrunkForm({
         <FormRoot onSubmit={form.handleSubmit(onSubmit)}>
           {/* Trunk ID - Only show in edit mode */}
           {isEdit && initialValues?.ref && (
-            <ResourceIdField value={initialValues.ref} label="Trunk Ref" />
+            <ResourceIdField value={initialValues.ref} label="Trunk ID" />
           )}
 
           {/* Friendly Name Field */}
@@ -236,7 +236,7 @@ export function CreateTrunkForm({
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input type="text" label="Friendly Name" {...field} />
+                  <Input type="text" label="Trunk name" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -244,14 +244,12 @@ export function CreateTrunkForm({
 
           {/* Text to Speech Section */}
           <Box sx={{ mt: "8px" }}>
-            <Typography variant="mono-medium" color="base.03">
-              INBOUND
+            <Typography variant="mono-medium" sx={{ color: "#fff", letterSpacing: "0.08em" }}>
+              Inbound
             </Typography>
-            <Typography variant="body-micro" color="base.03">
-              Outgoing traffic from your communications infrastructure to the
-              PSTN. In order to use a Trunk for termination it must have a
-              Termination SIP URI and at least one authentication scheme (IP
-              Access Control Lists and/or Credential Lists).
+            <Typography variant="body-micro" sx={{ color: "base.05" }}>
+              Calls coming in from your phone company. Set the inbound address
+              and who is allowed to send those calls.
             </Typography>
           </Box>
 
@@ -262,7 +260,7 @@ export function CreateTrunkForm({
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input type="text" label="Inbound SIP URI" {...field} />
+                  <Input type="text" label="Inbound SIP URI (calls coming in)" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -282,7 +280,7 @@ export function CreateTrunkForm({
                     }}
                   >
                     <Select
-                      label="Access Control List (ACL)"
+                      label="Who can send inbound calls (ACL)"
                       options={acls.map(({ ref, name }) => ({
                         value: ref,
                         label: name
@@ -354,14 +352,12 @@ export function CreateTrunkForm({
 
           {/* Text to Speech Section */}
           <Box sx={{ mt: "8px" }}>
-            <Typography variant="mono-medium" color="base.03">
-              OUTBOUND
+            <Typography variant="mono-medium" sx={{ color: "#fff", letterSpacing: "0.08em" }}>
+              Outbound
             </Typography>
-            <Typography variant="body-micro" color="base.03">
-              Outgoing traffic from your communications infrastructure to the
-              PSTN. In order to use a Trunk for termination it must have a
-              Termination SIP URI and at least one authentication scheme (IP
-              Access Control Lists and/or Credential Lists).
+            <Typography variant="body-micro" sx={{ color: "base.05" }}>
+              Calls going out to the phone network. Add at least one outbound
+              SIP URI, plus credentials if your provider requires them.
             </Typography>
           </Box>
 

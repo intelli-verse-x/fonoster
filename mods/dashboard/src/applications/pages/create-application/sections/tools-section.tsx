@@ -141,12 +141,11 @@ export const ToolsSection = ({ control }: ToolsSectionProps) => {
   return (
     <>
       <Box sx={{ mt: "8px" }}>
-        <Typography variant="mono-medium" color="base.03">
+        <Typography variant="mono-medium" sx={{ color: "#fff", letterSpacing: "0.08em" }}>
           Tools
         </Typography>
-        <Typography variant="body-micro" color="base.03">
-          Define callable tools for your Language Model. Use the button below to
-          add tools.
+        <Typography variant="body-micro" sx={{ color: "base.05" }}>
+          Extra actions the AI can take during the call (lookup, transfer, and so on).
         </Typography>
       </Box>
 

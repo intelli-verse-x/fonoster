@@ -36,12 +36,12 @@ export const DataTableToolbarSelection = () => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor: theme.palette.base["07"],
-        borderRadius: "4px",
-        border: `1px solid ${theme.palette.base["06"]}`,
-        background: theme.palette.base["07"],
-        minHeight: "32px",
-        minWidth: "32px"
+        backgroundColor: theme.palette.bg.muted,
+        borderRadius: "10px",
+        border: `1px solid ${theme.palette.base["07"]}`,
+        background: theme.palette.bg.muted,
+        minHeight: "40px",
+        minWidth: "40px"
       })}
     >
       <Checkbox
@@ -51,8 +51,11 @@ export const DataTableToolbarSelection = () => {
         checked={table.getIsAllRowsSelected()}
         onChange={() => table.toggleAllRowsSelected()}
         sx={{
-          maxWidth: "32px",
-          maxHeight: "32px"
+          maxWidth: "40px",
+          maxHeight: "40px",
+          color: "base.04",
+          "&.Mui-checked": { color: "brand.main" },
+          "&.MuiCheckbox-indeterminate": { color: "brand.main" }
         }}
       />
 

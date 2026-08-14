@@ -47,7 +47,7 @@ export const DataTableToolbarPagination = () => {
       >
         <ArrowForwardIosIcon fontSize="inherit" />
       </IconButton>
-      <Typography variant="body-micro" color="var(--fonoster-palette-base-03)">
+      <Typography variant="body-micro" sx={{ color: "base.04" }}>
         {`1–${pageSize} of ${pagination.total}`}
       </Typography>
     </Box>

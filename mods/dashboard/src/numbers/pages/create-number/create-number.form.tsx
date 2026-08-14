@@ -133,7 +133,7 @@ export function CreateNumberForm({
       <FormRoot onSubmit={form.handleSubmit(onSubmit)}>
         {/* Number ID - Only show in edit mode */}
         {isEdit && initialValues?.ref && (
-          <ResourceIdField value={initialValues.ref} label="Number Ref" />
+          <ResourceIdField value={initialValues.ref} label="Number ID" />
         )}
 
         {/* Friendly Name Field */}
@@ -143,7 +143,7 @@ export function CreateNumberForm({
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input type="text" label="Friendly Name" {...field} />
+                <Input type="text" label="Number name" {...field} />
               </FormControl>
             </FormItem>
           )}
@@ -157,7 +157,7 @@ export function CreateNumberForm({
             <FormItem>
               <FormControl>
                 <Select
-                  label="Trunk"
+                  label="Trunk (pipe to the phone company)"
                   options={trunks.map(({ ref, name }) => ({
                     value: ref,
                     label: name
@@ -213,7 +213,7 @@ export function CreateNumberForm({
               <FormControl>
                 <Input
                   type="text"
-                  label="Tel URL"
+                  label="Phone (tel:+…)"
                   placeholder="tel:+1234567890"
                   {...field}
                 />
@@ -230,7 +230,7 @@ export function CreateNumberForm({
             <FormItem>
               <FormControl>
                 <Select
-                  label="Select Inbound Application"
+                  label="Voice app that answers this number"
                   options={applications.map(({ ref, name }) => ({
                     value: ref,
                     label: name

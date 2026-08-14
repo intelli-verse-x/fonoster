@@ -43,32 +43,29 @@ const Trigger = styled(Box)<{ $active?: boolean }>(({ $active, theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "8px",
-  backgroundColor: theme.palette.base["07"],
-  borderRadius: "4px",
+  padding: "10px 12px",
+  backgroundColor: theme.palette.bg.muted,
+  borderRadius: "10px",
   cursor: "pointer",
   width: "100%",
   border: "1px solid transparent",
-  borderColor: $active ? theme.palette.brand["04"] : theme.palette.base["06"],
-  fontSize: "10px",
+  borderColor: $active ? theme.palette.brand["04"] : theme.palette.base["07"],
+  fontSize: "13px",
   fontFamily: "Poppins",
   fontWeight: 500,
-  maxHeight: "32px",
-  color: theme.palette.base["02"]
+  maxHeight: "40px",
+  color: "#F4F7FF"
 }));
 
 const FilterOption = styled(Box)(({ theme }) => ({
-  padding: "4px 0px",
-  borderBottom: `0.5px solid ${theme.palette.base["06"]}`,
-  color: theme.palette.base["03"],
-  fontSize: "10px",
+  padding: "8px 10px",
+  borderRadius: "8px",
+  color: "#F4F7FF",
+  fontSize: "13px",
   fontWeight: 500,
   cursor: "pointer",
-  "&:last-child": {
-    borderBottom: "none"
-  },
   "&:hover": {
-    backgroundColor: theme.palette.base["07"]
+    backgroundColor: "rgba(76,111,255,0.12)"
   }
 }));
 
@@ -78,10 +75,10 @@ const UnifiedDropdown = styled(Paper)(({ theme }) => ({
   left: "0",
   right: "0",
   zIndex: 1300,
-  borderRadius: "4px",
-  border: `1px solid ${theme.palette.base["06"]}`,
-  boxShadow: "0px 5px 10px 0px rgba(0, 0, 0, 0.10)",
-  backgroundColor: theme.palette.bg.surface,
+  borderRadius: "12px",
+  border: `1px solid ${theme.palette.base["07"]}`,
+  boxShadow: "0px 12px 32px rgba(0, 0, 0, 0.28)",
+  backgroundColor: theme.palette.bg.muted,
   overflow: "hidden",
   width: "100%",
   padding: "8px"
@@ -93,9 +90,9 @@ const DropdownHeader = styled(Box)(({ theme }) => ({
   justifyContent: "space-between",
   marginBottom: "8px",
   fontWeight: 500,
-  fontSize: "10px",
+  fontSize: "13px",
   fontFamily: "Poppins",
-  color: theme.palette.base["02"]
+  color: "#F4F7FF"
 }));
 
 export const FilterSearchBySelector: React.FC<FilterSearchBySelectorProps> = ({

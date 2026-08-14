@@ -97,7 +97,7 @@ export { rootAuthLoader as loader } from "./auth/services/sessions/auth.loader.s
  * while the app is hydrating.
  */
 export function HydrateFallback() {
-  return <Splash message="Loading Fonoster Dashboard..." />;
+  return <Splash message="Starting Voice Studio..." />;
 }
 
 /**
@@ -111,9 +111,21 @@ export function HydrateFallback() {
  */
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" translate="no" suppressHydrationWarning>
+    <html
+      lang="en"
+      translate="no"
+      suppressHydrationWarning
+      data-mui-color-scheme="dark"
+      style={{ backgroundColor: "#0C1018", colorScheme: "dark" }}
+    >
       <head>
         <meta charSet="utf-8" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var k='fonoster:theme';var m=localStorage.getItem(k)||'dark';if(m!=='light'&&m!=='dark')m='dark';document.documentElement.setAttribute('data-mui-color-scheme',m);document.documentElement.style.backgroundColor='#0C1018';document.documentElement.style.colorScheme=m;}catch(e){document.documentElement.setAttribute('data-mui-color-scheme','dark');}})();"
+          }}
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="google" content="notranslate" />
         <meta
@@ -123,7 +135,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body style={{ backgroundColor: "#0C1018", margin: 0 }}>
         <Providers>{children}</Providers>
         <ScrollRestoration />
         <Scripts />
