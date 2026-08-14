@@ -27,13 +27,13 @@ import { Input } from "~/core/components/design-system/ui/input/input";
 import { ResourceIdField } from "~/core/components/design-system/ui/resource-id-field/resource-id-field";
 import { FormRoot } from "~/core/components/design-system/forms/form-root";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { schema, type Schema } from "./create-acl.schema";
-import { Select } from "~/core/components/design-system/ui/select/select";
-import { Box } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { CreateRuleModal } from "./create-acl-rules-modal.modal";
 import { ModalTrigger } from "~/core/components/general/modal-trigger";
 import { useFormContextSync } from "~/core/hooks/use-form-context-sync";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 /**
  * Props interface for the CreateAclForm component.
@@ -93,63 +93,26 @@ export function CreateAclForm({
   /** Sync form state with FormContext */
   useFormContextSync(form, onSubmit, isEdit);
 
-  /**
-   * Handles deletions from the Select component.
-   *
-   * @param {string[]} oldValues - The currently displayed values in the Select.
-   * @param {string[]} newValues - The new values after deletion.
-   */
-  const handleDelete = useCallback(
-    (oldValues: string[], newValues: string[]) => {
-      const deleted = oldValues.find((val) => !newValues.includes(val));
-      if (deleted) {
-        const index = fields.findIndex(
-          (item) => `${item.type}:${item.name}` === deleted
-        );
-        if (index !== -1) {
-          remove(index);
-        }
-      }
-    },
-    [fields, remove]
-  );
-
-  /**
-   * Builds the displayed values for the Select, each formatted as "type:name".
-   */
-  const selectValues = fields.map((item) => `${item.type}:${item.name}`);
-
-  /**
-   * Builds the Select options, matching the Select values.
-   */
-  const selectOptions = selectValues.map((val) => ({
-    value: val,
-    label: val
-  }));
-
   return (
     <>
       <Form {...form}>
         <FormRoot onSubmit={form.handleSubmit(onSubmit)}>
-          {/* ACL ID - Only show in edit mode */}
           {isEdit && initialValues?.ref && (
-            <ResourceIdField value={initialValues.ref} label="ACL Ref" />
+            <ResourceIdField value={initialValues.ref} label="ACL ID" />
           )}
 
-          {/* Friendly Name Field */}
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input type="text" label="Friendly Name" {...field} />
+                  <Input type="text" label="ACL name" {...field} />
                 </FormControl>
               </FormItem>
             )}
           />
 
-          {/* Unified Rules Select Field */}
           <FormField
             control={form.control}
             name="rules"
@@ -160,27 +123,87 @@ export function CreateAclForm({
                     sx={{
                       display: "flex",
                       flexDirection: "column",
-                      gap: "12px"
+                      gap: "12px",
+                      minWidth: 0
                     }}
                   >
-                    {/* Read-only Select showing current rules */}
-                    <Select
-                      label="Network Rules"
-                      placeholder="Click below to add rules (e.g., allow:xxx, deny:xxx)."
-                      multiple
-                      value={selectValues}
-                      options={selectOptions}
-                      disabled
-                      onChange={(event) => {
-                        const newValues = event.target.value as string[];
-                        handleDelete(selectValues, newValues);
+                    <Typography
+                      sx={{
+                        fontSize: "10px",
+                        fontWeight: 700,
+                        letterSpacing: "0.1em",
+                        textTransform: "uppercase",
+                        color: "#8D8D8D"
                       }}
-                    />
+                    >
+                      Network rules
+                    </Typography>
 
-                    {/* Modal trigger to open rule creation */}
+                    {fields.length === 0 && (
+                      <Typography sx={{ fontSize: 13, color: "base.05" }}>
+                        No rules yet. Add an allow or deny IP / CIDR below.
+                      </Typography>
+                    )}
+
+                    {fields.map((rule, index) => (
+                      <Box
+                        key={rule.id}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1,
+                          minWidth: 0,
+                          px: 1.5,
+                          py: 1,
+                          borderRadius: "10px",
+                          border: "1px solid #333333",
+                          backgroundColor: "#141A24"
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontSize: 11,
+                            fontWeight: 700,
+                            letterSpacing: "0.06em",
+                            textTransform: "uppercase",
+                            color:
+                              rule.type === "allow" ? "#6EA8FF" : "#C2C2C2",
+                            flexShrink: 0
+                          }}
+                        >
+                          {rule.type}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontSize: 13,
+                            color: "#fff",
+                            fontWeight: 600,
+                            minWidth: 0,
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap"
+                          }}
+                        >
+                          {rule.name}
+                        </Typography>
+                        <IconButton
+                          size="small"
+                          aria-label={`Remove ${rule.type} ${rule.name}`}
+                          onClick={() => remove(index)}
+                          sx={{
+                            ml: "auto",
+                            color: "base.05",
+                            "&:hover": { color: "#fff" }
+                          }}
+                        >
+                          <DeleteOutlineIcon fontSize="small" />
+                        </IconButton>
+                      </Box>
+                    ))}
+
                     <ModalTrigger
                       onClick={() => setIsRulesModalOpen(true)}
-                      label="Add Rule"
+                      label="Add rule"
                     />
                   </Box>
                 </FormControl>
