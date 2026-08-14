@@ -27,7 +27,7 @@ import { Box } from "@mui/material";
 import { CreateCredentialForm } from "../create-credential/create-credential.form";
 import { toast } from "~/core/components/design-system/ui/toaster/toaster";
 import { useWorkspaceId } from "~/workspaces/hooks/use-workspace-id";
-import { Splash } from "~/core/components/general/splash/splash";
+import { StudioFormSkeleton } from "~/core/brand/studio-skeletons";
 import {
   useCredential,
   useUpdateCredential
@@ -135,7 +135,7 @@ export default function EditCredential() {
    * Shows a loading indicator while fetching the credential data.
    */
   if (isLoading || !data) {
-    return <Splash message="Loading credential details..." />;
+    return <StudioFormSkeleton />;
   }
 
   /**

@@ -24,7 +24,7 @@ import { FormSubmitButton } from "~/core/components/design-system/ui/form-submit
 import { CreateTrunkForm } from "../create-trunk/create-trunk.form";
 import { toast } from "~/core/components/design-system/ui/toaster/toaster";
 import { useWorkspaceId } from "~/workspaces/hooks/use-workspace-id";
-import { Splash } from "~/core/components/general/splash/splash";
+import { StudioFormSkeleton } from "~/core/brand/studio-skeletons";
 import { useTrunk, useUpdateTrunk } from "~/trunks/services/trunks.service";
 import type { Schema } from "../create-trunk/create-trunk.schema";
 import { getErrorMessage } from "~/core/helpers/extract-error-message";
@@ -133,7 +133,7 @@ export default function EditTrunk() {
    * Shows a loading indicator while fetching the trunk data.
    */
   if (isLoading || !data) {
-    return <Splash message="Loading trunk details..." />;
+    return <StudioFormSkeleton />;
   }
 
   /**

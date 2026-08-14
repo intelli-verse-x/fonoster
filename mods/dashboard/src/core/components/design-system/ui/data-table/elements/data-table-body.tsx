@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 import { flexRender, type Row } from "@tanstack/react-table";
-import { TableBody, TableCell, TableRow } from "@mui/material";
+import { TableBody, TableCell, TableRow, Skeleton } from "@mui/material";
 
 import { useDataTable } from "../data-table.context";
 import { Checkbox } from "../../checkbox/checkbox";
@@ -131,10 +131,27 @@ export function DataTableBody() {
           />
         ))
       ) : isLoading ? (
-        <EmptyStateRow
-          colSpan={colSpan}
-          message="Loading…"
-        />
+        Array.from({ length: 6 }).map((_, rowIndex) => (
+          <TableRow key={`skeleton-${rowIndex}`} sx={{ height: 56 }}>
+            {Array.from({ length: colSpan }).map((_, colIndex) => (
+              <TableCell key={colIndex}>
+                <Skeleton
+                  variant="rounded"
+                  height={12}
+                  animation="wave"
+                  sx={{
+                    bgcolor: "rgba(76,111,255,0.16)",
+                    maxWidth: colIndex === 0 ? 72 : 160,
+                    "&::after": {
+                      background:
+                        "linear-gradient(90deg, transparent, rgba(110,168,255,0.22), transparent)"
+                    }
+                  }}
+                />
+              </TableCell>
+            ))}
+          </TableRow>
+        ))
       ) : (
         <EmptyStateRow
           colSpan={colSpan}
