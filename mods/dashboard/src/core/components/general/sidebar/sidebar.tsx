@@ -33,6 +33,7 @@ import {
 } from "./sidebar.styles";
 import { useSidebarItems } from "./sidebar-navigation.const";
 import { IS_PRIVATE_BETA } from "~/core/sdk/stores/fonoster.config";
+import { PRODUCT_NAME } from "~/core/brand/product";
 
 const VERSION = import.meta.env.DASHBOARD_VERSION || "unset";
 
@@ -78,7 +79,9 @@ const Sidebar = ({
               </Box>
             )}
             <Typography variant="mono-small">
-              &copy; {year}, FONOSTER. {VERSION}
+              {PRODUCT_NAME}
+              {VERSION && VERSION !== "unset" ? ` · ${VERSION}` : ""}
+              {` · ${year}`}
             </Typography>
           </SidebarFooter>
         </SidebarWrapper>

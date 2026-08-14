@@ -143,13 +143,13 @@ export function AppShellSidebar() {
 export const AppShellAside = styled("aside")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  width: "250px",
-  backgroundColor: theme.palette.bg.surface,
-  borderRight: `1px solid ${theme.palette.base["06"]}`,
+  width: "264px",
+  backgroundColor: theme.palette.bg.app,
+  borderRight: `1px solid ${theme.palette.base["07"]}`,
   height: "100%",
   overflow: "auto",
   ...theme.applyStyles("dark", {
-    backgroundColor: theme.palette.bg.surface,
-    borderRight: `1px solid ${theme.palette.base["06"]}`
+    backgroundColor: theme.palette.bg.app,
+    borderRight: `1px solid ${theme.palette.base["07"]}`
   })
 }));

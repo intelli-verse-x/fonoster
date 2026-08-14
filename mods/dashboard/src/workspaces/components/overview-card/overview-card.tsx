@@ -29,11 +29,12 @@ import { Icon } from "~/core/components/design-system/icons/icons";
 export interface OverviewCardProps {
   icon: ReactNode;
   label: string;
+  description?: string;
   onClick: VoidFunction;
 }
 
 export const OverviewCard = (props: OverviewCardProps) => {
-  const { label, icon, onClick } = props;
+  const { label, icon, onClick, description } = props;
 
   return (
     <OverviewCardRoot onClick={onClick}>
@@ -43,7 +44,8 @@ export const OverviewCard = (props: OverviewCardProps) => {
         <Typography
           variant="body-medium"
           sx={{
-            color: "base.03",
+            color: "base.02",
+            fontWeight: 600,
             overflow: "hidden",
             display: "-webkit-box",
             WebkitBoxOrient: "vertical",
@@ -52,9 +54,24 @@ export const OverviewCard = (props: OverviewCardProps) => {
         >
           {label}
         </Typography>
+        {description && (
+          <Typography
+            variant="body-small"
+            sx={{
+              color: "base.05",
+              mt: 0.5,
+              overflow: "hidden",
+              display: "-webkit-box",
+              WebkitBoxOrient: "vertical",
+              WebkitLineClamp: 2
+            }}
+          >
+            {description}
+          </Typography>
+        )}
       </OverviewCardRootLabel>
 
-      <Icon name="ChevronRight" sx={{ color: "base.02", fontSize: "20px" }} />
+      <Icon name="ChevronRight" sx={{ color: "base.05", fontSize: "20px" }} />
     </OverviewCardRoot>
   );
 };
