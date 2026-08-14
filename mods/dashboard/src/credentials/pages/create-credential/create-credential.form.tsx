@@ -90,7 +90,7 @@ export function CreateCredentialForm({
       <FormRoot onSubmit={form.handleSubmit(onSubmit)}>
         {/* Credential ID - Only show in edit mode */}
         {isEdit && initialValues?.ref && (
-          <ResourceIdField value={initialValues.ref} label="Credential Ref" />
+          <ResourceIdField value={initialValues.ref} label="Credential ID" />
         )}
 
         {/* Friendly Name Field */}
@@ -100,7 +100,7 @@ export function CreateCredentialForm({
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input type="text" label="Friendly Name" {...field} />
+                <Input type="text" label="Credential name" {...field} />
               </FormControl>
             </FormItem>
           )}
@@ -113,7 +113,7 @@ export function CreateCredentialForm({
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input type="text" label="Username" {...field} />
+                <Input type="text" label="SIP username" {...field} />
               </FormControl>
             </FormItem>
           )}

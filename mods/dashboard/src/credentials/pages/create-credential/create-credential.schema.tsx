@@ -34,7 +34,7 @@ export const schema = z.object({
   ref: z.string().nullish(),
 
   /** Human-friendly name for the credential (required). */
-  name: z.string().nonempty("Friendly Name is required"),
+  name: z.string().nonempty("Credential name is required"),
 
   /** Username associated with the credential (required). */
   username: z.string().nonempty("Username is required"),
