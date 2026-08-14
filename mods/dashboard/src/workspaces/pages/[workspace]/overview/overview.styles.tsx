@@ -20,7 +20,15 @@ import { Box, styled } from "@mui/material";
 import { Typography } from "~/core/components/design-system/ui/typography/typography";
 
 export const ContentContainer = styled(Box)(({ theme }) => ({
-  marginTop: theme.spacing(6)
+  marginTop: theme.spacing(3),
+  display: "grid",
+  gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+  gap: theme.spacing(2),
+  maxWidth: 880,
+
+  "@media (max-width: 899px)": {
+    gridTemplateColumns: "1fr"
+  }
 }));
 
 export const SectionContainer = styled(Box)(() => ({

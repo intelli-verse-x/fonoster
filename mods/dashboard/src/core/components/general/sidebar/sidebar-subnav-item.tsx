@@ -41,7 +41,7 @@ const SubNavItem = ({ item }: SubNavItemProps) => {
     <SidebarNavItemRoot
       onClick={onNavigate}
       data-selected={isItemActive(item)}
-      sx={{ pl: "16px" }}
+      sx={{ pl: "8px" }}
     >
       <SidebarNavItemContent data-selected={isItemActive(item)}>
         <SidebarNavItemText

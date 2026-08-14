@@ -22,29 +22,32 @@ export const WorkspaceTrigger = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "12px 16px",
-  paddingLeft: "40px",
+  padding: "12px 12px",
   cursor: "pointer",
   width: "100%",
-  borderBottom: "1px solid transparent",
-  borderBottomColor: theme.palette.base["06"],
+  borderRadius: "14px",
+  border: `1px solid ${theme.palette.base["07"]}`,
+  backgroundColor: theme.palette.bg.muted,
   fontSize: "10px",
   fontFamily: "Poppins",
   fontWeight: 500,
-  color: theme.palette.base["03"],
+  color: theme.palette.base["02"],
   whiteSpace: "nowrap",
   overflow: "hidden",
-  textOverflow: "ellipsis"
+  textOverflow: "ellipsis",
+  "&:hover": {
+    borderColor: theme.palette.brand.main
+  }
 }));
 
 export const WorkspaceOption = styled(Box)(({ theme }) => ({
-  padding: "10px 16px",
-  paddingLeft: "40px",
-  borderBottom: `0.5px solid ${theme.palette.base["06"]}`,
+  padding: "10px 12px",
   color: theme.palette.base["03"],
-  fontSize: "11px",
+  fontSize: "13px",
   fontWeight: 500,
   cursor: "pointer",
+  borderRadius: "10px",
+  margin: "2px 6px",
   transition: "background-color 0.2s ease-in-out",
   position: "relative",
 
@@ -53,19 +56,16 @@ export const WorkspaceOption = styled(Box)(({ theme }) => ({
   },
 
   "&:hover": {
-    backgroundColor: theme.palette.base["06"]
+    backgroundColor: "rgba(76,111,255,0.1)"
+  },
+
+  "&[data-selected='true']": {
+    backgroundColor: "rgba(76,111,255,0.16)",
+    color: theme.palette.base["01"]
   },
 
   "&[data-selected='true']:before": {
-    content: '""',
-    position: "absolute",
-    right: "16px",
-    top: "50%",
-    transform: "translateY(-50%)",
-    width: "6px",
-    height: "6px",
-    borderRadius: "50%",
-    backgroundColor: theme.palette.brand["04"]
+    content: "none"
   }
 }));
 
@@ -75,13 +75,14 @@ export const WorkspaceUnifiedDropdown = styled(Paper)(({ theme }) => ({
   left: "0",
   right: "0",
   zIndex: 1300,
-  borderRadius: "0px",
-  borderBottom: `1px solid ${theme.palette.base["06"]}`,
-  boxShadow: "0px 5px 10px 0px rgba(0, 0, 0, 0.10)",
-  backgroundColor: theme.palette.bg.surface,
+  borderRadius: "14px",
+  border: `1px solid ${theme.palette.base["07"]}`,
+  boxShadow: "0px 12px 32px rgba(0, 0, 0, 0.28)",
+  backgroundColor: theme.palette.bg.muted,
   overflow: "hidden",
   width: "100%",
+  paddingBottom: "8px",
   ...theme.applyStyles("dark", {
-    backgroundColor: theme.palette.bg.surface
+    backgroundColor: theme.palette.bg.muted
   })
 }));

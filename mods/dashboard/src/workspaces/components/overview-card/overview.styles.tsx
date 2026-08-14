@@ -22,33 +22,30 @@ import { styled } from "@mui/material/styles";
 export const OverviewCardRoot = styled(Box)(({ theme }) => ({
   display: "flex",
   width: "100%",
-  height: "76px",
+  minHeight: "108px",
   alignItems: "center",
   justifyContent: "space-between",
-  paddingTop: "24px",
-  paddingRight: "16px",
-  paddingBottom: "24px",
-  paddingLeft: "16px",
-  borderRadius: "8px",
-  border: "1px",
-  borderStyle: "solid",
-  borderColor: theme.palette.base["06"],
-  gap: "12px",
+  padding: "20px 18px",
+  borderRadius: "16px",
+  border: `1px solid ${theme.palette.base["07"]}`,
+  gap: "14px",
   cursor: "pointer",
-  backgroundColor: theme.palette.base["07"],
-  transition: "all 0.2s ease-in-out",
+  backgroundColor: theme.palette.bg.muted,
+  transition: "border-color 0.2s ease, transform 0.2s ease",
 
   "&:hover": {
-    borderColor: theme.palette.brand.main
+    borderColor: theme.palette.brand.main,
+    transform: "translateY(-1px)"
   }
 }));
 
 export const OverviewCardRootIcon = styled(Box)(({ theme }) => ({
   display: "flex",
-  backgroundColor: theme.palette.brand["03"],
-  padding: "4px",
-  borderRadius: "4px",
-  color: theme.palette.brand["05"]
+  backgroundColor: "rgba(76, 111, 255, 0.18)",
+  padding: "10px",
+  borderRadius: "10px",
+  color: theme.palette.brand.main,
+  flexShrink: 0
 }));
 
 export const OverviewCardRootLabel = styled(Box)(() => ({
