@@ -1,4 +1,4 @@
-import { Box, Button, Typography, styled } from "@mui/material";
+import { Box, Button, Skeleton, Typography, styled } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import type { Route } from "./+types/overview.page";
@@ -212,7 +212,17 @@ export default function Overview() {
                 API keys
               </Typography>
               <Typography sx={{ fontSize: 12, color: "base.05" }}>
-                {isLoading ? "Loading…" : `${keyCount} active`}
+                {isLoading ? (
+                  <Skeleton
+                    variant="rounded"
+                    width={88}
+                    height={12}
+                    animation="wave"
+                    sx={{ bgcolor: "rgba(76,111,255,0.16)" }}
+                  />
+                ) : (
+                  `${keyCount} active`
+                )}
               </Typography>
             </Box>
             <ChevronRightIcon sx={{ color: "base.05", fontSize: 20 }} />
@@ -223,11 +233,17 @@ export default function Overview() {
                 Key alerts
               </Typography>
               <Typography sx={{ fontSize: 12, color: "base.05" }}>
-                {isLoading
-                  ? "Loading…"
-                  : expiringCount === 0
-                    ? "Nothing expiring in 7 days"
-                    : `${expiringCount} expiring in 7 days`}
+                {isLoading ? (
+                  <Skeleton
+                    variant="rounded"
+                    width={140}
+                    height={12}
+                    animation="wave"
+                    sx={{ bgcolor: "rgba(76,111,255,0.16)" }}
+                  />
+                ) : expiringCount === 0
+                  ? "Nothing expiring in 7 days"
+                  : `${expiringCount} expiring in 7 days`}
               </Typography>
             </Box>
             <ChevronRightIcon sx={{ color: "base.05", fontSize: 20 }} />

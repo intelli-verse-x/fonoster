@@ -47,6 +47,7 @@ import { useWorkspaceId } from "~/workspaces/hooks/use-workspace-id";
 import { PRODUCT_NAME } from "~/core/brand/product";
 import { formatEngineName } from "~/core/helpers/format-engine-name";
 import { toTitleCase } from "~/core/helpers/to-title-case";
+import { ResourceListSkeleton } from "~/core/brand/studio-skeletons";
 
 export function meta(_: Route.MetaArgs) {
   return [
@@ -301,11 +302,7 @@ export default function Applications() {
           </Box>
         </Toolbar>
 
-        {isLoading && (
-          <Typography sx={{ px: 2, py: 4, color: "base.05", fontSize: 13 }}>
-            Loading…
-          </Typography>
-        )}
+        {isLoading && <ResourceListSkeleton />}
 
         {!isLoading && filteredData.length === 0 && (
           <Typography sx={{ px: 2, py: 4, color: "base.05", fontSize: 13 }}>

@@ -37,7 +37,7 @@ import type {
   Form,
   Schema
 } from "../create-application/schemas/application-schema";
-import { Splash } from "~/core/components/general/splash/splash";
+import { StudioFormSkeleton } from "~/core/brand/studio-skeletons";
 import { useApplicationTestCall } from "~/applications/hooks/use-test-call";
 import { useApplicationContext } from "~/applications/stores/application.store";
 import {
@@ -124,7 +124,7 @@ export function EditApplicationContainer() {
 
   /** Show splash screen during loading. */
   if (isLoading || !data) {
-    return <Splash message="Loading application details..." />;
+    return <StudioFormSkeleton />;
   }
 
   const actions = (
