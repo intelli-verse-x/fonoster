@@ -118,7 +118,7 @@ export const CreateRuleModal = ({
   };
 
   return (
-    <Modal open={isOpen} onClose={onClose} title="Create New Rule">
+    <Modal open={isOpen} onClose={onClose} title="Add network rule">
       <Form {...form}>
         <FormRoot onSubmit={form.handleSubmit(onSubmit)}>
           {/* IP or CIDR Field */}
@@ -147,7 +147,7 @@ export const CreateRuleModal = ({
               <FormItem>
                 <FormControl>
                   <Select
-                    label="Category"
+                    label="Allow or deny"
                     options={[
                       { value: "allow", label: "Allow" },
                       { value: "deny", label: "Deny" }
@@ -166,7 +166,7 @@ export const CreateRuleModal = ({
             isFullWidth
             size="small"
           >
-            Save Rule
+            Save rule
           </Button>
         </FormRoot>
       </Form>
