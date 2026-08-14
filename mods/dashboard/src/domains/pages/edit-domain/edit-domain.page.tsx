@@ -16,21 +16,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Page } from "~/core/components/general/page/page";
-import { PageHeader } from "~/core/components/general/page/page-header";
 import type { Route } from "./+types/edit-domain.page";
 import { useCallback, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { FormProvider } from "~/core/contexts/form-context";
 import { FormSubmitButton } from "~/core/components/design-system/ui/form-submit-button/form-submit-button";
-import { Box } from "@mui/material";
 import { CreateDomainForm } from "../create-domain/create-domain.form";
 import { toast } from "~/core/components/design-system/ui/toaster/toaster";
 import { useWorkspaceId } from "~/workspaces/hooks/use-workspace-id";
-import { Splash } from "~/core/components/general/splash/splash";
+import { StudioFormSkeleton } from "~/core/brand/studio-skeletons";
 import { useDomain, useUpdateDomain } from "~/domains/services/domains.service";
 import type { Schema } from "../create-domain/create-domain.schema";
 import { getErrorMessage } from "~/core/helpers/extract-error-message";
+import { PRODUCT_NAME } from "~/core/brand/product";
+import {
+  ApplicationStudioLayout,
+  studioActionButtonSx
+} from "~/applications/pages/create-application/application-studio-layout";
 
 /**
  * Sets the metadata for the "Edit Domain" page.
@@ -43,11 +45,11 @@ import { getErrorMessage } from "~/core/helpers/extract-error-message";
  */
 export function meta(_: Route.MetaArgs) {
   return [
-    { title: "Domains | Fonoster" },
+    { title: `Edit domain | ${PRODUCT_NAME}` },
     {
       name: "description",
       content:
-        "A SIP Domain is used to group multiple SIP Agents for internal calling and organization."
+        "Change this SIP domain URI, ACL, and outbound rules."
     }
   ];
 }
@@ -132,7 +134,7 @@ export default function EditDomain() {
    * Shows a loading indicator while fetching the domain data.
    */
   if (isLoading || !data) {
-    return <Splash message="Loading domain details..." />;
+    return <StudioFormSkeleton />;
   }
 
   /**
@@ -140,27 +142,28 @@ export default function EditDomain() {
    */
   return (
     <FormProvider>
-      <Page variant="form">
-        <PageHeader
-          title="Edit Domain"
-          description="A SIP Domain is used to group multiple SIP Agents for internal calling and organization."
-          onBack={{ label: "Back to domains", onClick: onGoBack }}
-          actions={
-            <FormSubmitButton size="small" loadingText="Saving...">
-              Save Domain
-            </FormSubmitButton>
-          }
+      <ApplicationStudioLayout
+        title={data.name || "Edit domain"}
+        description="Change this SIP domain URI, who can register, and outbound rules."
+        onBack={onGoBack}
+        backLabel="Back to domains"
+        sideHint="Save after you change the URI, ACL, or outbound rules."
+        actions={
+          <FormSubmitButton
+            size="small"
+            loadingText="Saving..."
+            sx={studioActionButtonSx}
+          >
+            Save
+          </FormSubmitButton>
+        }
+      >
+        <CreateDomainForm
+          onSubmit={onSave}
+          initialValues={data}
+          isEdit={true}
         />
-
-        {/* Form container with a max width for readability and consistent layout */}
-        <Box sx={{ maxWidth: "440px" }}>
-          <CreateDomainForm
-            onSubmit={onSave}
-            initialValues={data}
-            isEdit={true}
-          />
-        </Box>
-      </Page>
+      </ApplicationStudioLayout>
     </FormProvider>
   );
 }
