@@ -38,13 +38,13 @@ export const ConversationSettingsSection = ({
 }) => (
   <>
     <Box sx={{ mt: "8px" }}>
-      <Typography variant="mono-medium" color="base.03">
-        Conversation Settings
-      </Typography>
-      <Typography variant="body-micro" color="base.03">
-        Use these settings to configure the conversation with your customers.
-        All the parameters will be available to the context of the conversation.
-      </Typography>
+        <Typography variant="mono-medium" sx={{ color: "#fff", letterSpacing: "0.08em" }}>
+          Conversation
+        </Typography>
+        <Typography variant="body-micro" sx={{ color: "base.05" }}>
+          First message is what the caller hears first. System prompt is the
+          instruction sheet for the AI.
+        </Typography>
     </Box>
 
     <FormField
@@ -53,7 +53,7 @@ export const ConversationSettingsSection = ({
       render={({ field }) => (
         <FormItem>
           <FormControl>
-            <Input type="text" label="First Message" {...field} />
+            <Input type="text" label="First message (what the caller hears)" {...field} />
           </FormControl>
         </FormItem>
       )}
@@ -65,7 +65,7 @@ export const ConversationSettingsSection = ({
         <FormItem>
           <FormControl>
             <Textarea
-              label="System Prompt"
+              label="System prompt (instructions for the AI)"
               minRows={SYSTEM_PROMPT_MIN_ROWS}
               maxRows={SYSTEM_PROMPT_MIN_ROWS}
               placeholder="Add your system prompt here"

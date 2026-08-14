@@ -21,74 +21,114 @@ import { Outlet } from "react-router";
 import { AuthenticationFlowHeader as LayoutHeader } from "./authentication-flow.header";
 import type { Route } from "./+types/authentication-flow.layout";
 import { getUnauthenticatedSession } from "~/auth/services/sessions/session.server";
+import { Typography } from "~/core/components/design-system/ui/typography/typography";
+import { PRODUCT_NAME, PRODUCT_PARENT, PRODUCT_TAGLINE } from "~/core/brand/product";
 
-/**
- * Prevents route revalidation on navigation.
- *
- * Since authentication-related routes typically don't require revalidation
- * unless a form is submitted or a redirect occurs, we disable automatic
- * revalidation for performance.
- */
 export const shouldRevalidate = () => true;
 
-/**
- * Route loader for authentication flow (e.g., login, register, etc).
- *
- * Ensures that only unauthenticated users can access this layout.
- * If the user is already authenticated, it redirects them to the root ("/"),
- * preventing access to login/signup pages while logged in.
- *
- * @param request - The HTTP request object containing cookies
- * @returns null if user is not authenticated; otherwise redirects
- */
 export async function loader({ request }: Route.LoaderArgs) {
   return await getUnauthenticatedSession(request.headers.get("Cookie"));
 }
 
-/**
- * Layout component for all authentication-related routes.
- *
- * This layout typically wraps routes like `/login`, `/signup`, `/forgot-password`, etc.
- * It includes a header and centers its children within a styled container.
- *
- * Note: Authenticated users are redirected away from this layout via the loader.
- */
 export default function AuthenticationFlowLayout() {
   return (
     <LayoutRoot>
-      {/* Header with app branding or navigation (minimal) */}
-      <LayoutHeader />
-
-      {/* Content area where authentication routes are rendered */}
-      <LayoutContent>
-        <Outlet />
-      </LayoutContent>
+      <BrandPanel>
+        <Typography
+          sx={{
+            fontSize: 11,
+            fontWeight: 700,
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            color: "brand.main",
+            mb: 2
+          }}
+        >
+          {PRODUCT_PARENT}
+        </Typography>
+        <Typography
+          sx={{
+            fontFamily: "Poppins, sans-serif",
+            fontSize: { xs: 32, md: 44 },
+            fontWeight: 600,
+            letterSpacing: "-0.03em",
+            lineHeight: 1.1,
+            color: "#F4F7FF"
+          }}
+        >
+          {PRODUCT_NAME}
+        </Typography>
+        <Typography sx={{ mt: 2, color: "base.04", fontSize: 16, maxWidth: 420 }}>
+          {PRODUCT_TAGLINE}
+        </Typography>
+        <Box sx={{ mt: 5, display: "flex", flexDirection: "column", gap: 1.5 }}>
+          {["Voice applications", "Numbers and SIP", "API keys in one workspace"].map(
+            (item) => (
+              <Typography key={item} sx={{ color: "base.03", fontSize: 14 }}>
+                {item}
+              </Typography>
+            )
+          )}
+        </Box>
+      </BrandPanel>
+      <FormPanel>
+        <LayoutHeader />
+        <LayoutContent>
+          <FormCard>
+            <Outlet />
+          </FormCard>
+        </LayoutContent>
+      </FormPanel>
     </LayoutRoot>
   );
 }
 
-/**
- * Root layout container using Material UI's Box component.
- * Vertically centers the content and ensures full viewport height.
- */
 export const LayoutRoot = styled(Box)(() => ({
-  display: "flex",
-  flexDirection: "column",
-  flexGrow: 1,
+  display: "grid",
+  gridTemplateColumns: "minmax(0, 1.05fr) minmax(0, 0.95fr)",
   height: "100%",
-  overflow: "auto"
+  overflow: "hidden",
+  backgroundColor: "#0C1018",
+  "@media (max-width: 899px)": {
+    gridTemplateColumns: "1fr"
+  }
 }));
 
-/**
- * Inner layout content area for the authentication form and related UI.
- * Uses padding for spacing, and fills available vertical space.
- */
-export const LayoutContent = styled("div")(({ theme }) => ({
+const BrandPanel = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  padding: "48px 56px",
+  background:
+    "linear-gradient(160deg, rgba(76,111,255,0.28) 0%, #141A24 45%, #0C1018 100%)",
+  borderRight: `1px solid ${theme.palette.base["07"]}`,
+  "@media (max-width: 899px)": {
+    display: "none"
+  }
+}));
+
+const FormPanel = styled(Box)(() => ({
+  display: "flex",
+  flexDirection: "column",
+  minHeight: 0,
+  overflow: "auto",
+  backgroundColor: "#0C1018"
+}));
+
+export const LayoutContent = styled("div")(() => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  padding: "80px 40px",
-  backgroundColor: theme.palette.bg.app,
+  padding: "32px 24px 48px",
   flexGrow: 1
+}));
+
+const FormCard = styled(Box)(({ theme }) => ({
+  width: "100%",
+  maxWidth: 440,
+  padding: "32px 28px",
+  borderRadius: 24,
+  border: `1px solid ${theme.palette.base["07"]}`,
+  backgroundColor: theme.palette.bg.muted
 }));

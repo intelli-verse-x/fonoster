@@ -76,7 +76,7 @@ export const AdvancedSettingsSection = ({
       >
         {/* transferOptions (objeto opcional) */}
         <Box sx={{ mt: "8px" }}>
-          <Typography variant="mono-medium" color="base.03">
+          <Typography variant="mono-medium" sx={{ color: "#fff", letterSpacing: "0.08em" }}>
             Transfer Options
           </Typography>
           <Typography variant="body-micro" color="base.03">
@@ -134,7 +134,7 @@ export const AdvancedSettingsSection = ({
         />
         {/* idleOptions (objeto requerido) */}
         <Box sx={{ mt: "8px" }}>
-          <Typography variant="mono-medium" color="base.03">
+          <Typography variant="mono-medium" sx={{ color: "#fff", letterSpacing: "0.08em" }}>
             Idle Options
           </Typography>
           <Typography variant="body-micro" color="base.03">
@@ -195,7 +195,7 @@ export const AdvancedSettingsSection = ({
           )}
         />
         <Box sx={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-          <Typography variant="mono-medium" color="base.03">
+          <Typography variant="mono-medium" sx={{ color: "#fff", letterSpacing: "0.08em" }}>
             Allow user barge-in
           </Typography>
           <Typography variant="body-micro" color="base.03">
@@ -222,7 +222,7 @@ export const AdvancedSettingsSection = ({
         </Box>
         {/* Configuración de languageModel */}
         <Box>
-          <Typography variant="mono-medium" color="base.03">
+          <Typography variant="mono-medium" sx={{ color: "#fff", letterSpacing: "0.08em" }}>
             Language Model
           </Typography>
           <Typography variant="body-micro" color="base.03">
@@ -306,7 +306,7 @@ export const AdvancedSettingsSection = ({
         <ToolsSection control={control} />
         {/* Configuración de eventsHook */}
         <Box sx={{ mt: "8px" }}>
-          <Typography variant="mono-medium" color="base.03">
+          <Typography variant="mono-medium" sx={{ color: "#fff", letterSpacing: "0.08em" }}>
             Events Hook
           </Typography>
           <Typography variant="body-micro" color="base.03">

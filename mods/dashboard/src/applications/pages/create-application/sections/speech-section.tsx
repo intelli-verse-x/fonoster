@@ -47,13 +47,11 @@ export const SpeechSection = ({
   return (
     <>
       <Box sx={{ mt: "8px" }}>
-        <Typography variant="mono-medium" color="base.03">
-          SPEECH TO TEXT
+        <Typography variant="mono-medium" sx={{ color: "#fff", letterSpacing: "0.08em" }}>
+          Speech
         </Typography>
-        <Typography variant="body-micro" color="base.03">
-          Select the Speech-to-Text vendor and model that best fit your use
-          case. Check the vendor's documentation for the languages supported by
-          each model.
+        <Typography variant="body-micro" sx={{ color: "base.05" }}>
+          Listens with = speech to text. Speaks with = the voice the caller hears.
         </Typography>
       </Box>
 
@@ -96,13 +94,11 @@ export const SpeechSection = ({
       />
 
       <Box sx={{ mt: "8px" }}>
-        <Typography variant="mono-medium" color="base.03">
-          TEXT TO SPEECH
+        <Typography variant="mono-medium" sx={{ color: "#fff", letterSpacing: "0.08em" }}>
+          Speaks with
         </Typography>
-        <Typography variant="body-micro" color="base.03">
-          Select the Text-to-Speech vendor and voice that best fit your use
-          case. Check the vendor's documentation for the languages supported by
-          each voice.
+        <Typography variant="body-micro" sx={{ color: "base.05" }}>
+          The voice the caller hears on the line.
         </Typography>
       </Box>
 

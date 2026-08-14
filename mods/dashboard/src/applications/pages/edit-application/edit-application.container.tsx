@@ -18,11 +18,8 @@
  */
 
 import { useCallback, useEffect } from "react";
-import { Box } from "@mui/material";
 import { useNavigate, useParams } from "react-router";
 
-import { Page } from "~/core/components/general/page/page";
-import { PageHeader } from "~/core/components/general/page/page-header";
 import { FormSubmitButton } from "~/core/components/design-system/ui/form-submit-button/form-submit-button";
 import { Button } from "~/core/components/design-system/ui/button/button";
 import { Icon } from "~/core/components/design-system/icons/icons";
@@ -43,6 +40,10 @@ import type {
 import { Splash } from "~/core/components/general/splash/splash";
 import { useApplicationTestCall } from "~/applications/hooks/use-test-call";
 import { useApplicationContext } from "~/applications/stores/application.store";
+import {
+  ApplicationStudioLayout,
+  studioActionButtonSx
+} from "../create-application/application-studio-layout";
 
 export function EditApplicationContainer() {
   /** Workspace context for routing. */
@@ -126,54 +127,51 @@ export function EditApplicationContainer() {
     return <Splash message="Loading application details..." />;
   }
 
+  const actions = (
+    <>
+      <FormSubmitButton
+        size="small"
+        loadingText="Saving..."
+        sx={studioActionButtonSx}
+      >
+        Save
+      </FormSubmitButton>
+      <Button
+        onClick={isAnswered ? hangup : onTestCall}
+        variant="outlined"
+        size="small"
+        disabled={isLoadingCall || (isCalling && !isAnswered)}
+        startIcon={
+          <Icon
+            name="Phone"
+            sx={{ fontSize: "16px !important", color: "inherit" }}
+          />
+        }
+        sx={studioActionButtonSx}
+      >
+        {isCalling && !isAnswered
+          ? "Calling..."
+          : isAnswered
+            ? "Hangup"
+            : "Test Call"}
+      </Button>
+    </>
+  );
+
   return (
     <>
-      <Page variant="form">
-        <PageHeader
-          title="Edit Application"
-          description="An Application defines how your Voice AI behaves. Use Autopilot for LLM-based agents or External for custom logic."
-          onBack={{ label: "Back to voice applications", onClick: onGoBack }}
-          actions={
-            <Box sx={{ display: "flex", gap: 1, flexDirection: "column" }}>
-              {/* Submit button */}
-              <FormSubmitButton size="small" loadingText="Saving...">
-                Save Voice Application
-              </FormSubmitButton>
-
-              {/* Test Call button */}
-              <Button
-                onClick={isAnswered ? hangup : onTestCall}
-                variant="outlined"
-                size="small"
-                disabled={isLoadingCall || (isCalling && !isAnswered)}
-                startIcon={
-                  <Icon
-                    name="Phone"
-                    sx={{ fontSize: "16px !important", color: "inherit" }}
-                  />
-                }
-              >
-                {isCalling && !isAnswered
-                  ? "Calling..."
-                  : isAnswered
-                    ? "Hangup"
-                    : "Test Call"}
-              </Button>
-            </Box>
-          }
+      <ApplicationStudioLayout
+        title={data.name || "Edit application"}
+        description="Change how this voice app talks on a live call. Autopilot uses the AI. External uses your server."
+        onBack={onGoBack}
+        actions={actions}
+      >
+        <CreateApplicationForm
+          onSubmit={onSave}
+          initialValues={data as Schema}
+          isEdit={true}
         />
-
-        {/* Application form with initial values */}
-        <Box sx={{ maxWidth: "440px" }}>
-          <CreateApplicationForm
-            onSubmit={onSave}
-            initialValues={data as Schema}
-            isEdit={true}
-          />
-        </Box>
-      </Page>
-
-      {/* Audio element for SIP test call playback */}
+      </ApplicationStudioLayout>
       <audio ref={audioRef} autoPlay />
     </>
   );

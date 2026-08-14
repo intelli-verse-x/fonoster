@@ -39,29 +39,29 @@ export const TableRoot = styled(Table)(() => ({
 }));
 
 export const TableCellRoot = styled(TableCell)(({ theme }) => ({
-  height: "31px",
-  padding: "0px 4px",
-  fontSize: "10px",
-  fontWeight: 500,
-  color: theme.palette.base["03"],
+  height: "44px",
+  padding: "12px 16px",
+  fontSize: "11px",
+  fontWeight: 600,
+  color: theme.palette.base["05"],
   borderBottom: `solid 1px ${theme.palette.base["07"]}`,
   textAlign: "left",
-  fontFeatureSettings: "'liga' off, 'clig' off",
   fontFamily: "Poppins",
   lineHeight: "normal",
-  fontStyle: "normal",
+  letterSpacing: "0.08em",
+  textTransform: "uppercase",
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
 
   "&:first-of-type": {
-    paddingLeft: "8px"
+    paddingLeft: "16px"
   },
   "&:last-of-type": {
-    paddingRight: "8px"
+    paddingRight: "16px"
   },
   "&[data-selection-cell='true']": {
-    padding: "0px 4px",
+    padding: "0px 8px",
     width: "48px",
     maxWidth: "48px",
     minWidth: "48px",
@@ -73,13 +73,12 @@ export const TableCellRoot = styled(TableCell)(({ theme }) => ({
 
 export const DataTableContainerElement = styled(TableContainer)(
   ({ theme }) => ({
-    border: `solid 1px ${theme.palette.base["06"]}`,
-    borderTopLeftRadius: "4px",
-    borderTopRightRadius: "4px",
+    border: "none",
+    borderRadius: "16px",
     overflowX: "auto",
-    backgroundColor: theme.palette.bg.surface,
+    backgroundColor: "transparent",
     ...theme.applyStyles("dark", {
-      backgroundColor: theme.palette.bg.surface
+      backgroundColor: "transparent"
     }),
 
     "& table": {
@@ -88,11 +87,11 @@ export const DataTableContainerElement = styled(TableContainer)(
       tableLayout: "fixed",
 
       "& thead": {
-        backgroundColor: theme.palette.base["07"]
+        backgroundColor: "transparent"
       },
 
       "& th": {
-        borderBottom: "none"
+        borderBottom: `1px solid ${theme.palette.base["07"]}`
       },
 
       "& tbody": {
@@ -103,13 +102,12 @@ export const DataTableContainerElement = styled(TableContainer)(
         },
 
         "& td": {
-          padding: "0px 4px",
-          minHeight: "36px",
-          height: "36px",
-          fontSize: "10px",
-          color: theme.palette.base["03"],
+          padding: "14px 16px",
+          minHeight: "52px",
+          height: "52px",
+          fontSize: "13px",
+          color: "#F4F7FF",
           borderBottom: `solid 1px ${theme.palette.base["07"]}`,
-          fontFeatureSettings: "'liga' off, 'clig' off",
           fontFamily: "Poppins",
           lineHeight: "normal",
           fontStyle: "normal",
@@ -120,14 +118,14 @@ export const DataTableContainerElement = styled(TableContainer)(
           textOverflow: "ellipsis",
 
           "&:first-of-type": {
-            paddingLeft: "8px"
+            paddingLeft: "16px"
           },
           "&:last-of-type": {
-            paddingRight: "8px"
+            paddingRight: "16px"
           },
 
           "&[data-selection-cell='true']": {
-            padding: "0px",
+            padding: "0px 8px",
             width: "48px",
             maxWidth: "48px",
             minWidth: "48px",
@@ -138,9 +136,9 @@ export const DataTableContainerElement = styled(TableContainer)(
         },
 
         "& tr.Mui-selected": {
-          backgroundColor: "transparent",
+          backgroundColor: "rgba(76,111,255,0.12)",
           "&:hover": {
-            backgroundColor: "transparent"
+            backgroundColor: "rgba(76,111,255,0.16)"
           }
         }
       }
@@ -148,7 +146,7 @@ export const DataTableContainerElement = styled(TableContainer)(
 
     "&[data-variant='compact']": {
       "& table thead": {
-        backgroundColor: theme.palette.base["06"]
+        backgroundColor: "transparent"
       }
     }
   })

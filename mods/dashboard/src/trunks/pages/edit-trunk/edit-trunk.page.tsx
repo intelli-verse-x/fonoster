@@ -16,14 +16,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Page } from "~/core/components/general/page/page";
-import { PageHeader } from "~/core/components/general/page/page-header";
 import type { Route } from "./+types/edit-trunk.page";
 import { useCallback, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { FormProvider } from "~/core/contexts/form-context";
 import { FormSubmitButton } from "~/core/components/design-system/ui/form-submit-button/form-submit-button";
-import { Box } from "@mui/material";
 import { CreateTrunkForm } from "../create-trunk/create-trunk.form";
 import { toast } from "~/core/components/design-system/ui/toaster/toaster";
 import { useWorkspaceId } from "~/workspaces/hooks/use-workspace-id";
@@ -31,6 +28,11 @@ import { Splash } from "~/core/components/general/splash/splash";
 import { useTrunk, useUpdateTrunk } from "~/trunks/services/trunks.service";
 import type { Schema } from "../create-trunk/create-trunk.schema";
 import { getErrorMessage } from "~/core/helpers/extract-error-message";
+import { PRODUCT_NAME } from "~/core/brand/product";
+import {
+  ApplicationStudioLayout,
+  studioActionButtonSx
+} from "~/applications/pages/create-application/application-studio-layout";
 
 /**
  * Sets the metadata for the "Edit Trunk" page.
@@ -43,11 +45,10 @@ import { getErrorMessage } from "~/core/helpers/extract-error-message";
  */
 export function meta(_: Route.MetaArgs) {
   return [
-    { title: "Edit SIP Trunk | Fonoster" },
+    { title: `Edit trunk | ${PRODUCT_NAME}` },
     {
       name: "description",
-      content:
-        "A VoIP Provider is a resource within the Fonoster network that handles PSTN connectivity. "
+      content: "Change how this trunk connects Voice Studio to your phone company."
     }
   ];
 }
@@ -140,27 +141,28 @@ export default function EditTrunk() {
    */
   return (
     <FormProvider>
-      <Page variant="form">
-        <PageHeader
-          title="Edit SIP Trunk"
-          description="A VoIP Provider is a resource within the Fonoster network that handles PSTN connectivity. "
-          onBack={{ label: "Back to trunks", onClick: onGoBack }}
-          actions={
-            <FormSubmitButton size="small" loadingText="Saving...">
-              Save Trunk
-            </FormSubmitButton>
-          }
+      <ApplicationStudioLayout
+        title={data.name || "Edit trunk"}
+        description="Change how this trunk connects Voice Studio to your phone company. Inbound is calls coming in. Outbound is calls going out."
+        onBack={onGoBack}
+        backLabel="Back to trunks"
+        sideHint="Save after you change the inbound address, outbound routes, ACL, or credentials."
+        actions={
+          <FormSubmitButton
+            size="small"
+            loadingText="Saving..."
+            sx={studioActionButtonSx}
+          >
+            Save
+          </FormSubmitButton>
+        }
+      >
+        <CreateTrunkForm
+          onSubmit={onSave}
+          initialValues={{ inboundUri: "", ...data }}
+          isEdit={true}
         />
-
-        {/* Form container with a max width for readability and consistent layout */}
-        <Box sx={{ maxWidth: "440px" }}>
-          <CreateTrunkForm
-            onSubmit={onSave}
-            initialValues={{ inboundUri: "", ...data }}
-            isEdit={true}
-          />
-        </Box>
-      </Page>
+      </ApplicationStudioLayout>
     </FormProvider>
   );
 }

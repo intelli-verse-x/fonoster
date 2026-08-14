@@ -28,12 +28,12 @@ export const AuthenticationFlowHeader = memo(() => {
   );
 });
 
-export const HeaderRoot = styled("div")(({ theme }) => ({
-  minHeight: "75px",
+export const HeaderRoot = styled("div")(() => ({
+  minHeight: "72px",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  padding: "24px 40px",
+  padding: "20px 24px 0",
   width: "100%",
-  borderBottom: `1px solid ${theme.palette.base["06"]}`
+  borderBottom: "none"
 }));

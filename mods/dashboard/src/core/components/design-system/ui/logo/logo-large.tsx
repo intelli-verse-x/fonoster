@@ -6,7 +6,8 @@ import { LogoMark } from "./logo-mark";
 
 export const LogoLarge = memo(() => {
   const theme = useTheme();
-  const textColor = theme.palette.mode === "dark" ? "#F4F7FF" : "#0C1018";
+  const textColor =
+    theme.palette.mode === "light" ? "#0C1018" : "#F4F7FF";
 
   return (
     <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>

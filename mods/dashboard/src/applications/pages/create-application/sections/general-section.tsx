@@ -43,7 +43,7 @@ export const GeneralSection = ({
   <>
     {/* Application ID - Only show in edit mode */}
     {isEdit && initialValues?.ref && (
-      <ResourceIdField value={initialValues.ref} label="Application Ref" />
+      <ResourceIdField value={initialValues.ref} label="Application ID" />
     )}
 
     <FormField
@@ -52,7 +52,7 @@ export const GeneralSection = ({
       render={({ field }) => (
         <FormItem>
           <FormControl>
-            <Input type="text" label="Friendly Name" {...field} />
+            <Input type="text" label="Application name" {...field} />
           </FormControl>
         </FormItem>
       )}
@@ -87,7 +87,7 @@ export const GeneralSection = ({
               type="text"
               label="Application Endpoint"
               placeholder="your-app.com:50051"
-              supportingText="This is your application's endpoint. You only need to specify it for External applications or when running your own instance of the Autopilot service."
+              supportingText="Only required for External apps, or if Autopilot runs on your own server. Autopilot in this workspace can leave the default."
               {...field}
             />
           </FormControl>
