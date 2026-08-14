@@ -191,7 +191,7 @@ export function CreateDomainForm({
         <FormRoot ref={formRef} onSubmit={form.handleSubmit(onSubmit)}>
           {/* Domain ID - Only show in edit mode */}
           {isEdit && initialValues?.ref && (
-            <ResourceIdField value={initialValues.ref} label="Domain Ref" />
+            <ResourceIdField value={initialValues.ref} label="Domain ID" />
           )}
 
           {/* Friendly Name Field */}
@@ -201,7 +201,7 @@ export function CreateDomainForm({
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input type="text" label="Friendly Name" {...field} />
+                  <Input type="text" label="Domain name" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -213,7 +213,7 @@ export function CreateDomainForm({
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input type="text" label="Domain URI" {...field} />
+                  <Input type="text" label="Domain URI (internal SIP address)" {...field} />
                 </FormControl>
               </FormItem>
             )}
@@ -233,7 +233,7 @@ export function CreateDomainForm({
                     }}
                   >
                     <Select
-                      label="Access Control List (ACL)"
+                      label="Who can join (ACL)"
                       options={(acls || []).map(({ ref, name }) => ({
                         value: ref,
                         label: name
@@ -274,7 +274,7 @@ export function CreateDomainForm({
                   >
                     {/* Read-only Select showing current rules */}
                     <Select
-                      label="Egress Rules"
+                      label="Outbound rules (which numbers to use)"
                       placeholder="Click below to add rules (e.g., .*)."
                       multiple
                       value={selectValues}
