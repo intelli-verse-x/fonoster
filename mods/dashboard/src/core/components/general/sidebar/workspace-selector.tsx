@@ -27,9 +27,10 @@ import {
   WorkspaceUnifiedDropdown
 } from "./workspace-selector.styles";
 import { Typography } from "../../design-system/ui/typography/typography";
+import { LogoMark } from "../../design-system/ui/logo/logo-mark";
 import { ellipsis } from "~/core/helpers/ellipsis";
 
-const DEFAULT_WORKSPACE = [{ id: "ADD", name: "New Workspace +" }];
+const DEFAULT_WORKSPACE = [{ id: "ADD", name: "New workspace" }];
 
 export interface FilterSearchBySelectorProps {
   selectedWorkspaceId: string;
@@ -86,22 +87,32 @@ export const WorkspaceSelector: React.FC<FilterSearchBySelectorProps> = ({
     }
   }, [open, animationDuration]);
 
+  const triggerInner = (expanded: boolean) => (
+    <WorkspaceTrigger onClick={handleToggle}>
+      <Box display="flex" alignItems="center" gap="10px" minWidth={0}>
+        <LogoMark size={28} />
+        <Box display="flex" flexDirection="column" gap="2px" minWidth={0}>
+          <Typography
+            variant="mono-small"
+            sx={{ color: "base.05", letterSpacing: "0.06em", textTransform: "uppercase" }}
+          >
+            Workspace · {region}
+          </Typography>
+          <Typography variant="body-medium" sx={{ fontWeight: 600 }}>
+            {ellipsis(selectedFilterLabel)}
+          </Typography>
+        </Box>
+      </Box>
+      <Icon name={expanded ? "UnfoldLess" : "UnfoldMore"} />
+    </WorkspaceTrigger>
+  );
+
   const renderAnimatedDropdown = () => {
     if (!shouldRender) return null;
 
     const dropdown = (
       <WorkspaceUnifiedDropdown>
-        <WorkspaceTrigger onClick={handleToggle}>
-          <Box display="flex" flexDirection="column" gap="4px">
-            <Typography variant="mono-small" sx={{ color: "base.04" }}>
-              {region}
-            </Typography>
-            <Typography variant="body-medium">
-              {ellipsis(selectedFilterLabel)}
-            </Typography>
-          </Box>
-          <Icon name={"UnfoldLess"} />
-        </WorkspaceTrigger>
+        {triggerInner(true)}
 
         {[...workspaces, ...DEFAULT_WORKSPACE].map((option) => (
           <WorkspaceOption
@@ -146,17 +157,7 @@ export const WorkspaceSelector: React.FC<FilterSearchBySelectorProps> = ({
         }}
         ref={containerRef}
       >
-        <WorkspaceTrigger onClick={handleToggle}>
-          <Box display="flex" flexDirection="column" gap="4px">
-            <Typography variant="mono-small" sx={{ color: "base.04" }}>
-              {region}
-            </Typography>
-            <Typography variant="body-medium">
-              {ellipsis(selectedFilterLabel)}
-            </Typography>
-          </Box>
-          <Icon name={"UnfoldMore"} />
-        </WorkspaceTrigger>
+        {triggerInner(false)}
 
         {renderAnimatedDropdown()}
       </Box>

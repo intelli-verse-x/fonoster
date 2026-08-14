@@ -23,15 +23,15 @@ export const SidebarContainer = styled(Box)(({ theme }) => ({
   height: "100%",
 
   "& .MuiDrawer-paper": {
-    backgroundColor: theme.palette.bg.surface,
+    backgroundColor: theme.palette.bg.app,
     color: theme.palette.base["03"],
-    borderRight: `solid 1px ${theme.palette.base["06"]}`,
-    width: "250px",
+    borderRight: `solid 1px ${theme.palette.base["07"]}`,
+    width: "264px",
     height: "100%",
     boxSizing: "border-box",
     ...theme.applyStyles("dark", {
-      backgroundColor: theme.palette.bg.surface,
-      borderRight: `solid 1px ${theme.palette.base["06"]}`
+      backgroundColor: theme.palette.bg.app,
+      borderRight: `solid 1px ${theme.palette.base["07"]}`
     })
   }
 }));
@@ -41,18 +41,19 @@ export const SidebarWrapper = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   justifyContent: "space-between",
   height: "100%",
-  backgroundColor: theme.palette.bg.surface,
-  gap: "16px",
+  backgroundColor: theme.palette.bg.app,
+  gap: "12px",
   flexGrow: 1,
+  padding: "12px 10px 16px",
   ...theme.applyStyles("dark", {
-    backgroundColor: theme.palette.bg.surface
+    backgroundColor: theme.palette.bg.app
   })
 }));
 
 export const SidebarContent = styled("nav")(() => ({
   display: "flex",
   flexDirection: "column",
-  gap: "8px"
+  gap: "12px"
 }));
 
 export const SidebarNavigation = styled("ul")(() => ({
@@ -60,14 +61,15 @@ export const SidebarNavigation = styled("ul")(() => ({
   flexDirection: "column",
   listStyle: "none",
   padding: 0,
-  margin: 0
+  margin: 0,
+  gap: "2px"
 }));
 
 export const SidebarFooter = styled(Box)(({ theme }) => ({
   marginTop: "auto",
-  padding: "10px 40px",
-  fontSize: "0.75rem",
-  color: theme.palette.base["04"]
+  padding: "8px 12px",
+  fontSize: "0.7rem",
+  color: theme.palette.base["05"]
 }));
 
 export const SidebarNavItemRoot = styled("li")(() => ({
@@ -80,33 +82,34 @@ export const SidebarNavItemRoot = styled("li")(() => ({
 }));
 
 export const SidebarNavItemContent = styled(Box)(({ theme }) => ({
-  color: theme.palette.base["03"],
+  color: theme.palette.base["04"],
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
   width: "100%",
   position: "relative",
-  padding: "8px 16px",
-  paddingLeft: "40px",
+  padding: "9px 12px",
+  borderRadius: "10px",
+  transition: "background-color 0.15s ease, color 0.15s ease",
+
+  "&:hover": {
+    backgroundColor: "rgba(76,111,255,0.08)",
+    color: theme.palette.base["02"]
+  },
 
   "&[data-selected='true']": {
-    color: theme.palette.base["01"]
+    color: theme.palette.base["01"],
+    backgroundColor: "rgba(76,111,255,0.16)"
   }
 }));
 
-export const SidebarNavItemText = styled(Typography)(({ theme }) => ({
+export const SidebarNavItemText = styled(Typography)(() => ({
   position: "relative",
+  fontWeight: 500,
+  fontSize: "13px !important",
 
   "&[data-selected='true']:before": {
-    content: '""',
-    position: "absolute",
-    right: "-12px",
-    top: "50%",
-    transform: "translateY(-50%)",
-    width: "6px",
-    height: "6px",
-    borderRadius: "50%",
-    backgroundColor: theme.palette.brand["04"]
+    content: "none"
   }
 }));
 

@@ -35,7 +35,7 @@ export default function AppShellLayout() {
 
 export const AppShellContainer = styled("div")(({ theme }) => ({
   display: "grid",
-  gridTemplateColumns: "250px 1fr",
+  gridTemplateColumns: "264px 1fr",
   gridTemplateRows: "1fr",
   width: "100%",
   height: "100%",

@@ -66,9 +66,9 @@ const NavItem = ({ item }: NavItemProps) => {
           </SidebarNavItemText>
           {nestedItems &&
             (isOpen ? (
-              <ExpandLess sx={{ color: "base.04" }} />
+              <ExpandLess sx={{ color: "inherit", fontSize: 18 }} />
             ) : (
-              <ExpandMore sx={{ color: "base.04" }} />
+              <ExpandMore sx={{ color: "inherit", fontSize: 18 }} />
             ))}
         </SidebarNavItemContent>
       </SidebarNavItemRoot>
