@@ -2,111 +2,57 @@
  * Copyright (C) 2025 by Fonoster Inc (https://fonoster.com)
  * http://github.com/fonoster/fonoster
  *
- * This file is part of Fonoster
- *
- * Licensed under the MIT License (the "License");
- * you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
- *
- *    https://opensource.org/licenses/MIT
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Licensed under the MIT License.
  */
-import { Page } from "~/core/components/general/page/page";
-import { PageHeader } from "~/core/components/general/page/page-header";
 import type { Route } from "./+types/edit-secret.page";
 import { useCallback, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { FormProvider } from "~/core/contexts/form-context";
 import { FormSubmitButton } from "~/core/components/design-system/ui/form-submit-button/form-submit-button";
-import { Box } from "@mui/material";
 import { CreateSecretForm } from "../create-secret/create-secret.form";
 import { toast } from "~/core/components/design-system/ui/toaster/toaster";
 import { useWorkspaceId } from "~/workspaces/hooks/use-workspace-id";
-import { Splash } from "~/core/components/general/splash/splash";
+import { StudioFormSkeleton } from "~/core/brand/studio-skeletons";
 import { useSecret, useUpdateSecret } from "~/secrets/services/secrets.service";
 import type { Schema } from "../create-secret/create-secret.schema";
 import { getErrorMessage } from "~/core/helpers/extract-error-message";
+import { PRODUCT_NAME } from "~/core/brand/product";
+import {
+  ApplicationStudioLayout,
+  studioActionButtonSx
+} from "~/applications/pages/create-application/application-studio-layout";
 
-/**
- * Sets the metadata for the "Edit Secret" page.
- *
- * This information is used by the router to define the page title and description
- * for SEO and display in the browser.
- *
- * @param _ - Meta arguments provided by the router (unused here).
- * @returns {Array} Metadata objects for the page.
- */
 export function meta(_: Route.MetaArgs) {
   return [
-    { title: "Secrets | Fonoster" },
+    { title: `Edit secret | ${PRODUCT_NAME}` },
     {
       name: "description",
-      content: "Edit a secret to protect your domains, peers, and trunks."
+      content: "Replace this encrypted value used by apps and APIs in this workspace."
     }
   ];
 }
 
-/**
- * EditSecret page component.
- *
- * Renders a page to edit an existing voice secret, including:
- * - Page header with back navigation and save button.
- * - A form pre-filled with the secret details.
- * - Data fetching and optimistic update integration.
- *
- * @returns {JSX.Element} The rendered Edit Secret page.
- */
 export default function EditSecret() {
-  /** Retrieves the current workspace ID for building navigation paths. */
   const workspaceId = useWorkspaceId();
-
-  /** Extracts the secret reference from the URL parameters. */
   const { ref } = useParams();
 
-  /**
-   * Ensures the secret reference is provided.
-   *
-   * This value should never be null or undefined, as it is required
-   * to fetch and update the secret data.
-   */
   if (!ref) {
     throw new Error("Secret reference is required");
   }
 
-  /** Fetches the existing secret details for editing. */
   const { data, isLoading } = useSecret(ref);
-
-  /** Hook to programmatically navigate between pages. */
   const navigate = useNavigate();
 
-  /**
-   * Handler for navigating back to the secrets page.
-   * Uses `viewTransition` for smoother transitions.
-   */
   const onGoBack = useCallback(() => {
-    navigate(`/workspaces/${workspaceId}/secrets`, {
-      viewTransition: true
-    });
+    navigate(`/workspaces/${workspaceId}/secrets`);
   }, [navigate, workspaceId]);
 
-  /** Custom hook to handle secret updates via the API. */
   const { mutate } = useUpdateSecret();
 
-  /**
-   * Handler called after form submission.
-   * Updates the secret, shows a toast, and navigates back to the secrets page.
-   *
-   * @param {Schema} data - The validated form data.
-   */
   const onSave = useCallback(
-    async (data: Schema) => {
+    async (formData: Schema) => {
       try {
-        mutate({ ...data, ref });
+        mutate({ ...formData, ref });
         toast("Secret updated successfully!");
         onGoBack();
       } catch (error) {
@@ -116,10 +62,6 @@ export default function EditSecret() {
     [mutate, ref, onGoBack]
   );
 
-  /**
-   * Effect that ensures the user is redirected if the secret does not exist.
-   * Shows an error toast and navigates back to the secrets page.
-   */
   useEffect(() => {
     if (!isLoading && !data) {
       toast("Oops! You are trying to edit a secret that does not exist.");
@@ -127,39 +69,34 @@ export default function EditSecret() {
     }
   }, [isLoading, data, onGoBack]);
 
-  /**
-   * Shows a loading indicator while fetching the secret data.
-   */
   if (isLoading || !data) {
-    return <Splash message="Loading secret details..." />;
+    return <StudioFormSkeleton />;
   }
 
-  /**
-   * Renders the Edit Secret page layout.
-   */
   return (
     <FormProvider>
-      <Page variant="form">
-        <PageHeader
-          title="Edit Secret"
-          description="Secrets are encrypted variables available to your apps and APIs within the current workspace."
-          onBack={{ label: "Back to secrets", onClick: onGoBack }}
-          actions={
-            <FormSubmitButton size="small" loadingText="Saving...">
-              Save Secret
-            </FormSubmitButton>
-          }
+      <ApplicationStudioLayout
+        title={data.name || "Edit secret"}
+        description="Replace this encrypted value. Apps and APIs in this workspace can use the new value after you save."
+        onBack={onGoBack}
+        backLabel="Back to secrets"
+        sideHint="Save after you change the name or value."
+        actions={
+          <FormSubmitButton
+            size="small"
+            loadingText="Saving..."
+            sx={studioActionButtonSx}
+          >
+            Save
+          </FormSubmitButton>
+        }
+      >
+        <CreateSecretForm
+          onSubmit={onSave}
+          initialValues={{ ...data, type: "text" }}
+          isEdit={true}
         />
-
-        {/* Form container with a max width for readability and consistent layout */}
-        <Box sx={{ maxWidth: "440px" }}>
-          <CreateSecretForm
-            onSubmit={onSave}
-            initialValues={{ ...data, type: "text" }}
-            isEdit={true}
-          />
-        </Box>
-      </Page>
+      </ApplicationStudioLayout>
     </FormProvider>
   );
 }

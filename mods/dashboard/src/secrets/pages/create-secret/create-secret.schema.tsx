@@ -42,7 +42,7 @@ export const schema = z.object({
    *
    * Required; must not be empty.
    */
-  name: z.string().nonempty("Friendly Name is required"),
+  name: z.string().nonempty("Secret name is required"),
 
   /**
    * Secret value associated with the credential.
