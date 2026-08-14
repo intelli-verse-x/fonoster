@@ -114,7 +114,7 @@ export const CreateSecretForm = ({
       <FormRoot onSubmit={form.handleSubmit(onSubmit)}>
         {/* Secret ID - Only show in edit mode */}
         {isEdit && initialValues?.ref && (
-          <ResourceIdField value={initialValues.ref} label="Secret Ref" />
+          <ResourceIdField value={initialValues.ref} label="Secret ID" />
         )}
 
         {/* Secret Name Field */}
@@ -126,8 +126,8 @@ export const CreateSecretForm = ({
               <FormControl>
                 <Input
                   type="text"
-                  label="Secret Name"
-                  placeholder="(e.g. GOOGLE_SERVICE_ACCOUNT)"
+                  label="Secret name"
+                  placeholder="e.g. GOOGLE_SERVICE_ACCOUNT"
                   {...field}
                 />
               </FormControl>
@@ -143,7 +143,7 @@ export const CreateSecretForm = ({
             <FormItem>
               <FormControl>
                 <Select
-                  label="Secret Type"
+                  label="Type"
                   options={[
                     { label: "Text", value: "text" },
                     { label: "JSON", value: "json" }
@@ -163,11 +163,11 @@ export const CreateSecretForm = ({
             <FormItem>
               <FormControl>
                 {type === "text" ? (
-                  <Input type="password" label="Secret Value" {...field} />
+                  <Input type="password" label="Secret value" {...field} />
                 ) : (
                   <Textarea
-                    label="Secret Value"
-                    placeholder='(e.g. {"key": "value"})'
+                    label="Secret value"
+                    placeholder='{"key": "value"}'
                     minRows={6}
                     {...field}
                   />
