@@ -28,6 +28,7 @@ import { ROLE_LABELS } from "~/workspaces/pages/[workspace]/members/members.cons
 import { FormRoot } from "~/core/components/design-system/forms/form-root";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
+import { Box, Typography } from "@mui/material";
 import { schema, type Schema } from "./create-api-key.schema";
 import { Select } from "~/core/components/design-system/ui/select/select";
 import { useFormContextSync } from "~/core/hooks/use-form-context-sync";
@@ -79,27 +80,48 @@ export function CreateApiKeyForm({
   return (
     <Form {...form}>
       <FormRoot onSubmit={form.handleSubmit(onSubmit)}>
-        {/* Application Type Field */}
-        <FormField
-          control={form.control}
-          name="role"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Select
-                  label="Access Role"
-                  options={[
-                    {
-                      value: Role.WORKSPACE_ADMIN,
-                      label: ROLE_LABELS[Role.WORKSPACE_ADMIN]
-                    }
-                  ]}
-                  {...field}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+          <Box>
+            <Typography
+              sx={{
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "base.05",
+                mb: 1
+              }}
+            >
+              Permissions
+            </Typography>
+            <Typography sx={{ fontSize: 13, color: "base.04", mb: 2 }}>
+              This key can call Voice Studio APIs for the current workspace.
+              After you save, copy the secret access key — it is never listed
+              again.
+            </Typography>
+          </Box>
+
+          <FormField
+            control={form.control}
+            name="role"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Select
+                    label="Access role"
+                    options={[
+                      {
+                        value: Role.WORKSPACE_ADMIN,
+                        label: ROLE_LABELS[Role.WORKSPACE_ADMIN]
+                      }
+                    ]}
+                    {...field}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+        </Box>
       </FormRoot>
     </Form>
   );
