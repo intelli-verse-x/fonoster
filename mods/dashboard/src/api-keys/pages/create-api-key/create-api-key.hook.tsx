@@ -36,9 +36,7 @@ export const useCreateApiKey = () => {
    * Uses view transitions for smoother page transitions (if supported).
    */
   const onGoBack = useCallback(() => {
-    navigate(`/workspaces/${workspaceId}/api-keys`, {
-      viewTransition: true
-    });
+    navigate(`/workspaces/${workspaceId}/api-keys`);
   }, [navigate, workspaceId]);
 
   /** Custom hook to create a apiKey via API with optimistic updates. */

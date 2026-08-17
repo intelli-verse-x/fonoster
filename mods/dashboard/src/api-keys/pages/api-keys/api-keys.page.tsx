@@ -2,82 +2,134 @@
  * Copyright (C) 2025 by Fonoster Inc (https://fonoster.com)
  * http://github.com/fonoster/fonoster
  *
- * This file is part of Fonoster
- *
- * Licensed under the MIT License (the "License");
- * you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
- *
- *    https://opensource.org/licenses/MIT
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Licensed under the MIT License.
  */
-import { useState } from "react";
+import type { Route } from "./+types/api-keys.page";
+import { useCallback, useState } from "react";
+import {
+  Box,
+  Button,
+  IconButton,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+  styled
+} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import { Page } from "~/core/components/general/page/page";
-import { DataTable } from "~/core/components/design-system/ui/data-table/data-table";
-
-import { columns } from "./api-keys.columns";
-import { ApiKeysPageHeader } from "./api-keys.page-header";
+import { PAGE_SIZE } from "~/core/shared/page-sizes.const";
 import { API_KEYS_SEARCHABLE_FIELDS } from "./api-keys.const";
 import { useResourceTable } from "~/core/hooks/use-resource-table";
 import { useApiKeys, useDeleteApiKey } from "../../services/api-keys.service";
 import { useNavigate } from "react-router";
 import { useWorkspaceId } from "~/workspaces/hooks/use-workspace-id";
-import type { Route } from "./+types/api-keys.page";
-import { PAGE_SIZE } from "~/core/shared/page-sizes.const";
+import { PRODUCT_NAME } from "~/core/brand/product";
+import { ResourceListSkeleton } from "~/core/brand/studio-skeletons";
+import type { ApiKey } from "~/api-keys/services/api-keys.interfaces";
+import { ROLE_LABELS } from "~/workspaces/pages/[workspace]/members/members.constants";
 
-/**
- * Page metadata function for the ApiKeys page.
- *
- * Sets the page title and meta description for SEO and browser display.
- *
- * @param _ - Meta arguments provided by the router (not used here).
- * @returns An array of metadata objects for the page.
- */
 export function meta(_: Route.MetaArgs) {
   return [
-    { title: "API Keys | Fonoster" },
+    { title: `API Keys | ${PRODUCT_NAME}` },
     {
       name: "description",
       content:
-        "Use API Keys to access Fonoster's APIs securely. Keys are encrypted and limited to this workspace."
+        "API keys let apps call Voice Studio APIs for this workspace. Secrets are shown only once when you create a key."
     }
   ];
 }
 
-/**
- * ApiKeys page component.
- *
- * Renders a table of phone API keys with search, pagination, deletion, and editing features.
- * Uses a reusable DataTable component for consistent design and behavior.
- *
- * @returns {JSX.Element} The rendered ApiKeys page.
- */
+const Hero = styled(Box)(() => ({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+  gap: 24,
+  marginBottom: 24,
+  flexWrap: "wrap"
+}));
+
+const Board = styled(Box)(({ theme }) => ({
+  borderRadius: 20,
+  padding: 8,
+  background: theme.palette.bg.muted,
+  border: `1px solid ${theme.palette.base["07"]}`
+}));
+
+const Toolbar = styled(Box)(() => ({
+  display: "flex",
+  gap: 12,
+  alignItems: "center",
+  flexWrap: "wrap",
+  padding: "8px 8px 12px"
+}));
+
+const fieldSelectSx = {
+  minWidth: 140,
+  height: 40,
+  color: "#fff",
+  fontSize: 13,
+  fontFamily: "Poppins",
+  borderRadius: "10px",
+  backgroundColor: "#141A24",
+  "& .MuiOutlinedInput-notchedOutline": {
+    borderColor: "#333333"
+  },
+  "&:hover .MuiOutlinedInput-notchedOutline": {
+    borderColor: "#4C6FFF"
+  },
+  "& .MuiSvgIcon-root": { color: "#C2C2C2" }
+};
+
+const searchSx = {
+  flex: 1,
+  minWidth: 180,
+  "& .MuiOutlinedInput-root": {
+    height: 40,
+    borderRadius: "10px",
+    color: "#fff",
+    fontSize: 13,
+    backgroundColor: "#141A24",
+    "& fieldset": { borderColor: "#333333" },
+    "&:hover fieldset": { borderColor: "#4C6FFF" }
+  }
+};
+
+const ApiKeyRow = styled(Box)(() => ({
+  display: "flex",
+  alignItems: "flex-start",
+  gap: 8,
+  padding: "16px 8px 16px 16px",
+  borderRadius: 16,
+  "&:hover": {
+    background: "rgba(76,111,255,0.1)"
+  }
+}));
+
+const FieldLabel = styled(Typography)(() => ({
+  fontSize: "10px !important",
+  fontWeight: 700,
+  letterSpacing: "0.1em",
+  textTransform: "uppercase",
+  color: "#8D8D8D"
+}));
+
 export default function ApiKeysList() {
-  /** State to hold the current pagination token used to fetch a specific page of data. */
+  const navigate = useNavigate();
+  const workspaceId = useWorkspaceId();
   const [pageToken, setPageToken] = useState<string | undefined>(undefined);
 
-  /** Fetch API keys data using the current page token and page size. */
   const { data, nextPageToken, isLoading } = useApiKeys({
     pageSize: PAGE_SIZE,
     pageToken
   });
 
-  /** Hook to delete a API key via the API. */
-  const { mutate: deleteApiKey } = useDeleteApiKey();
+  const { mutateAsync: deleteApiKey } = useDeleteApiKey();
 
-  /**
-   * Custom hook for table management:
-   * - Handles search functionality
-   * - Handles pagination (next/prev pages)
-   * - Handles deletion of selected rows
-   * - Integrates with UI components
-   */
   const {
     filteredData,
     searchBy,
@@ -97,47 +149,176 @@ export default function ApiKeysList() {
     defaultSearchBy: "ref"
   });
 
-  /**
-   * Renders the ApiKeys page, including a header and a DataTable.
-   */
+  const onCreate = useCallback(() => {
+    navigate(`/workspaces/${workspaceId}/api-keys/create`);
+  }, [navigate, workspaceId]);
+
   return (
     <Page>
-      <ApiKeysPageHeader />
+      <Hero>
+        <Box>
+          <Typography
+            sx={{
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "brand.main",
+              mb: 1
+            }}
+          >
+            Workspace
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: "Poppins, sans-serif",
+              fontSize: { xs: 28, md: 36 },
+              fontWeight: 600,
+              letterSpacing: "-0.03em",
+              color: "#fff"
+            }}
+          >
+            API Keys
+          </Typography>
+          <Typography sx={{ mt: 1, color: "base.04", fontSize: 14, maxWidth: 560 }}>
+            Keys that let apps call Voice Studio APIs for this workspace. The
+            secret is shown only once when you create a key.
+          </Typography>
+        </Box>
+        <Button
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={onCreate}
+          sx={{
+            bgcolor: "brand.main",
+            color: "#fff",
+            textTransform: "none",
+            fontWeight: 600,
+            borderRadius: 2,
+            px: 2,
+            "&:hover": { bgcolor: "brand.04" }
+          }}
+        >
+          Create API key
+        </Button>
+      </Hero>
 
-      <DataTable
-        /** Indicates loading state during data fetch. */
-        isLoading={isLoading}
-        /** Data displayed in the table, filtered by search input. */
-        data={filteredData}
-        /** Column definitions for each table column. */
-        columns={columns}
-        /** Function to determine the unique row ID for each record. */
-        getRowId={(row) => row.ref}
-        /** The currently selected search field (e.g., "ref", "name"). */
-        searchBy={searchBy}
-        /** List of available searchable fields presented to the user. */
-        searchableFields={API_KEYS_SEARCHABLE_FIELDS}
-        /** ApiKey of rows displayed per page. */
-        pageSize={PAGE_SIZE}
-        /** Pagination configuration: total rows, next and previous tokens. */
-        pagination={{
-          total: filteredData.length,
-          nextToken: nextPageToken,
-          prevToken: prevTokens.length
-            ? prevTokens[prevTokens.length - 1]
-            : null
-        }}
-        /** Handler for navigating to the next page. */
-        onNextPage={() => handleNextPage(nextPageToken)}
-        /** Handler for navigating to the previous page. */
-        onPrevPage={handlePrevPage}
-        /** Handler for updating the search input. */
-        onSearch={handleSearch}
-        /** Handler for changing the search field selection. */
-        onSearchByFieldChange={setSearchBy}
-        /** Handler for deleting selected rows. */
-        onDeleteSelected={handleDelete}
-      />
+      <Board>
+        <Toolbar>
+          <Select
+            size="small"
+            value={searchBy}
+            onChange={(e) => setSearchBy(String(e.target.value))}
+            sx={fieldSelectSx}
+          >
+            {API_KEYS_SEARCHABLE_FIELDS.map((field) => (
+              <MenuItem key={field.value} value={field.value}>
+                {field.label}
+              </MenuItem>
+            ))}
+          </Select>
+          <TextField
+            size="small"
+            placeholder="Search"
+            onChange={(e) => handleSearch(e.target.value)}
+            sx={searchSx}
+          />
+          <Box sx={{ ml: "auto", display: "flex", alignItems: "center", gap: 0.5 }}>
+            <IconButton
+              size="small"
+              onClick={handlePrevPage}
+              disabled={!prevTokens.length}
+              sx={{ color: "base.04" }}
+            >
+              <ArrowBackIosNewIcon fontSize="small" />
+            </IconButton>
+            <IconButton
+              size="small"
+              onClick={() => handleNextPage(nextPageToken)}
+              disabled={!nextPageToken}
+              sx={{ color: "base.04" }}
+            >
+              <ArrowForwardIosIcon fontSize="small" />
+            </IconButton>
+            <Typography sx={{ fontSize: 12, color: "base.05", pr: 1 }}>
+              {isLoading ? "…" : `${filteredData.length} in this view`}
+            </Typography>
+          </Box>
+        </Toolbar>
+
+        {isLoading && <ResourceListSkeleton />}
+
+        {!isLoading && filteredData.length === 0 && (
+          <Typography sx={{ px: 2, py: 4, color: "base.05", fontSize: 13 }}>
+            No API keys yet. Create one so an app can call APIs in this workspace.
+          </Typography>
+        )}
+
+        {!isLoading &&
+          filteredData.map((apiKey: ApiKey) => (
+            <ApiKeyRow key={apiKey.ref}>
+              <Box sx={{ flex: 1, minWidth: 0 }}>
+                <Box sx={{ mb: 1.5 }}>
+                  <FieldLabel>Access key ID</FieldLabel>
+                  <Typography
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: 16,
+                      color: "#fff",
+                      wordBreak: "break-all"
+                    }}
+                  >
+                    {apiKey.accessKeyId}
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+                    gap: 12
+                  }}
+                >
+                  <Box>
+                    <FieldLabel>Role</FieldLabel>
+                    <Typography sx={{ fontSize: 13, color: "#fff", fontWeight: 600 }}>
+                      {ROLE_LABELS[apiKey.role] || apiKey.role || "Not set"}
+                    </Typography>
+                    <Typography sx={{ fontSize: 12, color: "base.05" }}>
+                      What this key is allowed to do
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <FieldLabel>Secret</FieldLabel>
+                    <Typography sx={{ fontSize: 13, color: "#fff", fontWeight: 600 }}>
+                      Hidden
+                    </Typography>
+                    <Typography sx={{ fontSize: 12, color: "base.05" }}>
+                      Shown only once at create time
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+              <IconButton
+                size="small"
+                aria-label="Delete API key"
+                onClick={() => {
+                  void handleDelete([apiKey]);
+                }}
+                sx={{
+                  color: "base.05",
+                  mt: 0.5,
+                  borderRadius: "8px",
+                  "&:hover": {
+                    color: "#fff",
+                    bgcolor: "rgba(76,111,255,0.16)"
+                  }
+                }}
+              >
+                <DeleteOutlineIcon fontSize="small" />
+              </IconButton>
+            </ApiKeyRow>
+          ))}
+      </Board>
     </Page>
   );
 }
