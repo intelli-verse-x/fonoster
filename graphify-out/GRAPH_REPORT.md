@@ -4,12 +4,12 @@
 - cluster-only mode — file stats not available
 
 ## Summary
-- 13402 nodes · 26687 edges · 665 communities (356 shown, 309 thin omitted)
+- 13402 nodes · 26687 edges · 667 communities (359 shown, 308 thin omitted)
 - Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 1309 edges (avg confidence: 0.63)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e9078a7c`
+- Built from commit: `1cf17a21`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -33,7 +33,7 @@
 - Community 16
 - Community 17
 - Community 18
-- Community 19
+- Community 20
 - Community 21
 - Community 22
 - Community 23
@@ -160,7 +160,7 @@
 - Community 145
 - Community 146
 - Community 147
-- Community 150
+- Community 148
 - Community 151
 - Community 152
 - Community 153
@@ -175,7 +175,7 @@
 - Community 162
 - Community 163
 - Community 164
-- Community 169
+- Community 165
 - Community 170
 - Community 171
 - Community 172
@@ -234,7 +234,7 @@
 - Community 226
 - Community 227
 - Community 228
-- Community 230
+- Community 229
 - Community 231
 - Community 232
 - Community 233
@@ -504,8 +504,8 @@
 - Community 497
 - Community 498
 - Community 499
+- Community 500
 - Community 501
-- Community 502
 - Community 503
 - Community 504
 - Community 505
@@ -519,8 +519,8 @@
 - Community 513
 - Community 514
 - Community 515
+- Community 516
 - Community 517
-- Community 518
 - Community 519
 - Community 520
 - Community 521
@@ -570,7 +570,7 @@
 - Community 565
 - Community 566
 - Community 567
-- Community 569
+- Community 568
 - Community 570
 - Community 571
 - Community 572
@@ -613,7 +613,7 @@
 - Community 609
 - Community 610
 - Community 611
-- Community 613
+- Community 612
 - Community 614
 - Community 615
 - Community 616
@@ -637,6 +637,8 @@
 - Community 634
 - Community 635
 - Community 636
+- Community 637
+- Community 638
 
 ## God Nodes (most connected - your core abstractions)
 1. `useWorkspaceId()` - 148 edges
@@ -663,15 +665,15 @@
   mods/identity/src/generated/@prisma/client/query_engine_bg.js → site/site-assets/js/jquery.min.js
 
 ## Import Cycles
+- 3-file cycle: `mods/common/src/voice/Stream.ts -> mods/common/src/voice/Verb.ts -> mods/common/src/voice/voice.ts -> mods/common/src/voice/Stream.ts`
+- 3-file cycle: `mods/common/src/voice/Record.ts -> mods/common/src/voice/Verb.ts -> mods/common/src/voice/voice.ts -> mods/common/src/voice/Record.ts`
+- 3-file cycle: `mods/common/src/voice/Mute.ts -> mods/common/src/voice/Verb.ts -> mods/common/src/voice/voice.ts -> mods/common/src/voice/Mute.ts`
 - 3-file cycle: `mods/common/src/voice/Dial.ts -> mods/common/src/voice/Verb.ts -> mods/common/src/voice/voice.ts -> mods/common/src/voice/Dial.ts`
 - 3-file cycle: `mods/common/src/voice/Gather.ts -> mods/common/src/voice/Verb.ts -> mods/common/src/voice/voice.ts -> mods/common/src/voice/Gather.ts`
-- 3-file cycle: `mods/common/src/voice/Mute.ts -> mods/common/src/voice/Verb.ts -> mods/common/src/voice/voice.ts -> mods/common/src/voice/Mute.ts`
 - 3-file cycle: `mods/common/src/voice/Play.ts -> mods/common/src/voice/Verb.ts -> mods/common/src/voice/voice.ts -> mods/common/src/voice/Play.ts`
 - 3-file cycle: `mods/common/src/voice/PlayDtmf.ts -> mods/common/src/voice/Verb.ts -> mods/common/src/voice/voice.ts -> mods/common/src/voice/PlayDtmf.ts`
-- 3-file cycle: `mods/common/src/voice/Record.ts -> mods/common/src/voice/Verb.ts -> mods/common/src/voice/voice.ts -> mods/common/src/voice/Record.ts`
 - 3-file cycle: `mods/common/src/voice/Say.ts -> mods/common/src/voice/Verb.ts -> mods/common/src/voice/voice.ts -> mods/common/src/voice/Say.ts`
 - 3-file cycle: `mods/common/src/voice/StopSay.ts -> mods/common/src/voice/Verb.ts -> mods/common/src/voice/voice.ts -> mods/common/src/voice/StopSay.ts`
-- 3-file cycle: `mods/common/src/voice/Stream.ts -> mods/common/src/voice/Verb.ts -> mods/common/src/voice/voice.ts -> mods/common/src/voice/Stream.ts`
 - 3-file cycle: `mods/common/src/voice/StreamGather.ts -> mods/common/src/voice/Verb.ts -> mods/common/src/voice/voice.ts -> mods/common/src/voice/StreamGather.ts`
 - 3-file cycle: `mods/common/src/identity/createAuthInterceptor.ts -> mods/common/src/identity/tokenHasAccessKeyId.ts -> mods/common/src/identity/index.ts -> mods/common/src/identity/createAuthInterceptor.ts`
 - 4-file cycle: `mods/identity/src/exchanges/createExchangeCredentials.ts -> mods/identity/src/verification/index.ts -> mods/identity/src/verification/createSendVerificationCode.ts -> mods/identity/src/exchanges/index.ts -> mods/identity/src/exchanges/createExchangeCredentials.ts`
@@ -679,7 +681,7 @@
 - 5-file cycle: `mods/autopilot/src/index.ts -> mods/autopilot/src/models/index.ts -> mods/autopilot/src/models/evaluations/index.ts -> mods/autopilot/src/models/evaluations/evalTestCases.ts -> mods/autopilot/src/models/createLanguageModel.ts -> mods/autopilot/src/index.ts`
 - 5-file cycle: `mods/autopilot/src/index.ts -> mods/autopilot/src/models/index.ts -> mods/autopilot/src/models/evaluations/index.ts -> mods/autopilot/src/models/evaluations/runEval.ts -> mods/autopilot/src/models/createLanguageModel.ts -> mods/autopilot/src/index.ts`
 
-## Communities (665 total, 309 thin omitted)
+## Communities (667 total, 308 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.00
@@ -691,11 +693,11 @@ Nodes (343): AccelerateEngineConfig, AccelerateExtensionFetch, AccelerateExtensi
 
 ### Community 2 - "Community 2"
 Cohesion: 0.01
-Nodes (233): Ip(), Op(), addItem(), ae(), ai(), An(), ap(), applyPendingMigrations() (+225 more)
+Nodes (225): Ip(), Op(), addItem(), addMarginSymbol(), ae(), afterNextNewline(), ai(), An() (+217 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.01
-Nodes (223): zl(), ou(), aa(), ac(), Ad(), addField(), Af(), Ai() (+215 more)
+Nodes (217): zl(), ou(), aa(), ac(), Ad(), Af(), Ai(), alloc() (+209 more)
 
 ### Community 4 - "Community 4"
 Cohesion: 0.02
@@ -703,39 +705,39 @@ Nodes (101): prepareForValidation(), logger, Acls, Agents, ApiKeys, Applications
 
 ### Community 5 - "Community 5"
 Cohesion: 0.03
-Nodes (133): logger, logger, logger, GrpcErrorMessage, getTokenFromCall(), AccessToken, RefreshToken, TokenUseEnum (+125 more)
+Nodes (132): logger, logger, logger, GrpcErrorMessage, getTokenFromCall(), AccessToken, RefreshToken, TokenUseEnum (+124 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.04
-Nodes (115): CreateRuleModal(), ModalProps, Schema, useAcls(), CreateApiKeyForm(), CreateApiKeyFormProps, Schema, VoiceSelector() (+107 more)
+Nodes (117): CreateRuleModal(), ModalProps, Schema, useAcls(), CreateAgentForm(), CreateApiKeyForm(), CreateApiKeyFormProps, Schema (+109 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.02
-Nodes (120): ACLS_SEARCHABLE_FIELDS, AclRow, AclsList(), AclWithDeny, Board, FieldLabel, fieldSelectSx, Hero (+112 more)
+Nodes (114): ACLS_SEARCHABLE_FIELDS, AclRow, AclsList(), AclWithDeny, Board, FieldLabel, fieldSelectSx, Hero (+106 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.04
-Nodes (122): EditAcl(), RESOURCE_QUERY_KEY, useAcl(), useCreateAcl(), useDeleteAcl(), useUpdateAcl(), AgentsList(), CreateAgentCredentialsModal() (+114 more)
+Cohesion: 0.05
+Nodes (74): CreateAclForm(), CreateAclFormProps, useCreateAcl(), CreateAcl(), Schema, COLLECTION_QUERY_KEY, ModalProps, CreateAgentFormProps (+66 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.04
-Nodes (74): CreateAclForm(), CreateAclFormProps, useCreateAcl(), CreateAcl(), Schema, COLLECTION_QUERY_KEY, ModalProps, CreateAgentFormProps (+66 more)
+Nodes (118): EditAcl(), RESOURCE_QUERY_KEY, useAcl(), useCreateAcl(), useDeleteAcl(), useUpdateAcl(), AgentsList(), CreateAgentCredentialsModal() (+110 more)
 
 ### Community 10 - "Community 10"
-Cohesion: 0.03
-Nodes (90): createOAuthUrl(), getGithubSigninUrl(), getGithubSignupUrl(), OAUTH_CONFIG, OAuthAction, OAuthConfig, OAuthResponse, OAuthState (+82 more)
-
-### Community 11 - "Community 11"
 Cohesion: 0.02
 Nodes (79): addItem(), At(), bc(), bo(), constructor(), cs(), dc(), dispatchEngineSpans() (+71 more)
 
-### Community 12 - "Community 12"
+### Community 11 - "Community 11"
 Cohesion: 0.02
 Nodes (69): al(), ao(), bn(), bs(), bu(), Ci(), constructor(), cs() (+61 more)
 
+### Community 12 - "Community 12"
+Cohesion: 0.03
+Nodes (83): AuthenticationFlowHeader, HeaderRoot, BrandPanel, FormCard, FormPanel, LayoutContent, LayoutRoot, loader() (+75 more)
+
 ### Community 13 - "Community 13"
 Cohesion: 0.03
-Nodes (96): logger, client, CallManagerConfig, createCreateCallSubscriber(), logger, allowList, httpBridge(), logger (+88 more)
+Nodes (95): logger, client, CallManagerConfig, createCreateCallSubscriber(), logger, allowList, httpBridge(), logger (+87 more)
 
 ### Community 16 - "Community 16"
 Cohesion: 0.03
@@ -743,15 +745,15 @@ Nodes (64): Af(), bi(), bl(), Bm(), Bo(), Bu(), Cm(), Co() (+56 more)
 
 ### Community 17 - "Community 17"
 Cohesion: 0.03
-Nodes (64): ai(), al(), ao(), ar(), buildQueryError(), Cl(), constructor(), consumeError() (+56 more)
-
-### Community 18 - "Community 18"
-Cohesion: 0.03
 Nodes (53): aa(), Ae(), Ai(), as(), L(), cn(), ct(), da() (+45 more)
 
-### Community 19 - "Community 19"
+### Community 18 - "Community 18"
 Cohesion: 0.05
 Nodes (65): buildService(), createCreateApplication(), logger, createCreateTestToken(), logger, createDeleteApplication(), logger, createGetApplication() (+57 more)
+
+### Community 20 - "Community 20"
+Cohesion: 0.03
+Nodes (55): addItem(), ai(), al(), be(), bo(), bs(), dispatchEngineSpans(), dn() (+47 more)
 
 ### Community 21 - "Community 21"
 Cohesion: 0.04
@@ -774,16 +776,16 @@ Cohesion: 0.09
 Nodes (50): a(), addEventListener(), ae(), b(), blur(), c(), S(), cancelAnimationFrame() (+42 more)
 
 ### Community 26 - "Community 26"
+Cohesion: 0.04
+Nodes (53): FonosterService, loadServices(), logger, handleError(), logger, handleZodError(), logger, PrismaErrorEnum (+45 more)
+
+### Community 27 - "Community 27"
 Cohesion: 0.05
 Nodes (51): AclsPageHeader(), AgentsPageHeader(), ApiKeysPageHeader(), ApplicationsPageHeader(), ICON, Icon(), IconProps, Button() (+43 more)
 
-### Community 27 - "Community 27"
+### Community 28 - "Community 28"
 Cohesion: 0.06
 Nodes (34): textChunksByFirstNaturalPause(), AbstractTextToSpeech, logger, Azure, Deepgram, ElevenLabs, logger, TODO: Make this configurable (+26 more)
-
-### Community 28 - "Community 28"
-Cohesion: 0.05
-Nodes (51): FonosterService, loadServices(), logger, handleError(), logger, handleZodError(), logger, PrismaErrorEnum (+43 more)
 
 ### Community 29 - "Community 29"
 Cohesion: 0.03
@@ -794,60 +796,60 @@ Cohesion: 0.05
 Nodes (58): DATA_TABLE_FEATURES, DataTableContext, DataTableProvider(), useDataTable(), DataTable(), BaseDataTable, CursorPagination, DataTable (+50 more)
 
 ### Community 31 - "Community 31"
-Cohesion: 0.08
-Nodes (36): AbstractLanguageModel, logger, Anthropic, AnthropicModel, AnthropicParams, createChatHistory(), createChain(), createPromptTemplate() (+28 more)
+Cohesion: 0.05
+Nodes (52): useSipTestCall(), useApplicationTestCall(), APPLICATION_TYPES, APPLICATIONS_DEFAULT_INITIAL_VALUES, getLanguageModelModels(), LANGUAGE_MODEL_ANTHROPIC_MODELS, LANGUAGE_MODEL_GOOGLE_MODELS, LANGUAGE_MODEL_GROQ_MODELS (+44 more)
 
 ### Community 32 - "Community 32"
-Cohesion: 0.05
-Nodes (20): AudioSocketHandler, transcribeOnConnection(), AudioPlayer, logger, AudioSocket, logger, AudioSocketError, AudioStream (+12 more)
+Cohesion: 0.08
+Nodes (74): ac(), addErrorMessage(), addField(), addSuggestion(), asObject(), bc(), _c(), cc() (+66 more)
 
 ### Community 33 - "Community 33"
 Cohesion: 0.05
-Nodes (51): useApplicationTestCall(), APPLICATION_TYPES, APPLICATIONS_DEFAULT_INITIAL_VALUES, getLanguageModelModels(), LANGUAGE_MODEL_ANTHROPIC_MODELS, LANGUAGE_MODEL_GOOGLE_MODELS, LANGUAGE_MODEL_GROQ_MODELS, LANGUAGE_MODEL_OPENAI_MODELS (+43 more)
+Nodes (42): _e(), un(), a(), Aa(), ar(), bi(), Ca(), Ce() (+34 more)
 
 ### Community 34 - "Community 34"
 Cohesion: 0.05
-Nodes (44): useSipTestCall(), AuthenticationFlowHeader, HeaderRoot, BrandPanel, FormCard, FormPanel, LayoutContent, LayoutRoot (+36 more)
+Nodes (20): AudioSocketHandler, transcribeOnConnection(), AudioPlayer, logger, AudioSocket, logger, AudioSocketError, AudioStream (+12 more)
 
 ### Community 35 - "Community 35"
-Cohesion: 0.05
-Nodes (35): _e(), un(), a(), Aa(), ar(), bi(), Ca(), Ce() (+27 more)
+Cohesion: 0.09
+Nodes (33): AbstractLanguageModel, logger, Anthropic, AnthropicModel, AnthropicParams, createChatHistory(), createChain(), createPromptTemplate() (+25 more)
 
 ### Community 36 - "Community 36"
 Cohesion: 0.05
-Nodes (22): VoiceImpl, getPublicKey(), DialOptions, GatherSource, MuteOptions, StreamOptions, StreamGatherOptions, StreamGatherPayload (+14 more)
+Nodes (43): columns, useAuth(), useAuthContext(), AuthenticatedUser, AuthenticatedContext, BottomArrow, Default, LongText (+35 more)
 
 ### Community 37 - "Community 37"
-Cohesion: 0.07
-Nodes (24): Messages, toCamelCase(), toPascalCase(), VoiceSessionStreamServer, Answer, Dial, Gather, getExpectedContent() (+16 more)
+Cohesion: 0.05
+Nodes (22): VoiceImpl, getPublicKey(), DialOptions, GatherSource, MuteOptions, StreamOptions, StreamGatherOptions, StreamGatherPayload (+14 more)
 
 ### Community 38 - "Community 38"
 Cohesion: 0.07
-Nodes (35): compileTemplate(), CompileTemplateParams, createSendEmail(), logger, createSendSmsTwilioImpl(), logger, EmailParams, EmailSenderConfig (+27 more)
+Nodes (24): Messages, toCamelCase(), toPascalCase(), VoiceSessionStreamServer, Answer, Dial, Gather, getExpectedContent() (+16 more)
 
 ### Community 39 - "Community 39"
-Cohesion: 0.03
-Nodes (58): Commands, `fonoster apikeys:create`, `fonoster apikeys:delete REF`, `fonoster apikeys:list`, `fonoster apikeys:regenerate REF`, `fonoster applications:create`, `fonoster applications:delete REF`, `fonoster applications:eval` (+50 more)
+Cohesion: 0.07
+Nodes (35): compileTemplate(), CompileTemplateParams, createSendEmail(), logger, createSendSmsTwilioImpl(), logger, EmailParams, EmailSenderConfig (+27 more)
 
 ### Community 40 - "Community 40"
 Cohesion: 0.08
 Nodes (36): createLanguageModel(), createEvalEffectiveConfig(), createEvaluateIntelligence(), logger, ServerStreamCall, createTestTextSimilarity(), evalTestCases(), evaluateScenario() (+28 more)
 
 ### Community 41 - "Community 41"
-Cohesion: 0.10
-Nodes (57): ac(), addErrorMessage(), addField(), addSuggestion(), asObject(), bc(), _c(), cc() (+49 more)
+Cohesion: 0.03
+Nodes (58): Commands, `fonoster apikeys:create`, `fonoster apikeys:delete REF`, `fonoster apikeys:list`, `fonoster apikeys:regenerate REF`, `fonoster applications:create`, `fonoster applications:delete REF`, `fonoster applications:eval` (+50 more)
 
 ### Community 42 - "Community 42"
+Cohesion: 0.10
+Nodes (56): addErrorMessage(), addField(), addSuggestion(), ap(), ar(), asObject(), bp(), Cp() (+48 more)
+
+### Community 43 - "Community 43"
 Cohesion: 0.05
 Nodes (55): Wa(), bn(), Ci(), constructor(), e(), ed(), F(), fn() (+47 more)
 
-### Community 43 - "Community 43"
-Cohesion: 0.10
-Nodes (55): addErrorMessage(), addSuggestion(), ap(), ar(), asObject(), bp(), Cp(), dn() (+47 more)
-
 ### Community 44 - "Community 44"
 Cohesion: 0.04
-Nodes (6): AclsClient, ApplicationsClient, CallsClient, CredentialsServiceClient, NumbersClient, TrunksClient
+Nodes (6): AclsClient, ApplicationsClient, CallsClient, CredentialsServiceClient, SecretsClient, TrunksClient
 
 ### Community 45 - "Community 45"
 Cohesion: 0.06
@@ -859,7 +861,7 @@ Nodes (51): addErrorMessage(), addField(), addSuggestion(), asObject(), bu(), Do
 
 ### Community 47 - "Community 47"
 Cohesion: 0.04
-Nodes (51): chai-as-promised, cross-env, eslint, eslint-config-next, eslint-plugin-import, eslint-plugin-react, eslint-plugin-react-hooks, globals (+43 more)
+Nodes (51): chai-as-promised, @commitlint/cli, cross-env, eslint, eslint-config-next, eslint-plugin-import, eslint-plugin-react, eslint-plugin-react-hooks (+43 more)
 
 ### Community 48 - "Community 48"
 Cohesion: 0.06
@@ -870,12 +872,12 @@ Cohesion: 0.08
 Nodes (17): countryIsoCodes, Create, Update, Create, Update, Create, Update, Create (+9 more)
 
 ### Community 50 - "Community 50"
-Cohesion: 0.08
-Nodes (34): loadAndValidateAssistant(), logger, AssistantConfig, ConversationSettings, LanguageModelConfig, APISERVER_ENDPOINT, AWS_S3_ACCESS_KEY_ID, AWS_S3_ENDPOINT (+26 more)
+Cohesion: 0.12
+Nodes (50): aa(), addErrorMessage(), addField(), addSuggestion(), asObject(), ba(), ca(), da() (+42 more)
 
 ### Community 51 - "Community 51"
-Cohesion: 0.12
-Nodes (50): aa(), addErrorMessage(), addField(), addItem(), addSuggestion(), asObject(), ba(), ca() (+42 more)
+Cohesion: 0.08
+Nodes (34): loadAndValidateAssistant(), logger, AssistantConfig, ConversationSettings, LanguageModelConfig, APISERVER_ENDPOINT, AWS_S3_ACCESS_KEY_ID, AWS_S3_ENDPOINT (+26 more)
 
 ### Community 52 - "Community 52"
 Cohesion: 0.07
@@ -930,8 +932,8 @@ Cohesion: 0.05
 Nodes (42): author, bin, fonoster, bugs, url, dependencies, @fonoster/common, @fonoster/identity (+34 more)
 
 ### Community 65 - "Community 65"
-Cohesion: 0.08
-Nodes (41): A(), C(), bc(), bf(), commitTransaction(), convertProtocolErrorsToClientError(), ct(), Fo() (+33 more)
+Cohesion: 0.07
+Nodes (42): ai(), ec(), getOrCreate(), Hd(), hr(), ic(), io(), Jo() (+34 more)
 
 ### Community 66 - "Community 66"
 Cohesion: 0.09
@@ -974,36 +976,36 @@ Cohesion: 0.08
 Nodes (39): wu(), Be(), buildQueryError(), consumeError(), convertProtocolErrorsToClientError(), Cu(), deref(), dispatchBatches() (+31 more)
 
 ### Community 76 - "Community 76"
+Cohesion: 0.06
+Nodes (39): ao(), ar(), buildQueryError(), Cl(), constructor(), consumeError(), deref(), dispatchBatches() (+31 more)
+
+### Community 77 - "Community 77"
 Cohesion: 0.12
 Nodes (20): GrpcError, GatherOptions, GatherRequest, GatherResponse, MuteRequest, PlayOptions, PlayRequest, PlayResponse (+12 more)
 
-### Community 77 - "Community 77"
+### Community 78 - "Community 78"
 Cohesion: 0.16
 Nodes (38): addErrorMessage(), addItem(), al(), asObject(), cl(), dl(), fl(), getDeepField() (+30 more)
 
-### Community 78 - "Community 78"
+### Community 79 - "Community 79"
 Cohesion: 0.05
 Nodes (37): @chromatic-com/storybook, devDependencies, @chromatic-com/storybook, @react-router/dev, react-router-devtools, storybook, @storybook/addon-docs, @storybook/addon-essentials (+29 more)
 
-### Community 79 - "Community 79"
+### Community 80 - "Community 80"
 Cohesion: 0.11
 Nodes (26): APP_REF_HEADER, ROUTR_DEFAULT_PEER_AOR, IntegrationConfig, NumberPreconditionsCheck, buildService(), convertToFonosterNumber(), convertToRoutrNumber(), convertToRoutrNumberUpdate() (+18 more)
 
-### Community 80 - "Community 80"
+### Community 81 - "Community 81"
 Cohesion: 0.07
 Nodes (3): q, W, we
 
-### Community 81 - "Community 81"
+### Community 82 - "Community 82"
 Cohesion: 0.08
 Nodes (32): bi(), cc(), cn(), Da(), de(), ea(), Ei(), es() (+24 more)
 
-### Community 82 - "Community 82"
+### Community 83 - "Community 83"
 Cohesion: 0.09
 Nodes (36): Aa(), buildQueryError(), consumeError(), convertProtocolErrorsToClientError(), df(), dispatchBatches(), dr(), Ft() (+28 more)
-
-### Community 83 - "Community 83"
-Cohesion: 0.08
-Nodes (36): ai(), Cs(), Ds(), ec(), getOrCreate(), Hd(), hp(), hr() (+28 more)
 
 ### Community 84 - "Community 84"
 Cohesion: 0.08
@@ -1022,12 +1024,12 @@ Cohesion: 0.06
 Nodes (35): @emotion/cache, @emotion/react, @emotion/server, @emotion/styled, export-to-csv, @hookform/resolvers, dependencies, @emotion/cache (+27 more)
 
 ### Community 88 - "Community 88"
-Cohesion: 0.07
-Nodes (35): bn(), ce(), enabled(), get(), has(), hn(), Hr(), hs() (+27 more)
-
-### Community 89 - "Community 89"
 Cohesion: 0.11
 Nodes (33): ac(), au(), be(), bn(), cc(), findField(), Ft(), getAllComputedFields() (+25 more)
+
+### Community 89 - "Community 89"
+Cohesion: 0.12
+Nodes (34): At(), bt(), Ca(), concat(), ea(), findField(), fr(), getAllQueryCallbacks() (+26 more)
 
 ### Community 91 - "Community 91"
 Cohesion: 0.10
@@ -1038,8 +1040,8 @@ Cohesion: 0.06
 Nodes (31): dependencies, @grpc/grpc-js, @grpc/proto-loader, jsonwebtoken, description, devDependencies, rimraf, @types/jsonwebtoken (+23 more)
 
 ### Community 93 - "Community 93"
-Cohesion: 0.07
-Nodes (32): alloc(), allocUnsafe(), allocUnsafeSlow(), be(), bo(), bs(), byteLength(), construct() (+24 more)
+Cohesion: 0.08
+Nodes (25): Bi(), Bt(), get(), handleAndLogRequestError(), handleRequestError(), He(), Ht(), Ii() (+17 more)
 
 ### Community 94 - "Community 94"
 Cohesion: 0.15
@@ -1111,63 +1113,63 @@ Nodes (27): compilerOptions, esModuleInterop, forceConsistentCasingInFileNames, 
 
 ### Community 117 - "Community 117"
 Cohesion: 0.07
-Nodes (27): ansis, cli-table3, cliui, figlet, @inquirer/prompts, dependencies, ansis, cli-table3 (+19 more)
+Nodes (27): ansis, cliui, figlet, @inquirer/prompts, dependencies, ansis, cliui, figlet (+19 more)
 
 ### Community 118 - "Community 118"
 Cohesion: 0.07
-Nodes (27): ari-client, @deepgram/sdk, @fonoster/authz, @google-cloud/text-to-speech, microsoft-cognitiveservices-speech-sdk, dependencies, ari-client, @deepgram/sdk (+19 more)
+Nodes (27): ari-client, @fonoster/authz, @google-cloud/text-to-speech, microsoft-cognitiveservices-speech-sdk, dependencies, ari-client, @fonoster/authz, @fonoster/identity (+19 more)
 
 ### Community 119 - "Community 119"
 Cohesion: 0.07
 Nodes (27): @esm-bundle/chai, devDependencies, @esm-bundle/chai, rollup, @rollup/plugin-commonjs, @rollup/plugin-node-resolve, @rollup/plugin-replace, @rollup/plugin-terser (+19 more)
 
 ### Community 120 - "Community 120"
-Cohesion: 0.10
-Nodes (17): columns, BottomArrow, Default, LongText, meta, NoArrow, Story, TooltipRoot (+9 more)
-
-### Community 121 - "Community 121"
 Cohesion: 0.07
 Nodes (25): About Identity, Key Features, Specification, identity Specification, Purpose, Requirement: Id, access, and refresh tokens, Requirement: Refresh-token rotation policy, Requirement: Role-based access control (+17 more)
 
-### Community 123 - "Community 123"
+### Community 122 - "Community 122"
 Cohesion: 0.24
 Nodes (24): a(), b(), c(), d(), e(), f(), g(), h() (+16 more)
 
-### Community 124 - "Community 124"
+### Community 123 - "Community 123"
 Cohesion: 0.13
 Nodes (14): sendConversationEndedEvent(), hangupToolDefinition, FIXME: Workaround for Google LLMs issue, FIXME: Workaround for Google LLMs issue, transferToolDefinition, convertToolToLangchainTool(), LangchainToolParams, logger (+6 more)
 
-### Community 125 - "Community 125"
+### Community 124 - "Community 124"
 Cohesion: 0.15
 Nodes (14): MuteDirection, sandbox, sandbox, sandbox, getVoiceObject(), voiceRequest, sandbox, sandbox (+6 more)
 
-### Community 126 - "Community 126"
+### Community 125 - "Community 125"
 Cohesion: 0.10
 Nodes (25): addItem(), bo(), $c(), d(), Ee(), Er(), getAllClientExtensions(), getAllModelExtensions() (+17 more)
 
-### Community 127 - "Community 127"
-Cohesion: 0.14
-Nodes (26): _a(), Ci(), concat(), Ct(), Dr(), ge(), getAllQueryCallbacks(), getArgumentName() (+18 more)
-
-### Community 130 - "Community 130"
+### Community 128 - "Community 128"
 Cohesion: 0.08
 Nodes (25): author, bugs, url, description, directories, src, test, files (+17 more)
 
-### Community 131 - "Community 131"
+### Community 129 - "Community 129"
 Cohesion: 0.19
 Nodes (19): SidebarContext, SidebarContextProps, SidebarProvider(), SidebarProviderProps, useSidebar(), SidebarItem, NavItem(), NavItemProps (+11 more)
 
-### Community 132 - "Community 132"
+### Community 130 - "Community 130"
 Cohesion: 0.11
 Nodes (25): ap(), convertProtocolErrorsToClientError(), ep(), g(), getURLAndAPIKey(), handleError(), je(), json() (+17 more)
 
-### Community 133 - "Community 133"
+### Community 131 - "Community 131"
+Cohesion: 0.10
+Nodes (25): alloc(), allocUnsafe(), allocUnsafeSlow(), bn(), byteLength(), ce(), construct(), fi() (+17 more)
+
+### Community 132 - "Community 132"
 Cohesion: 0.14
 Nodes (3): e(), Yt, oe()
 
-### Community 134 - "Community 134"
+### Community 133 - "Community 133"
 Cohesion: 0.08
 Nodes (23): author, bin, fonoster, bugs, url, description, directories, src (+15 more)
+
+### Community 134 - "Community 134"
+Cohesion: 0.11
+Nodes (19): LoginFormActions(), LoginFormActionsProps, LoginFormRoot, Form, LoginFormRoot, SignupFormActions(), SignupFormActionsProps, SignupFormProps (+11 more)
 
 ### Community 135 - "Community 135"
 Cohesion: 0.09
@@ -1185,59 +1187,63 @@ Nodes (23): author, bugs, url, description, directories, src, test, engines (+15
 Cohesion: 0.10
 Nodes (18): AnyNull, Args, Config, Constructor, DbNull, Exact, GetRuntimeOutput, Instance (+10 more)
 
-### Community 143 - "Community 143"
+### Community 142 - "Community 142"
+Cohesion: 0.12
+Nodes (23): Dr(), Ei(), eo(), fe(), getAllClientExtensions(), getAllComputedFields(), getAllModelExtensions(), _getName() (+15 more)
+
+### Community 144 - "Community 144"
 Cohesion: 0.16
 Nodes (11): FIXME: Implement stream IN and correct streamRef, streamRequestSchema, StartStreamRequest, StartStreamResponse, StopStreamRequest, StreamAudioFormat, StreamDirection, StreamMessageType (+3 more)
 
-### Community 144 - "Community 144"
+### Community 145 - "Community 145"
 Cohesion: 0.15
 Nodes (18): AddWorkspaceCard(), meta, RegularCard, Story, WorkspaceCardProps, StyledAddIconContainer, StyledBottomContainer, StyledCardContentContainer (+10 more)
 
-### Community 145 - "Community 145"
+### Community 146 - "Community 146"
 Cohesion: 0.14
 Nodes (22): convertProtocolErrorsToClientError(), cp(), handleError(), Hr(), ip(), je(), json(), metrics() (+14 more)
 
-### Community 146 - "Community 146"
+### Community 147 - "Community 147"
 Cohesion: 0.12
 Nodes (22): addField(), br(), Ce(), ds(), eo(), fs(), getGlobalOmit(), _getName() (+14 more)
 
-### Community 147 - "Community 147"
+### Community 148 - "Community 148"
 Cohesion: 0.12
 Nodes (16): fluent, FluentTransport, LOGS_DRIVER_HOST, LOGS_DRIVER_PORT, LOGS_FORMAT, LOGS_LEVEL, LOGS_OPT_TAG_PREFIX, LOGS_TRANSPORT (+8 more)
 
-### Community 158 - "Community 158"
+### Community 159 - "Community 159"
 Cohesion: 0.09
 Nodes (21): **/bin/*, es2021, es6, scripthost, compilerOptions, composite, declaration, downlevelIteration (+13 more)
 
-### Community 159 - "Community 159"
+### Community 160 - "Community 160"
 Cohesion: 0.10
 Nodes (20): author, bin, fonoster, bugs, url, description, directories, src (+12 more)
 
-### Community 160 - "Community 160"
+### Community 161 - "Community 161"
 Cohesion: 0.10
 Nodes (21): dependencies, express, @fonoster/common, @fonoster/types, @grpc/grpc-js, jsonwebtoken, jwt-decode, nanoid (+13 more)
 
-### Community 161 - "Community 161"
+### Community 162 - "Community 162"
 Cohesion: 0.16
 Nodes (4): _t(), mt, dt(), ht()
 
-### Community 162 - "Community 162"
+### Community 163 - "Community 163"
 Cohesion: 0.10
 Nodes (21): Vl(), ao(), Bo(), constructor(), Fe(), getAllBatchQueryCallbacks(), getAllQueryCallbacks(), _getNamespace() (+13 more)
 
-### Community 163 - "Community 163"
+### Community 164 - "Community 164"
 Cohesion: 0.14
 Nodes (21): am(), ba(), Fr(), getAllClientExtensions(), getAllComputedFields(), getAllModelExtensions(), getComputedFields(), he() (+13 more)
 
-### Community 164 - "Community 164"
-Cohesion: 0.20
-Nodes (12): jsonToObject(), makeRpcRequest(), objectToJson(), MappingTuple, getEnumKey(), getEnumValue(), isMapping(), enumMapping (+4 more)
+### Community 165 - "Community 165"
+Cohesion: 0.18
+Nodes (21): _a(), Ci(), concat(), Ct(), ge(), getAllQueryCallbacks(), getArgumentName(), getArgumentPath() (+13 more)
 
-### Community 169 - "Community 169"
+### Community 170 - "Community 170"
 Cohesion: 0.13
 Nodes (14): LogoLarge, LogoProps, LogoMark, LogoSmall, LargeLogo, meta, MicroLogo, Story (+6 more)
 
-### Community 170 - "Community 170"
+### Community 171 - "Community 171"
 Cohesion: 0.11
 Nodes (15): config, fs, path, Prisma, PrismaClient, {
   PrismaClientKnownRequestError,
@@ -1263,10 +1269,6 @@ Nodes (15): config, fs, path, Prisma, PrismaClient, {
   createParam,
 }, { warnEnvConflicts }, empty() (+7 more)
 
-### Community 171 - "Community 171"
-Cohesion: 0.12
-Nodes (13): Bi(), Bt(), handleAndLogRequestError(), handleRequestError(), He(), Ht(), _l(), renderAllMessages() (+5 more)
-
 ### Community 172 - "Community 172"
 Cohesion: 0.22
 Nodes (3): Xe(), Ge, qe()
@@ -1277,7 +1279,7 @@ Nodes (5): AsObject, ContactType, DeleteUserRequest, InviteUserToWorkspaceRespon
 
 ### Community 176 - "Community 176"
 Cohesion: 0.11
-Nodes (19): @aws-sdk/client-s3, @fonoster/voice, @langchain/anthropic, @langchain/groq, @langchain/ollama, dependencies, @aws-sdk/client-s3, @fonoster/types (+11 more)
+Nodes (19): @aws-sdk/client-s3, @dmitryrechkin/json-schema-to-zod, @fonoster/voice, @langchain/anthropic, @langchain/groq, @langchain/ollama, dependencies, @aws-sdk/client-s3 (+11 more)
 
 ### Community 177 - "Community 177"
 Cohesion: 0.18
@@ -1288,36 +1290,36 @@ Cohesion: 0.18
 Nodes (9): conversationSettingsSchema, EventsHookAllowedEvents, eventsHookSchema, languageModelConfigSchema, LanguageModelProvider, testCasesSchema, propertySchema, toolSchema (+1 more)
 
 ### Community 179 - "Community 179"
+Cohesion: 0.18
+Nodes (13): columns, APPS_SEARCHABLE_FIELDS, Applications(), AppRow, Board, describeType(), FieldLabel, fieldSelectSx (+5 more)
+
+### Community 180 - "Community 180"
 Cohesion: 0.17
 Nodes (8): b(), be(), ee(), k, l(), q(), W(), y()
 
-### Community 180 - "Community 180"
+### Community 181 - "Community 181"
 Cohesion: 0.12
 Nodes (18): Aa(), ai(), l(), ar(), Ca(), d(), Et(), h() (+10 more)
 
-### Community 181 - "Community 181"
+### Community 182 - "Community 182"
 Cohesion: 0.11
 Nodes (18): author, browser, bugs, url, description, files, gitHead, homepage (+10 more)
 
-### Community 183 - "Community 183"
+### Community 184 - "Community 184"
 Cohesion: 0.11
 Nodes (16): Example, Installation, new VoiceResponse(request, voice), VoiceResponse ⇐ <code>Verb</code>, voiceResponse.dial(destination, options) ⇒ <code>Promise.&lt;DialStatusStream&gt;</code>, voiceResponse.gather(options), voiceResponse.mute(options), voiceResponse.on(event, listener) (+8 more)
 
-### Community 184 - "Community 184"
+### Community 185 - "Community 185"
 Cohesion: 0.11
 Nodes (17): createApiKeyRequestSchema, createUserRequestSchema, createUserWithOauth2CodeRequestSchema, createWorkspaceRequestSchema, exchangeApiKeysRequestSchema, exchangeCredentialsRequestSchema, exchangeOauth2RequestSchema, exchangeRefreshTokenRequestSchema (+9 more)
 
-### Community 185 - "Community 185"
+### Community 186 - "Community 186"
 Cohesion: 0.16
 Nodes (15): PasswordStrengthBar(), PasswordStrengthBarProps, ProgressBarContainer, ProgressBarFill, Empty, Fair, Good, meta (+7 more)
 
-### Community 191 - "Community 191"
+### Community 192 - "Community 192"
 Cohesion: 0.17
 Nodes (16): an(), ba(), de(), di(), Ea(), fi(), hc(), ln() (+8 more)
-
-### Community 192 - "Community 192"
-Cohesion: 0.15
-Nodes (18): Ei(), eo(), fe(), getAllClientExtensions(), getAllComputedFields(), getAllModelExtensions(), Ie(), isEmpty() (+10 more)
 
 ### Community 200 - "Community 200"
 Cohesion: 0.14
@@ -1325,7 +1327,7 @@ Nodes (3): xt, Ct(), Tt()
 
 ### Community 201 - "Community 201"
 Cohesion: 0.12
-Nodes (17): handlebars, dependencies, dotenv, @grpc/grpc-js, handlebars, jsonwebtoken, jwt-decode, nodemailer (+9 more)
+Nodes (17): handlebars, dependencies, @grpc/grpc-js, handlebars, @influxdata/influxdb-client, jsonwebtoken, jwt-decode, nodemailer (+9 more)
 
 ### Community 202 - "Community 202"
 Cohesion: 0.21
@@ -1371,41 +1373,41 @@ Nodes (15): author, bugs, url, description, files, gitHead, homepage, dist (+7 m
 Cohesion: 0.14
 Nodes (16): dispatchBatches(), En(), fo(), getOrCreate(), gr(), handleAndLogRequestError(), handleRequestError(), middlewareArgsToRequestArgs() (+8 more)
 
-### Community 214 - "Community 214"
-Cohesion: 0.24
-Nodes (16): addMarginSymbol(), afterNextNewline(), getCurrentLineLength(), getPrintWidth(), indent(), newLine(), setColor(), underline() (+8 more)
-
-### Community 222 - "Community 222"
+### Community 221 - "Community 221"
 Cohesion: 0.12
 Nodes (12): APIs, AudioSocket, audioSocket.onConnection(handler), AudioStream, audioStream.onClose(callback) ⇒ [<code>AudioStream</code>](#AudioStream), audioStream.onData(callback) ⇒ [<code>AudioStream</code>](#AudioStream), audioStream.onError(callback) ⇒ [<code>AudioStream</code>](#AudioStream), audioStream.play(filePath) ⇒ <code>Promise.&lt;void&gt;</code> (+4 more)
 
-### Community 224 - "Community 224"
+### Community 223 - "Community 223"
 Cohesion: 0.13
 Nodes (14): browser, imports, #main-entry-point, #wasm-engine-loader, main, default, name, sideEffects (+6 more)
 
+### Community 224 - "Community 224"
+Cohesion: 0.33
+Nodes (9): jsonToObject(), makeRpcRequest(), objectToJson(), MappingTuple, getEnumKey(), getEnumValue(), isMapping(), enumMapping (+1 more)
+
 ### Community 225 - "Community 225"
-Cohesion: 0.14
-Nodes (13): dependencies, @fonoster/sdk, description, engines, node, @fonoster/sdk, main, name (+5 more)
+Cohesion: 0.13
+Nodes (4): CreateExampleRequest, EmbeddedObject, ExampleEnum, sandbox
 
 ### Community 226 - "Community 226"
 Cohesion: 0.14
-Nodes (13): compilerOptions, outDir, rootDir, skipLibCheck, strictNullChecks, target, exclude, extends (+5 more)
+Nodes (13): dependencies, @fonoster/sdk, description, engines, node, @fonoster/sdk, main, name (+5 more)
 
 ### Community 227 - "Community 227"
 Cohesion: 0.14
-Nodes (13): ControlledInput, Default, Disabled, meta, NumberType, PasswordType, Story, WithBothIcons (+5 more)
+Nodes (13): compilerOptions, outDir, rootDir, skipLibCheck, strictNullChecks, target, exclude, extends (+5 more)
 
 ### Community 228 - "Community 228"
+Cohesion: 0.14
+Nodes (13): ControlledInput, Default, Disabled, meta, NumberType, PasswordType, Story, WithBothIcons (+5 more)
+
+### Community 229 - "Community 229"
 Cohesion: 0.16
 Nodes (11): Checked, CheckedAndDisabled, DefaultValueFalse, DefaultValueTrue, meta, Story, Unchecked, UncheckedAndDisabled (+3 more)
 
-### Community 230 - "Community 230"
+### Community 231 - "Community 231"
 Cohesion: 0.14
 Nodes (13): compilerOptions, declaration, esModuleInterop, forceConsistentCasingInFileNames, module, moduleResolution, outDir, rootDir (+5 more)
-
-### Community 231 - "Community 231"
-Cohesion: 0.20
-Nodes (14): ic(), Jo(), Jt(), nc(), oc(), rc(), sc(), tc() (+6 more)
 
 ### Community 232 - "Community 232"
 Cohesion: 0.29
@@ -1471,65 +1473,65 @@ Nodes (12): default, require, ./client, require, browser, default, edge-light, n
 Cohesion: 0.26
 Nodes (12): import, ./sql, browser, default, edge-light, node, types, worker (+4 more)
 
-### Community 257 - "Community 257"
+### Community 256 - "Community 256"
+Cohesion: 0.35
+Nodes (12): A(), C(), Et(), me(), N(), ni(), reverse(), ri() (+4 more)
+
+### Community 258 - "Community 258"
 Cohesion: 0.20
 Nodes (12): alloc(), allocUnsafe(), allocUnsafeSlow(), byteLength(), construct(), fill(), from(), ho() (+4 more)
 
-### Community 258 - "Community 258"
+### Community 259 - "Community 259"
 Cohesion: 0.17
 Nodes (11): Build, docker, Environment Variables, Fonoster MCP Server, npx, Prompts, Setup, Testing with the MCP Inspector (+3 more)
 
-### Community 288 - "Community 288"
+### Community 289 - "Community 289"
 Cohesion: 0.17
 Nodes (11): Authors, Bugs and Feedback, Code Examples, Code memory (Graphify) — use this before grepping, Contributing, Features, Fonoster: The open-source alternative to Twilio, Getting Started (+3 more)
 
-### Community 289 - "Community 289"
+### Community 290 - "Community 290"
 Cohesion: 0.18
 Nodes (10): Asterisk PBX, Authors, Available Versions, Contributing, Environment Variables, Exposed ports, Installation, License (+2 more)
 
-### Community 290 - "Community 290"
+### Community 291 - "Community 291"
 Cohesion: 0.18
 Nodes (10): Check for context, Ending Discovery, Guardrails, Handling Different Entry Points, OpenSpec Awareness, The Stance, What You Don't Have To Do, What You Might Do (+2 more)
 
-### Community 291 - "Community 291"
+### Community 292 - "Community 292"
 Cohesion: 0.18
 Nodes (10): Ask for Help, Come to Meetings, Contributing Guide, DCO, Development Environment Setup, Find an Issue, Pull Request Checklist, Pull Request Lifecycle (+2 more)
 
-### Community 292 - "Community 292"
-Cohesion: 0.18
-Nodes (11): devDependencies, @types/ari-client, @types/express, @types/jsonwebtoken, @types/uuid, @types/validator, @types/express, @types/jsonwebtoken (+3 more)
-
 ### Community 293 - "Community 293"
 Cohesion: 0.18
-Nodes (10): compilerOptions, outDir, rootDir, exclude, extends, dist, node_modules, test (+2 more)
+Nodes (11): devDependencies, @types/ari-client, @types/express, @types/jsonwebtoken, @types/uuid, @types/validator, @types/express, @types/jsonwebtoken (+3 more)
 
 ### Community 294 - "Community 294"
 Cohesion: 0.18
 Nodes (10): compilerOptions, outDir, rootDir, exclude, extends, dist, node_modules, test (+2 more)
 
 ### Community 295 - "Community 295"
+Cohesion: 0.18
+Nodes (10): compilerOptions, outDir, rootDir, exclude, extends, dist, node_modules, test (+2 more)
+
+### Community 296 - "Community 296"
 Cohesion: 0.22
 Nodes (4): Args, BaseCommand, Flags, Login
 
-### Community 296 - "Community 296"
+### Community 297 - "Community 297"
 Cohesion: 0.18
 Nodes (10): compilerOptions, outDir, rootDir, exclude, extends, dist, node_modules, test (+2 more)
 
-### Community 297 - "Community 297"
+### Community 298 - "Community 298"
 Cohesion: 0.24
 Nodes (8): RegionBadge(), DrawerExample, LandingPageExample, meta, Story, commonStyles, DrawerRegionBadge, LandingPageRegionBadge
 
-### Community 298 - "Community 298"
+### Community 299 - "Community 299"
 Cohesion: 0.18
 Nodes (10): Default, Disabled, Large, meta, Required, Story, WithCharacterLimit, WithError (+2 more)
 
-### Community 299 - "Community 299"
+### Community 300 - "Community 300"
 Cohesion: 0.18
 Nodes (11): exports, ./generator-build, ./index-browser, ./package.json, default, import, require, default (+3 more)
-
-### Community 301 - "Community 301"
-Cohesion: 0.18
-Nodes (10): compilerOptions, outDir, rootDir, exclude, extends, dist, node_modules, test (+2 more)
 
 ### Community 302 - "Community 302"
 Cohesion: 0.18
@@ -1537,23 +1539,23 @@ Nodes (10): compilerOptions, outDir, rootDir, exclude, extends, dist, node_modul
 
 ### Community 303 - "Community 303"
 Cohesion: 0.18
-Nodes (11): new Workspaces(client), Workspaces, workspaces.createWorkspace(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, workspaces.deleteWorkspace(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, workspaces.getWorkspace(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, workspaces.inviteUserToWorkspace(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, workspaces.listWorkspaceMembers(request) ⇒ <code>Promise.&lt;ListWorkspaceMembersResponse&gt;</code>, workspaces.listWorkspaces() ⇒ <code>Promise.&lt;ListWorkspacesResponse&gt;</code> (+3 more)
+Nodes (10): compilerOptions, outDir, rootDir, exclude, extends, dist, node_modules, test (+2 more)
 
 ### Community 304 - "Community 304"
 Cohesion: 0.18
-Nodes (3): AsObject, DeleteAgentRequest, Privacy
+Nodes (11): new Workspaces(client), Workspaces, workspaces.createWorkspace(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, workspaces.deleteWorkspace(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, workspaces.getWorkspace(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, workspaces.inviteUserToWorkspace(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, workspaces.listWorkspaceMembers(request) ⇒ <code>Promise.&lt;ListWorkspaceMembersResponse&gt;</code>, workspaces.listWorkspaces() ⇒ <code>Promise.&lt;ListWorkspacesResponse&gt;</code> (+3 more)
 
 ### Community 305 - "Community 305"
 Cohesion: 0.18
-Nodes (3): AsObject, CreateNumberResponse, IngressHandlerCase
+Nodes (3): AsObject, DeleteAgentRequest, Privacy
 
 ### Community 306 - "Community 306"
-Cohesion: 0.20
-Nodes (4): CreateExampleResponse, Example, ExampleEnum, RepeatableObject
+Cohesion: 0.18
+Nodes (3): AsObject, GetNumberRequest, IngressHandlerCase
 
 ### Community 307 - "Community 307"
-Cohesion: 0.18
-Nodes (10): compilerOptions, outDir, rootDir, exclude, extends, dist, node_modules, test (+2 more)
+Cohesion: 0.20
+Nodes (4): CreateExampleResponse, Example, ExampleEnum, RepeatableObject
 
 ### Community 308 - "Community 308"
 Cohesion: 0.18
@@ -1564,70 +1566,74 @@ Cohesion: 0.18
 Nodes (10): compilerOptions, outDir, rootDir, exclude, extends, dist, node_modules, test (+2 more)
 
 ### Community 310 - "Community 310"
+Cohesion: 0.18
+Nodes (10): compilerOptions, outDir, rootDir, exclude, extends, dist, node_modules, test (+2 more)
+
+### Community 311 - "Community 311"
 Cohesion: 0.20
 Nodes (9): Check for context, Ending Discovery, Guardrails, OpenSpec Awareness, The Stance, What You Don't Have To Do, What You Might Do, When a change exists (+1 more)
 
-### Community 311 - "Community 311"
+### Community 312 - "Community 312"
 Cohesion: 0.29
 Nodes (8): handleRpc(), makeClient(), PORT, rpcError(), rpcResult(), SERVER, TOOLS, toolSpecs()
 
-### Community 312 - "Community 312"
+### Community 313 - "Community 313"
 Cohesion: 0.20
 Nodes (9): Default, DifferentResourceTypes, LongValue, meta, SmallSize, Story, WithLeadingIcon, WithoutCopyIcon (+1 more)
 
-### Community 313 - "Community 313"
+### Community 314 - "Community 314"
 Cohesion: 0.20
 Nodes (9): Default, Disabled, meta, Required, sampleOptions, Story, WithError, WithHelperText (+1 more)
 
-### Community 314 - "Community 314"
+### Community 315 - "Community 315"
 Cohesion: 0.22
 Nodes (8): SIDEBAR_ITEMS, useSidebarItems(), withWorkspaceId(), Sidebar(), Default, meta, Story, workspaces
 
-### Community 316 - "Community 316"
-Cohesion: 0.20
-Nodes (9): compilerOptions, outDir, rootDir, exclude, extends, dist, node_modules, test (+1 more)
-
-### Community 344 - "Community 344"
+### Community 317 - "Community 317"
 Cohesion: 0.20
 Nodes (9): compilerOptions, outDir, rootDir, exclude, extends, dist, node_modules, test (+1 more)
 
 ### Community 345 - "Community 345"
 Cohesion: 0.20
-Nodes (9): ADDED Requirements, Requirement: Full Identity surface coverage from a single proto source, Requirement: Lightweight, endpoint-configurable client, Requirement: Per-request token forwarding, Scenario: A server forwards different callers' tokens, Scenario: Client targets an arbitrary endpoint, Scenario: Installing the client stays lightweight, Scenario: Stubs are generated from the canonical proto (+1 more)
+Nodes (9): compilerOptions, outDir, rootDir, exclude, extends, dist, node_modules, test (+1 more)
 
 ### Community 346 - "Community 346"
+Cohesion: 0.20
+Nodes (9): ADDED Requirements, Requirement: Full Identity surface coverage from a single proto source, Requirement: Lightweight, endpoint-configurable client, Requirement: Per-request token forwarding, Scenario: A server forwards different callers' tokens, Scenario: Client targets an arbitrary endpoint, Scenario: Installing the client stays lightweight, Scenario: Stubs are generated from the canonical proto (+1 more)
+
+### Community 347 - "Community 347"
 Cohesion: 0.33
 Nodes (7): c(), i(), l(), o(), r(), s(), u()
 
-### Community 347 - "Community 347"
+### Community 348 - "Community 348"
 Cohesion: 0.22
 Nodes (9): devDependencies, @oclif/test, @types/figlet, @types/js-yaml, @types/node, @types/node, @oclif/test, @types/figlet (+1 more)
 
-### Community 348 - "Community 348"
+### Community 349 - "Community 349"
 Cohesion: 0.22
 Nodes (8): author, description, homepage, license, name, private, type, version
 
-### Community 349 - "Community 349"
+### Community 350 - "Community 350"
 Cohesion: 0.33
 Nodes (9): a(), at(), dt(), gt(), lt(), st(), x(), xe() (+1 more)
 
-### Community 350 - "Community 350"
+### Community 351 - "Community 351"
 Cohesion: 0.22
 Nodes (9): as(), Ic(), ft(), ls(), rp(), ss(), us(), zr() (+1 more)
 
-### Community 351 - "Community 351"
+### Community 352 - "Community 352"
 Cohesion: 0.31
 Nodes (9): Bt(), _c(), getAllClientExtensions(), jn(), ls(), me(), qt(), te() (+1 more)
 
-### Community 352 - "Community 352"
+### Community 353 - "Community 353"
 Cohesion: 0.33
 Nodes (9): Fe(), Ge(), r(), i(), j(), le(), mn(), pn() (+1 more)
 
-### Community 353 - "Community 353"
+### Community 354 - "Community 354"
 Cohesion: 0.22
 Nodes (5): AnyNull, DbNull, JsonNull, NullTypesEnumValue, ObjectEnumValue
 
-### Community 355 - "Community 355"
+### Community 356 - "Community 356"
 Cohesion: 0.22
 Nodes (9): new Users(client), Users, users.createUser(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, users.createUserWithOauth2Code(request) ⇒ <code>Promise.&lt;ExchangeCredentialsResponse&gt;</code>, users.deleteUser(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, users.getUser(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, users.resetPassword(request) ⇒ <code>Promise.&lt;void&gt;</code>, users.sendResetPasswordCode(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code> (+1 more)
 
@@ -1652,42 +1658,46 @@ Cohesion: 0.25
 Nodes (8): ./runtime/client, default, require, default, import, node, require, types
 
 ### Community 365 - "Community 365"
+Cohesion: 0.32
+Nodes (8): Cs(), Ds(), hp(), hu(), Is(), Qs(), st(), yp()
+
+### Community 366 - "Community 366"
 Cohesion: 0.29
 Nodes (8): eu(), handleAndLogRequestError(), handleRequestError(), _n(), Nn(), Of(), renderAllMessages(), Tn()
 
-### Community 366 - "Community 366"
+### Community 367 - "Community 367"
 Cohesion: 0.25
 Nodes (8): scripts, build, clean, generate:readme, postbuild, prebuild, start:demo, start:oauth2-demo
 
-### Community 367 - "Community 367"
+### Community 368 - "Community 368"
 Cohesion: 0.25
 Nodes (8): Applications, applications.createApplication(request) ⇒ <code>Promise.&lt;CreateAppResponse&gt;</code>, applications.deleteApplication(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, applications.evaluateIntelligence(request) ⇒ <code>Promise.&lt;ScenarioEvaluationReport&gt;</code>, applications.getApplication(ref) ⇒ <code>Promise.&lt;Application&gt;</code>, applications.listApplications(request) ⇒ <code>Promise.&lt;ListApplicationsResponse&gt;</code>, applications.updateApplication(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, new Applications(client)
 
-### Community 427 - "Community 427"
+### Community 428 - "Community 428"
 Cohesion: 0.25
 Nodes (7): ADDED Requirements, Requirement: Default realm for existing data, Requirement: Realm configuration, Scenario: A configured realm is usable, Scenario: An unknown realm is rejected, Scenario: Existing deployment keeps working, Scenario: Per-realm branding on outbound mail
 
-### Community 428 - "Community 428"
+### Community 429 - "Community 429"
 Cohesion: 0.25
 Nodes (7): Configuration source, Database ownership, Design notes, Reference implementation, Reuse, don't fork, What the standalone service is NOT, Why extend `mods/identity` instead of a new package
 
-### Community 429 - "Community 429"
+### Community 430 - "Community 430"
 Cohesion: 0.25
 Nodes (6): allJSFiles, fs, introFilePath, jsdoc2md, outputFile, path
 
-### Community 430 - "Community 430"
+### Community 431 - "Community 431"
 Cohesion: 0.29
 Nodes (7): scripts, build, build:storybook, dev, start, storybook, typecheck
 
-### Community 431 - "Community 431"
+### Community 432 - "Community 432"
 Cohesion: 0.29
 Nodes (7): devDependencies, prisma, @types/express, @types/jsonwebtoken, prisma, @types/express, @types/jsonwebtoken
 
-### Community 432 - "Community 432"
+### Community 433 - "Community 433"
 Cohesion: 0.29
 Nodes (3): ErrorWithBatchIndex, PrismaClientKnownRequestError, PrismaClientUnknownRequestError
 
-### Community 433 - "Community 433"
+### Community 434 - "Community 434"
 Cohesion: 0.29
 Nodes (5): empty(), config, Prisma, PrismaClient, {
   PrismaClientKnownRequestError,
@@ -1713,99 +1723,99 @@ Nodes (5): empty(), config, Prisma, PrismaClient, {
   createParam,
 }
 
-### Community 434 - "Community 434"
-Cohesion: 0.29
-Nodes (6): APIs, Creating a client object, Example, Importing the library, Installation, Login in and make requests
-
 ### Community 435 - "Community 435"
 Cohesion: 0.29
 Nodes (6): APIs, Creating a client object, Example, Importing the library, Installation, Login in and make requests
 
 ### Community 436 - "Community 436"
 Cohesion: 0.29
-Nodes (7): Acls, acls.createAcl(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, acls.deleteAcl(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, acls.getAcl(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, acls.listAcls(request) ⇒ <code>Promise.&lt;ListAclsResponse&gt;</code>, acls.updateAcl(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, new Acls(client)
+Nodes (6): APIs, Creating a client object, Example, Importing the library, Installation, Login in and make requests
 
 ### Community 437 - "Community 437"
 Cohesion: 0.29
-Nodes (7): Agents, agents.createAgent(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, agents.deleteAgent(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, agents.getAgent(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, agents.listAgents(request) ⇒ <code>Promise.&lt;ListAgentsResponse&gt;</code>, agents.updateAgent(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, new Agents(client)
+Nodes (7): Acls, acls.createAcl(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, acls.deleteAcl(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, acls.getAcl(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, acls.listAcls(request) ⇒ <code>Promise.&lt;ListAclsResponse&gt;</code>, acls.updateAcl(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, new Acls(client)
 
 ### Community 438 - "Community 438"
 Cohesion: 0.29
-Nodes (7): Credentials, credentials.createCredentials(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, credentials.deleteCredentials(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, credentials.getCredentials(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, credentials.listCredentials(request) ⇒ <code>Promise.&lt;ListCredentialsResponse&gt;</code>, credentials.updateCredentials(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, new Credentials(client)
+Nodes (7): Agents, agents.createAgent(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, agents.deleteAgent(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, agents.getAgent(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, agents.listAgents(request) ⇒ <code>Promise.&lt;ListAgentsResponse&gt;</code>, agents.updateAgent(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, new Agents(client)
 
 ### Community 439 - "Community 439"
 Cohesion: 0.29
-Nodes (7): Domains, domains.createDomain(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, domains.deleteDomain(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, domains.getDomain(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, domains.listDomains(request) ⇒ <code>Promise.&lt;ListDomainsResponse&gt;</code>, domains.updateDomain(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, new Domains(client)
+Nodes (7): Credentials, credentials.createCredentials(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, credentials.deleteCredentials(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, credentials.getCredentials(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, credentials.listCredentials(request) ⇒ <code>Promise.&lt;ListCredentialsResponse&gt;</code>, credentials.updateCredentials(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, new Credentials(client)
 
 ### Community 440 - "Community 440"
 Cohesion: 0.29
-Nodes (7): new Numbers(client), Numbers, numbers.createNumber(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, numbers.deleteNumber(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, numbers.getNumber(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, numbers.listNumbers(request) ⇒ <code>Promise.&lt;ListNumbersResponse&gt;</code>, numbers.updateNumber(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>
+Nodes (7): Domains, domains.createDomain(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, domains.deleteDomain(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, domains.getDomain(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, domains.listDomains(request) ⇒ <code>Promise.&lt;ListDomainsResponse&gt;</code>, domains.updateDomain(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, new Domains(client)
 
 ### Community 441 - "Community 441"
 Cohesion: 0.29
-Nodes (7): new Secrets(client), Secrets, secrets.createSecret(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, secrets.deleteSecret(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, secrets.getSecret(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, secrets.listSecrets(request) ⇒ <code>Promise.&lt;ListSecretsResponse&gt;</code>, secrets.updateSecret(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>
+Nodes (7): new Numbers(client), Numbers, numbers.createNumber(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, numbers.deleteNumber(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, numbers.getNumber(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, numbers.listNumbers(request) ⇒ <code>Promise.&lt;ListNumbersResponse&gt;</code>, numbers.updateNumber(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>
 
 ### Community 442 - "Community 442"
 Cohesion: 0.29
-Nodes (7): new Trunks(client), Trunks, trunks.createTrunk(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, trunks.deleteTrunk(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, trunks.getTrunk(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, trunks.listTrunks(request) ⇒ <code>Promise.&lt;ListTrunksResponse&gt;</code>, trunks.updateTrunk(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>
+Nodes (7): new Secrets(client), Secrets, secrets.createSecret(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, secrets.deleteSecret(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, secrets.getSecret(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, secrets.listSecrets(request) ⇒ <code>Promise.&lt;ListSecretsResponse&gt;</code>, secrets.updateSecret(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>
 
 ### Community 443 - "Community 443"
 Cohesion: 0.29
-Nodes (6): Auth model: per-request forwarding, Design notes, Proto is owned upstream, Reference implementation, Relationship to `@fonoster/sdk`, Why a separate package (and why that's consistent with Gap A)
+Nodes (7): new Trunks(client), Trunks, trunks.createTrunk(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, trunks.deleteTrunk(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, trunks.getTrunk(ref) ⇒ <code>Promise.&lt;Acl&gt;</code>, trunks.listTrunks(request) ⇒ <code>Promise.&lt;ListTrunksResponse&gt;</code>, trunks.updateTrunk(request) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>
 
 ### Community 444 - "Community 444"
 Cohesion: 0.29
-Nodes (6): Configuration shape, Decisions (locked), Design notes, Migration, Realm resolution, Relationship to the baseline
+Nodes (6): Auth model: per-request forwarding, Design notes, Proto is owned upstream, Reference implementation, Relationship to `@fonoster/sdk`, Why a separate package (and why that's consistent with Gap A)
 
 ### Community 445 - "Community 445"
 Cohesion: 0.29
-Nodes (6): Capabilities, Impact, Modified Capabilities, New Capabilities, What Changes, Why
+Nodes (6): Configuration shape, Decisions (locked), Design notes, Migration, Realm resolution, Relationship to the baseline
 
 ### Community 446 - "Community 446"
 Cohesion: 0.29
-Nodes (6): 1. Realm configuration (static file), 2. Realm-scoped, siloed data, 3. Per-realm keys and tokens, 4. Realm resolution, 5. Migration, 6. Verification
+Nodes (6): Capabilities, Impact, Modified Capabilities, New Capabilities, What Changes, Why
 
 ### Community 447 - "Community 447"
 Cohesion: 0.29
-Nodes (6): 1. Extract shared cross-cutting concerns from apiserver, 2. Make `mods/identity` runnable, 3. Configuration, 4. Database provisioning, 5. Packaging & release, 6. Verification
+Nodes (6): 1. Realm configuration (static file), 2. Realm-scoped, siloed data, 3. Per-realm keys and tokens, 4. Realm resolution, 5. Migration, 6. Verification
 
 ### Community 448 - "Community 448"
 Cohesion: 0.29
-Nodes (7): nodemonConfig, exec, ext, ignore, watch, workspaces, mods/*
+Nodes (6): 1. Extract shared cross-cutting concerns from apiserver, 2. Make `mods/identity` runnable, 3. Configuration, 4. Database provisioning, 5. Packaging & release, 6. Verification
 
 ### Community 449 - "Community 449"
+Cohesion: 0.29
+Nodes (7): nodemonConfig, exec, ext, ignore, watch, workspaces, mods/*
+
+### Community 450 - "Community 450"
 Cohesion: 0.33
 Nodes (6): scripts, build, clean, generate:readme, prebuild, start:dev
 
-### Community 450 - "Community 450"
+### Community 451 - "Community 451"
 Cohesion: 0.40
 Nodes (4): ROOT_DOMAIN, createDomainRequestSchema, domainSchema, updateDomainRequestSchema
 
-### Community 451 - "Community 451"
+### Community 452 - "Community 452"
 Cohesion: 0.47
 Nodes (3): Get, getOutboundUri(), Uri
 
-### Community 452 - "Community 452"
+### Community 453 - "Community 453"
 Cohesion: 0.33
 Nodes (5): Checked, Disabled, meta, NoLabel, Story
 
-### Community 453 - "Community 453"
+### Community 454 - "Community 454"
 Cohesion: 0.33
 Nodes (5): Default, Disabled, Loading, meta, Story
 
-### Community 454 - "Community 454"
+### Community 455 - "Community 455"
 Cohesion: 0.33
 Nodes (5): MultiValueRendererProps, SelectContainerProps, SelectInputProps, SelectOption, SelectProps
 
-### Community 455 - "Community 455"
+### Community 456 - "Community 456"
 Cohesion: 0.33
 Nodes (5): DisabledCard, meta, RegularCard, Story, WorkspaceCard()
 
-### Community 456 - "Community 456"
+### Community 457 - "Community 457"
 Cohesion: 0.33
 Nodes (6): scripts, build, clean, db:deploy, prebuild, start
 
-### Community 457 - "Community 457"
+### Community 458 - "Community 458"
 Cohesion: 0.33
 Nodes (5): config, Prisma, PrismaClient, {
   PrismaClientKnownRequestError,
@@ -1831,17 +1841,13 @@ Nodes (5): config, Prisma, PrismaClient, {
   createParam,
 }, empty()
 
-### Community 461 - "Community 461"
+### Community 462 - "Community 462"
 Cohesion: 0.33
 Nodes (6): ApiKeys, apiKeys.createApiKey(request) ⇒ <code>Promise.&lt;CreateApiKeyResponse&gt;</code>, apiKeys.deleteApiKey(ref) ⇒ <code>Promise.&lt;BaseApiObject&gt;</code>, apiKeys.listApiKeys(request) ⇒ <code>Promise.&lt;ListApiKeysResponse&gt;</code>, apiKeys.regenerateApiKey(ref) ⇒ <code>Promise.&lt;CreateApiKeyResponse&gt;</code>, new ApiKeys(client)
 
-### Community 462 - "Community 462"
-Cohesion: 0.33
-Nodes (5): AsObject, CallDirection, CallStatus, CallType, Status
-
 ### Community 463 - "Community 463"
 Cohesion: 0.33
-Nodes (5): Capabilities, Impact, New Capabilities, What Changes, Why
+Nodes (5): AsObject, CallDirection, CallStatus, CallType, Status
 
 ### Community 464 - "Community 464"
 Cohesion: 0.33
@@ -1849,37 +1855,41 @@ Nodes (5): Capabilities, Impact, New Capabilities, What Changes, Why
 
 ### Community 465 - "Community 465"
 Cohesion: 0.33
-Nodes (4): destDir, fs, path, sourceDir
+Nodes (5): Capabilities, Impact, New Capabilities, What Changes, Why
 
 ### Community 466 - "Community 466"
-Cohesion: 0.40
-Nodes (4): Agent instructions, Code memory (Graphify) — use this before grepping, Ops, Without MCP (primary for this tier)
+Cohesion: 0.33
+Nodes (4): destDir, fs, path, sourceDir
 
 ### Community 467 - "Community 467"
 Cohesion: 0.40
-Nodes (4): Checklist:, Description, How Has This Been Tested?, Type of change
+Nodes (4): Agent instructions, Code memory (Graphify) — use this before grepping, Ops, Without MCP (primary for this tier)
 
 ### Community 468 - "Community 468"
 Cohesion: 0.40
-Nodes (5): scripts, build, clean, prebuild, start:dev
+Nodes (4): Checklist:, Description, How Has This Been Tested?, Type of change
 
 ### Community 469 - "Community 469"
+Cohesion: 0.40
+Nodes (5): scripts, build, clean, prebuild, start:dev
+
+### Community 470 - "Community 470"
 Cohesion: 0.50
 Nodes (3): assistantWithoutApiKeySchema, createValidationSchema(), speechValidators
 
-### Community 470 - "Community 470"
+### Community 471 - "Community 471"
 Cohesion: 0.40
 Nodes (5): scripts, build, clean, postbuild, prebuild
 
-### Community 472 - "Community 472"
+### Community 473 - "Community 473"
 Cohesion: 0.40
 Nodes (5): scripts, build, clean, generate:readme, prebuild
 
-### Community 474 - "Community 474"
+### Community 475 - "Community 475"
 Cohesion: 0.40
 Nodes (4): Client, @fonoster/sdk/dist/node/node.js, @fonoster/sdk/dist/web/index.esm.js, WebClient
 
-### Community 475 - "Community 475"
+### Community 476 - "Community 476"
 Cohesion: 0.40
 Nodes (3): {
   Decimal,
@@ -1890,139 +1900,143 @@ Nodes (3): {
   skip
 }, Prisma, PrismaClient
 
-### Community 476 - "Community 476"
+### Community 477 - "Community 477"
 Cohesion: 0.40
 Nodes (5): default, import, require, types, ./edge
 
-### Community 477 - "Community 477"
+### Community 478 - "Community 478"
 Cohesion: 0.40
 Nodes (5): ./extension, default, import, require, types
 
-### Community 478 - "Community 478"
+### Community 479 - "Community 479"
 Cohesion: 0.40
 Nodes (5): ./index, default, import, require, types
 
-### Community 479 - "Community 479"
+### Community 480 - "Community 480"
 Cohesion: 0.40
 Nodes (5): ./react-native, default, import, require, types
 
-### Community 480 - "Community 480"
+### Community 481 - "Community 481"
 Cohesion: 0.40
 Nodes (5): ./runtime/binary, default, import, require, types
 
-### Community 481 - "Community 481"
+### Community 482 - "Community 482"
 Cohesion: 0.40
 Nodes (5): ./runtime/edge, default, import, require, types
 
-### Community 482 - "Community 482"
+### Community 483 - "Community 483"
 Cohesion: 0.40
 Nodes (5): ./runtime/index-browser, default, import, require, types
 
-### Community 483 - "Community 483"
+### Community 484 - "Community 484"
 Cohesion: 0.40
 Nodes (5): ./runtime/library, default, import, require, types
 
-### Community 484 - "Community 484"
+### Community 485 - "Community 485"
 Cohesion: 0.40
 Nodes (5): ./runtime/react-native, default, import, require, types
 
-### Community 485 - "Community 485"
+### Community 486 - "Community 486"
 Cohesion: 0.40
 Nodes (5): ./runtime/wasm-compiler-edge, default, import, require, types
 
-### Community 486 - "Community 486"
+### Community 487 - "Community 487"
 Cohesion: 0.40
 Nodes (5): ./runtime/wasm-engine-edge, default, import, require, types
 
-### Community 487 - "Community 487"
+### Community 488 - "Community 488"
 Cohesion: 0.40
 Nodes (5): ./wasm, default, import, require, types
 
-### Community 489 - "Community 489"
+### Community 490 - "Community 490"
 Cohesion: 0.40
 Nodes (5): Calls, calls.createCall(request) ⇒ <code>Object</code>, calls.getCall(ref) ⇒ <code>Promise.&lt;CallDetailRecord&gt;</code>, calls.listCalls(request) ⇒ <code>Promise.&lt;ListCallsResponse&gt;</code>, new Calls(client)
 
-### Community 491 - "Community 491"
-Cohesion: 0.50
-Nodes (3): @mui/material/styles, Palette, PaletteOptions
-
 ### Community 492 - "Community 492"
 Cohesion: 0.50
-Nodes (3): destDir, here, src
+Nodes (3): GatherStream, Stream, TransferOptions
 
 ### Community 493 - "Community 493"
 Cohesion: 0.50
+Nodes (3): @mui/material/styles, Palette, PaletteOptions
+
+### Community 494 - "Community 494"
+Cohesion: 0.50
+Nodes (3): destDir, here, src
+
+### Community 495 - "Community 495"
+Cohesion: 0.50
 Nodes (3): configPath, { database }, i
 
-### Community 498 - "Community 498"
+### Community 500 - "Community 500"
 Cohesion: 0.50
 Nodes (3): APIs, Example, Installation
 
-### Community 499 - "Community 499"
+### Community 501 - "Community 501"
 Cohesion: 0.50
 Nodes (3): 1. Proto and codegen, 2. Lightweight client package, 3. Verification
 
-### Community 502 - "Community 502"
-Cohesion: 0.67
-Nodes (3): directories, src, test
-
-### Community 503 - "Community 503"
-Cohesion: 0.67
-Nodes (3): files, dist, silero_vad.onnx
-
 ### Community 504 - "Community 504"
 Cohesion: 0.67
-Nodes (3): devDependencies, @types/nodemailer, @types/nodemailer
+Nodes (3): directories, src, test
 
 ### Community 505 - "Community 505"
 Cohesion: 0.67
-Nodes (3): directories, src, test
+Nodes (3): files, dist, silero_vad.onnx
 
 ### Community 506 - "Community 506"
 Cohesion: 0.67
-Nodes (3): repository, type, url
+Nodes (3): devDependencies, @types/nodemailer, @types/nodemailer
 
 ### Community 507 - "Community 507"
 Cohesion: 0.67
+Nodes (3): directories, src, test
+
+### Community 508 - "Community 508"
+Cohesion: 0.67
 Nodes (3): repository, type, url
 
-### Community 513 - "Community 513"
+### Community 509 - "Community 509"
 Cohesion: 0.67
-Nodes (3): bin, fonoster, fonoster-identity
-
-### Community 514 - "Community 514"
-Cohesion: 0.67
-Nodes (3): directories, src, test
+Nodes (3): repository, type, url
 
 ### Community 515 - "Community 515"
 Cohesion: 0.67
-Nodes (3): repository, type, url
+Nodes (3): bin, fonoster, fonoster-identity
 
-### Community 521 - "Community 521"
+### Community 516 - "Community 516"
 Cohesion: 0.67
 Nodes (3): directories, src, test
 
-### Community 522 - "Community 522"
+### Community 517 - "Community 517"
+Cohesion: 0.67
+Nodes (3): repository, type, url
+
+### Community 523 - "Community 523"
+Cohesion: 0.67
+Nodes (3): directories, src, test
+
+### Community 524 - "Community 524"
 Cohesion: 0.67
 Nodes (3): keywords, fonoster, sdk
 
-### Community 523 - "Community 523"
+### Community 525 - "Community 525"
 Cohesion: 0.67
 Nodes (3): repository, type, url
 
 ## Knowledge Gaps
 - **3076 isolated node(s):** `check-preconditions.sh script`, `{ PrismaClient }`, `path`, `args`, `isDryRun` (+3071 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **309 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **308 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `n()` connect `Community 23` to `Community 2`, `Community 3`, `Community 132`, `Community 11`, `Community 12`, `Community 16`, `Community 17`, `Community 146`, `Community 162`, `Community 42`, `Community 43`, `Community 46`, `Community 179`, `Community 180`, `Community 52`, `Community 51`, `Community 58`, `Community 62`, `Community 63`, `Community 192`, `Community 65`, `Community 66`, `Community 73`, `Community 74`, `Community 205`, `Community 207`, `Community 81`, `Community 82`, `Community 84`, `Community 213`, `Community 214`, `Community 85`, `Community 88`, `Community 89`, `Community 349`, `Community 351`, `Community 352`, `Community 99`, `Community 100`, `Community 104`, `Community 112`, `Community 113`, `Community 243`, `Community 126`, `Community 127`?**
+- **Why does `n()` connect `Community 23` to `Community 130`, `Community 3`, `Community 2`, `Community 10`, `Community 11`, `Community 142`, `Community 16`, `Community 147`, `Community 20`, `Community 33`, `Community 163`, `Community 165`, `Community 42`, `Community 43`, `Community 46`, `Community 50`, `Community 180`, `Community 181`, `Community 52`, `Community 58`, `Community 62`, `Community 63`, `Community 66`, `Community 73`, `Community 74`, `Community 76`, `Community 205`, `Community 207`, `Community 82`, `Community 83`, `Community 84`, `Community 213`, `Community 85`, `Community 88`, `Community 93`, `Community 350`, `Community 352`, `Community 353`, `Community 99`, `Community 100`, `Community 104`, `Community 112`, `Community 113`, `Community 243`, `Community 125`?**
   _High betweenness centrality (0.028) - this node is a cross-community bridge._
-- **Why does `A()` connect `Community 65` to `Community 42`, `Community 16`, `Community 83`, `Community 243`, `Community 23`, `Community 88`?**
+- **Why does `A()` connect `Community 256` to `Community 65`, `Community 131`, `Community 3`, `Community 43`, `Community 16`, `Community 243`, `Community 23`?**
   _High betweenness centrality (0.018) - this node is a cross-community bridge._
-- **Why does `getLogger()` connect `Community 5` to `Community 4`, `Community 136`, `Community 13`, `Community 19`, `Community 147`, `Community 21`, `Community 22`, `Community 24`, `Community 27`, `Community 28`, `Community 31`, `Community 32`, `Community 36`, `Community 37`, `Community 38`, `Community 40`, `Community 48`, `Community 177`, `Community 50`, `Community 55`, `Community 56`, `Community 57`, `Community 69`, `Community 202`, `Community 79`, `Community 490`, `Community 124`?**
+- **Why does `getLogger()` connect `Community 5` to `Community 4`, `Community 136`, `Community 13`, `Community 18`, `Community 148`, `Community 21`, `Community 22`, `Community 24`, `Community 26`, `Community 28`, `Community 34`, `Community 35`, `Community 37`, `Community 38`, `Community 39`, `Community 40`, `Community 48`, `Community 177`, `Community 51`, `Community 55`, `Community 56`, `Community 57`, `Community 69`, `Community 202`, `Community 80`, `Community 491`, `Community 123`?**
   _High betweenness centrality (0.016) - this node is a cross-community bridge._
 - **Are the 104 inferred relationships involving `n()` (e.g. with `ee()` and `et()`) actually correct?**
   _`n()` has 104 INFERRED edges - model-reasoned connections that need verification._
