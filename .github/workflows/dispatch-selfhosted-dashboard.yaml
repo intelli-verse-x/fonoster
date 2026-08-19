@@ -1,0 +1,41 @@
+name: Dispatch self-hosted dashboard production deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'mods/dashboard/**'
+      - '.github/workflows/dispatch-selfhosted-dashboard.yaml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fonoster-dashboard-production-dispatch
+  cancel-in-progress: false
+
+jobs:
+  dispatch:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch exact source SHA to kube-infra
+        env:
+          GH_TOKEN: ${{ secrets.INFRA_REPO_TOKEN || secrets.GH_PAT }}
+        run: |
+          set -euo pipefail
+          [[ "$GITHUB_SHA" =~ ^[0-9a-f]{40}$ ]]
+          test -n "${GH_TOKEN:-}"
+          gh api --method POST \
+            repos/intelli-verse-x/intelli-verse-kube-infra/dispatches \
+            --input - <<EOF
+          {
+            "event_type": "fonoster-dashboard-deploy",
+            "client_payload": {
+              "sha": "${GITHUB_SHA}",
+              "source_repository": "${GITHUB_REPOSITORY}",
+              "source_run_id": "${GITHUB_RUN_ID}"
+            }
+          }
+          EOF
