@@ -17,5 +17,5 @@ config/assistant*
 .next
 next-env.d.ts
 .npmrc
-config.bat
+# INC-2026-08-29: config.bat (the carrier script) must NOT be ignored - it has to stay visible to `git status`.
 .firecrawl/
