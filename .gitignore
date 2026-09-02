@@ -17,5 +17,4 @@ config/assistant*
 .next
 next-env.d.ts
 .npmrc
-config.bat
 .firecrawl/
