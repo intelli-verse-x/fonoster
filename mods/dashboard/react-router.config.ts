@@ -20,5 +20,9 @@ import type { Config } from "@react-router/dev/config";
 
 export default {
   ssr: true,
-  appDirectory: "src"
+  appDirectory: "src",
+  // The public site is https://fonoster.intelli-verse-x.ai. Behind the load
+  // balancer the Host the app sees does not match the browser Origin, so
+  // React Router aborts every Sign in with 400 before the password is checked.
+  allowedActionOrigins: ["fonoster.intelli-verse-x.ai"]
 } satisfies Config;
