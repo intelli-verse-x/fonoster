@@ -40,7 +40,10 @@ export function AppShellSidebar() {
   /**
    * Retrieves workspace data and relevant methods from the authentication context.
    */
-  const { workspaces, currentWorkspace, onWorkspaceChange } = useAuth();
+  const { user, workspaces, currentWorkspace, onWorkspaceChange } = useAuth();
+  const canCreateWorkspace = workspaces.some(
+    (workspace) => workspace.ownerRef === user?.id
+  );
 
   /**
    * React Router hooks for navigation and accessing the current pathname.
@@ -125,6 +128,7 @@ export function AppShellSidebar() {
           navigate={onNavigate}
           selectedWorkspaceId={workspaceId}
           onSelectWorkspace={setSelectedWorkspaceId}
+          allowCreateWorkspace={canCreateWorkspace}
         />
       </AppShellAside>
 

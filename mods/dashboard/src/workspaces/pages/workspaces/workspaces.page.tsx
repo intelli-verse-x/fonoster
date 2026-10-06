@@ -23,7 +23,7 @@ import {
   CreateWorkspaceRow,
   FeaturedWorkspace
 } from "~/workspaces/components/studio-picker/studio-picker";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   ContentWrapper,
   SideStack,
@@ -60,6 +60,15 @@ export default function Workspaces() {
 
   /** Get the current user and their workspaces from the auth context. */
   const { user, workspaces } = useAuth();
+  const ownsWorkspace = workspaces.some(
+    (workspace) => workspace.ownerRef === user?.id
+  );
+
+  useEffect(() => {
+    if (!ownsWorkspace && workspaces.length === 1) {
+      navigate(`/workspaces/${workspaces[0].ref}`, { replace: true });
+    }
+  }, [navigate, ownsWorkspace, workspaces]);
 
   /** Local state to control the visibility of the Create Workspace modal. */
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -95,6 +104,10 @@ export default function Workspaces() {
   /**
    * Renders the workspace cards grid, the Add Workspace button, and the modal.
    */
+  if (!ownsWorkspace && workspaces.length === 1) {
+    return null;
+  }
+
   const [featured, ...rest] = workspaces;
   const formatDate = (createdAt?: Date) =>
     createdAt ? createdAt.toLocaleDateString() : "N/A";
@@ -130,7 +143,9 @@ export default function Workspaces() {
                   onSettings={() => onSettingsClick(workspace.ref)}
                 />
               ))}
-              <CreateWorkspaceRow onClick={() => setIsCreateModalOpen(true)} />
+              {ownsWorkspace ? (
+                <CreateWorkspaceRow onClick={() => setIsCreateModalOpen(true)} />
+              ) : null}
             </SideStack>
           </StudioBento>
         </ContentWrapper>
