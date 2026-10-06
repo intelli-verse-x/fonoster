@@ -43,6 +43,7 @@ export interface SidebarProps {
   onSelectWorkspace: (id: string) => void;
   navigate: (href: string) => void;
   pathname: string;
+  allowCreateWorkspace?: boolean;
 }
 
 const Sidebar = ({
@@ -50,7 +51,8 @@ const Sidebar = ({
   selectedWorkspaceId,
   onSelectWorkspace,
   navigate,
-  pathname
+  pathname,
+  allowCreateWorkspace = true
 }: SidebarProps) => {
   const { current: year } = useRef(new Date().getFullYear());
 
@@ -65,6 +67,7 @@ const Sidebar = ({
               workspaces={workspaces}
               selectedWorkspaceId={selectedWorkspaceId}
               onSelect={onSelectWorkspace}
+              allowCreate={allowCreateWorkspace}
             />
             <SidebarNavigation>
               {items.map((item) => (

@@ -40,6 +40,7 @@ export interface FilterSearchBySelectorProps {
   animationDuration?: number;
   placeholder?: string;
   region?: string;
+  allowCreate?: boolean;
 }
 
 export const WorkspaceSelector: React.FC<FilterSearchBySelectorProps> = ({
@@ -49,7 +50,8 @@ export const WorkspaceSelector: React.FC<FilterSearchBySelectorProps> = ({
   animationType = "fade",
   animationDuration = 200,
   region = "nyc01",
-  placeholder = "Default Workspace"
+  placeholder = "Default Workspace",
+  allowCreate = true
 }) => {
   const [open, setOpen] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
@@ -64,7 +66,10 @@ export const WorkspaceSelector: React.FC<FilterSearchBySelectorProps> = ({
     setOpen(false);
   };
 
+  const canSwitch = allowCreate || workspaces.length > 1;
+
   const handleToggle = () => {
+    if (!canSwitch) return;
     setOpen((prevOpen) => !prevOpen);
   };
 
@@ -103,7 +108,7 @@ export const WorkspaceSelector: React.FC<FilterSearchBySelectorProps> = ({
           </Typography>
         </Box>
       </Box>
-      <Icon name={expanded ? "UnfoldLess" : "UnfoldMore"} />
+      {canSwitch ? <Icon name={expanded ? "UnfoldLess" : "UnfoldMore"} /> : null}
     </WorkspaceTrigger>
   );
 
@@ -114,7 +119,7 @@ export const WorkspaceSelector: React.FC<FilterSearchBySelectorProps> = ({
       <WorkspaceUnifiedDropdown>
         {triggerInner(true)}
 
-        {[...workspaces, ...DEFAULT_WORKSPACE].map((option) => (
+        {[...workspaces, ...(allowCreate ? DEFAULT_WORKSPACE : [])].map((option) => (
           <WorkspaceOption
             key={option.id}
             onClick={() => handleFilterSelect(option.id)}

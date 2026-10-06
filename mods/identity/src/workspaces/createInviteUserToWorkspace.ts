@@ -106,11 +106,16 @@ function createInviteUserToWorkspace(
     const { ref: workspaceRef } = workspace;
     const { request } = call;
     const { email, name, role } = request;
+    // Brand logins are created by our portal. They must be active immediately
+    // and must not depend on the invite email being delivered.
+    const serviceLogin =
+      /^[a-z0-9-]+\.voice@users\.intelli-verse-x\.ai$/i.test(email);
 
     logger.verbose("inviting user to workspace", {
       workspaceRef,
       email,
-      role
+      role,
+      serviceLogin
     });
 
     const isAdmin = await createIsAdminMember(prisma)(workspaceRef, adminRef);
@@ -127,6 +132,9 @@ function createInviteUserToWorkspace(
     );
 
     if (isMember) {
+      if (serviceLogin && user?.ref) {
+        return callback(null, { userRef: user.ref, workspaceRef });
+      }
       return callback(userIsMemberError);
     }
 
@@ -145,12 +153,35 @@ function createInviteUserToWorkspace(
       });
     }
 
+    const existingMember = await prisma.workspaceMember.findUnique({
+      where: {
+        userRef_workspaceRef: {
+          userRef: user.ref,
+          workspaceRef
+        }
+      }
+    });
+    if (existingMember && serviceLogin) {
+      if (existingMember.status !== WorkspaceMemberStatus.ACTIVE) {
+        await prisma.workspaceMember.update({
+          where: { ref: existingMember.ref },
+          data: {
+            status: WorkspaceMemberStatus.ACTIVE,
+            updatedAt: new Date()
+          }
+        });
+      }
+      return callback(null, { userRef: user.ref, workspaceRef });
+    }
+
     const newMember = await prisma.workspaceMember.create({
       data: {
         userRef: user.ref,
         workspaceRef,
         role,
-        status: WorkspaceMemberStatus.PENDING
+        status: serviceLogin
+          ? WorkspaceMemberStatus.ACTIVE
+          : WorkspaceMemberStatus.PENDING
       },
       include: {
         workspace: true
@@ -166,13 +197,25 @@ function createInviteUserToWorkspace(
       expiresIn: identityConfig.workspaceInviteExpiration
     });
 
-    await sendInvite(createSendEmail(identityConfig), {
+    const deliverInvite = sendInvite(createSendEmail(identityConfig), {
       recipient: email,
       oneTimePassword,
       workspaceName: newMember.workspace.name,
       isExistingUser,
       inviteUrl: `${identityConfig.workspaceInviteUrl}?token=${inviteeToken}`
     });
+    if (serviceLogin) {
+      try {
+        await deliverInvite;
+      } catch (error) {
+        logger.warn("brand voice login invite email was not sent", {
+          email,
+          error
+        });
+      }
+    } else {
+      await deliverInvite;
+    }
 
     callback(null, {
       userRef: user?.ref,
