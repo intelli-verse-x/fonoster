@@ -104,6 +104,10 @@ message CallDetailRecord {
   int32 amd_latency_ms = 14;
   // Detector-specific cause code (e.g. Asterisk's AMDCAUSE), useful for tuning
   string amd_cause = 15;
+  // Spoken lines from the voice app, when Autopilot saved them
+  string transcript = 16;
+  // Recording URL, when one was produced
+  string recording_url = 17;
 }
 
 // The request message for Calls.Call
