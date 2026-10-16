@@ -1,6 +1,6 @@
 {
   "name": "@fonoster/streams",
-  "version": "0.22.0",
+  "version": "0.27.0",
   "description": "Core support for Fonoster Streams",
   "author": "Pedro Sanders <psanders@fonoster.com>",
   "homepage": "https://github.com/fonoster/fonoster#readme",
@@ -13,13 +13,13 @@
   },
   "scripts": {
     "prebuild": "rimraf ./dist tsconfig.tsbuildinfo",
-    "build": "tsc -b tsconfig.json",
+    "build": "node init && tsc -b tsconfig.json",
     "clean": "rimraf ./dist node_modules tsconfig.tsbuildinfo",
     "generate:readme": "node ../../.scripts/gen-readme.cjs",
-    "start:dev": "nodemon --exec tsx --watch src src/example.ts"
+    "start:dev": "node init && nodemon --exec tsx --watch src src/example.ts"
   },
   "dependencies": {
-    "@fonoster/logger": "^0.22.0",
+    "@fonoster/logger": "^0.27.0",
     "uuid": "^11.0.3"
   },
   "devDependencies": {
