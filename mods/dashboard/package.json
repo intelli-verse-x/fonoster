@@ -1,6 +1,6 @@
 {
   "name": "@fonoster/dashboard",
-  "version": "0.22.0",
+  "version": "0.27.0",
   "private": true,
   "description": "Fonoster Dashboard",
   "homepage": "https://fonoster.com",
@@ -8,10 +8,10 @@
   "author": "Fonoster Team <team@fonoster.com>",
   "type": "module",
   "scripts": {
-    "build": "react-router build",
-    "build:storybook": "storybook build",
-    "dev": "react-router dev",
-    "start": "PORT=3030 react-router-serve ./build/server/index.js",
+    "build": "node init && react-router build",
+    "build:storybook": "node init && storybook build",
+    "dev": "node init && react-router dev",
+    "start": "node init && PORT=3030 react-router-serve ./build/server/index.js",
     "storybook": "storybook dev -p 6006",
     "typecheck": "react-router typegen && tsc"
   },

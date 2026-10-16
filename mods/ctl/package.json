@@ -1,6 +1,6 @@
 {
   "name": "@fonoster/ctl",
-  "version": "0.22.1",
+  "version": "0.27.0",
   "description": "Fonoster Control Tool",
   "author": "Pedro Sanders <psanders@fonoster.com>",
   "homepage": "https://github.com/fonoster/fonoster#readme",
@@ -13,7 +13,7 @@
   },
   "scripts": {
     "prebuild": "rimraf ./dist tsconfig.tsbuildinfo",
-    "build": "tsc -b tsconfig.json",
+    "build": "node init && tsc -b tsconfig.json",
     "clean": "rimraf ./dist node_modules tsconfig.tsbuildinfo",
     "generate:readme": "oclif readme"
   },
@@ -51,7 +51,7 @@
     }
   },
   "dependencies": {
-    "@fonoster/sdk": "^0.22.0",
+    "@fonoster/sdk": "^0.27.0",
     "@inquirer/prompts": "^7.1.0",
     "@oclif/core": "^4.0.34",
     "@oclif/plugin-warn-if-update-available": "^3.1.28",
