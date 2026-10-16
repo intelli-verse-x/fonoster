@@ -13,8 +13,8 @@
   },
   "scripts": {
     "prebuild": "rimraf ./dist tsconfig.tsbuildinfo",
-    "build": "tsc -b tsconfig.json",
-    "start": "node dist/server/index.js",
+    "build": "node init && tsc -b tsconfig.json",
+    "start": "node init && node dist/server/index.js",
     "db:deploy": "node scripts/db-provision.mjs",
     "clean": "rimraf ./dist node_modules tsconfig.tsbuildinfo"
   },
