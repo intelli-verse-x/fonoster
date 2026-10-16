@@ -62,6 +62,8 @@ type CallDetailRecord = {
   direction: CallDirection;
   startedAt: Date;
   endedAt: Date;
+  transcript?: string;
+  recordingUrl?: string;
   // Answering Machine Detection verdict, absent when AMD did not run
   amdStatus?: AmdStatus;
   amdConfidence?: number;

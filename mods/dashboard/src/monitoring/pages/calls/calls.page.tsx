@@ -174,6 +174,7 @@ function shortId(ref: string): string {
 
 export default function Calls() {
   const [pageToken, setPageToken] = useState<string | undefined>(undefined);
+  const [openRef, setOpenRef] = useState<string | null>(null);
 
   const { data, nextPageToken, isLoading } = useCalls({
     pageSize: CALLS_PAGE_SIZE,
@@ -252,7 +253,7 @@ export default function Calls() {
             sx={{ mt: 1, color: "base.04", fontSize: 14, maxWidth: 560 }}
           >
             A live ledger of calls in this workspace — scan status, route, and
-            duration without the old dense table.
+            duration, then open a row to read the transcript.
           </Typography>
         </Box>
         <Button
@@ -374,9 +375,16 @@ export default function Calls() {
               const type =
                 TYPE_LABELS[String(call.type)] || call.type || "—";
               const duration = formatCallDuration(Number(call.duration) || 0);
+              const transcript = String(call.transcript || "").trim();
+              const recordingUrl = String(call.recordingUrl || "").trim();
+              const open = openRef === call.ref;
 
               return (
-                <LedgerRow key={call.ref}>
+                <Box key={call.ref}>
+                <LedgerRow
+                  onClick={() => setOpenRef(open ? null : String(call.ref))}
+                  sx={{ cursor: "pointer" }}
+                >
                   <Box
                     sx={{
                       display: "inline-flex",
@@ -470,6 +478,46 @@ export default function Calls() {
                     {shortId(call.ref)}
                   </Typography>
                 </LedgerRow>
+                {open && (
+                  <Box sx={{ px: 2, pb: 2 }}>
+                    <Typography
+                      sx={{
+                        fontSize: 11,
+                        fontWeight: 700,
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        color: "base.05",
+                        mb: 0.75
+                      }}
+                    >
+                      Transcript
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: 14,
+                        lineHeight: 1.6,
+                        color: "#fff",
+                        whiteSpace: "pre-wrap"
+                      }}
+                    >
+                      {transcript || "No words were captured on this call."}
+                    </Typography>
+                    {recordingUrl ? (
+                      <Typography sx={{ mt: 1, fontSize: 13 }}>
+                        <Box
+                          component="a"
+                          href={recordingUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          sx={{ color: "brand.main" }}
+                        >
+                          Open recording
+                        </Box>
+                      </Typography>
+                    ) : null}
+                  </Box>
+                )}
+                </Box>
               );
             })}
           </>

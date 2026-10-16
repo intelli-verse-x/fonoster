@@ -38,6 +38,11 @@ import { loadAssistantConfigFromFile } from "./loadAssistantConfigFromFile";
 import { loadAssistantFromAPI } from "./loadAssistantFromAPI";
 import { createLanguageModel } from "./models/createLanguageModel";
 import {
+  formatCallTranscript,
+  plainCallMetadata
+} from "./formatCallTranscript";
+import { saveCallTranscript } from "./saveCallTranscript";
+import {
   EventsHook,
   sendConversationEndedEvent
 } from "./sendConversationEndedEvent";
@@ -167,18 +172,32 @@ async function handleVoiceRequest(req: VoiceRequest, res: VoiceResponse) {
         })
         .filter(Boolean);
 
-      if (assistantConfig.eventsHook?.url) {
-        // Construct recording URL: baseUrl + appRef + mediaSessionRef
-        const recordingUrl = `${RECORDING_BASE_URL}/${appRef}_${mediaSessionRef}.wav`;
+      const recordingUrl = `${RECORDING_BASE_URL}/${appRef}_${mediaSessionRef}.wav`;
+      const transcript = formatCallTranscript(
+        chatHistory as { human?: unknown; ai?: unknown }[]
+      );
+      const callMetadata = plainCallMetadata(metadata);
+      try {
+        await saveCallTranscript({ callRef, transcript, recordingUrl });
+      } catch (error) {
+        logger.warn("call transcript was not saved for monitoring", {
+          callRef,
+          error
+        });
+      }
 
+      if (assistantConfig.eventsHook?.url) {
         await sendConversationEndedEvent(
           assistantConfig.eventsHook as EventsHook,
           {
             appRef,
             callRef,
             phone: ingressNumber,
+            callerNumber,
             chatHistory: chatHistory as Record<string, string>[],
             recordingUrl,
+            transcript,
+            metadata: callMetadata,
             amd
           }
         );

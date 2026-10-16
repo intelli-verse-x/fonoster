@@ -86,15 +86,53 @@ function createFetchCalls(influxdb: InfluxDBClient) {
     });
 
     const items = (await influxdb.collectRows(query)) as CallDetailRecord[];
+    const withTranscripts = await attachCallTranscripts(influxdb, items);
 
     const nextPageToken =
       items.length > 0 ? items[items.length - 1].startedAt : "";
 
     return {
       nextPageToken: nextPageToken + "",
-      items
+      items: withTranscripts
     };
   };
+}
+
+async function attachCallTranscripts(
+  influxdb: InfluxDBClient,
+  items: CallDetailRecord[]
+): Promise<CallDetailRecord[]> {
+  if (!items.length) return items;
+  const query = flux`from(bucket: "${INFLUXDB_CALLS_BUCKET}")
+    |> range(start: -30d)
+    |> filter(fn: (r) => r._measurement == "call_transcript")
+    |> pivot(rowKey: ["ref"], columnKey: ["_field"], valueColumn: "_value")`;
+  let rows: Array<{ ref?: string; transcript?: string; recordingUrl?: string }> =
+    [];
+  try {
+    rows = (await influxdb.collectRows(query)) as Array<{
+      ref?: string;
+      transcript?: string;
+      recordingUrl?: string;
+    }>;
+  } catch (error) {
+    logger.warn("call transcripts were not loaded", { error });
+    return items;
+  }
+  const byRef = new Map<string, { transcript?: string; recordingUrl?: string }>();
+  for (const row of rows) {
+    const ref = String(row.ref || "").trim();
+    if (ref) byRef.set(ref, row);
+  }
+  return items.map((item) => {
+    const extra = byRef.get(String(item.ref || ""));
+    if (!extra) return item;
+    return {
+      ...item,
+      transcript: String(extra.transcript || ""),
+      recordingUrl: String(extra.recordingUrl || "")
+    };
+  });
 }
 
 export { createFetchCalls };
