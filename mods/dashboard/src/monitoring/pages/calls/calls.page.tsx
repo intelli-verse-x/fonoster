@@ -4,6 +4,7 @@
  *
  * Licensed under the MIT License.
  */
+import { CallTranscript } from "./call-transcript";
 import type { Route } from "./+types/calls.page";
 import { useCallback, useState } from "react";
 import {
@@ -21,7 +22,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CallMadeOutlinedIcon from "@mui/icons-material/CallMadeOutlined";
 import { mkConfig, generateCsv, download } from "export-to-csv";
-import type { CallDetailRecord } from "@fonoster/types";
+import type { TranscriptCall as CallDetailRecord } from "../../services/calls-reader";
 
 import { Page } from "~/core/components/general/page/page";
 import { CALLS_PAGE_SIZE } from "~/core/shared/page-sizes.const";
@@ -33,7 +34,7 @@ import {
   formatCallDuration
 } from "./calls.const";
 import { useResourceTable } from "~/core/hooks/use-resource-table";
-import { useCalls } from "../../services/calls.service";
+import { useCall, useCalls } from "../../services/calls.service";
 import { PRODUCT_NAME } from "~/core/brand/product";
 import { ResourceListSkeleton } from "~/core/brand/studio-skeletons";
 import { toast } from "~/core/components/design-system/ui/toaster/toaster";
@@ -175,6 +176,7 @@ function shortId(ref: string): string {
 export default function Calls() {
   const [pageToken, setPageToken] = useState<string | undefined>(undefined);
   const [openRef, setOpenRef] = useState<string | null>(null);
+  const detail = useCall(openRef);
 
   const { data, nextPageToken, isLoading } = useCalls({
     pageSize: CALLS_PAGE_SIZE,
@@ -328,8 +330,12 @@ export default function Calls() {
 
         {!isLoading && filteredData.length === 0 && (
           <Box sx={{ px: 2, py: 6, textAlign: "center" }}>
-            <CallMadeOutlinedIcon sx={{ color: "base.06", fontSize: 32, mb: 1 }} />
-            <Typography sx={{ color: "base.04", fontSize: 14, fontWeight: 600 }}>
+            <CallMadeOutlinedIcon
+              sx={{ color: "base.06", fontSize: 32, mb: 1 }}
+            />
+            <Typography
+              sx={{ color: "base.04", fontSize: 14, fontWeight: 600 }}
+            >
               No calls yet
             </Typography>
             <Typography sx={{ color: "base.05", fontSize: 13, mt: 0.5 }}>
@@ -342,7 +348,14 @@ export default function Calls() {
           <>
             <LedgerHeader>
               {(
-                ["Status", "Route", "Direction", "Type", "Duration", "Call ID"] as const
+                [
+                  "Status",
+                  "Route",
+                  "Direction",
+                  "Type",
+                  "Duration",
+                  "Call ID"
+                ] as const
               ).map((label) => (
                 <Typography
                   key={label}
@@ -359,21 +372,26 @@ export default function Calls() {
               ))}
             </LedgerHeader>
 
-            {filteredData.map((call: CallDetailRecord) => {
+            {filteredData.map((listedCall: CallDetailRecord) => {
+              const call =
+                listedCall.ref === openRef && detail.data
+                  ? { ...listedCall, ...detail.data }
+                  : listedCall;
               // Proto enum 0 is UNKNOWN; avoid treating numeric 0 as missing.
               const statusKey =
                 call.status === undefined || call.status === null
                   ? "UNKNOWN"
                   : String(call.status);
               const statusLabel =
-                STATUS_LABELS[statusKey] || statusKey || "No hangup cause";
+                ["UNKNOWN", "0", ""].includes(statusKey) && call.transcript
+                  ? "Conversation captured"
+                  : STATUS_LABELS[statusKey] || statusKey || "No hangup cause";
               const tone = statusTone(statusKey);
               const direction =
                 DIRECTION_LABELS[String(call.direction)] ||
                 call.direction ||
                 "—";
-              const type =
-                TYPE_LABELS[String(call.type)] || call.type || "—";
+              const type = TYPE_LABELS[String(call.type)] || call.type || "—";
               const duration = formatCallDuration(Number(call.duration) || 0);
               const transcript = String(call.transcript || "").trim();
               const recordingUrl = String(call.recordingUrl || "").trim();
@@ -381,142 +399,123 @@ export default function Calls() {
 
               return (
                 <Box key={call.ref}>
-                <LedgerRow
-                  onClick={() => setOpenRef(open ? null : String(call.ref))}
-                  sx={{ cursor: "pointer" }}
-                >
-                  <Box
-                    sx={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      width: "fit-content",
-                      px: 1.25,
-                      py: 0.5,
-                      borderRadius: "999px",
-                      bgcolor: tone.bg,
-                      color: tone.color,
-                      fontSize: 12,
-                      fontWeight: 600,
-                      lineHeight: 1.2
+                  <LedgerRow
+                    role="button"
+                    tabIndex={0}
+                    aria-expanded={open}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        setOpenRef(open ? null : String(call.ref));
+                      }
                     }}
+                    onClick={() => setOpenRef(open ? null : String(call.ref))}
+                    sx={{ cursor: "pointer" }}
                   >
-                    {statusLabel}
-                  </Box>
-
-                  <Box sx={{ minWidth: 0 }}>
-                    <Typography
+                    <Box
                       sx={{
-                        fontWeight: 600,
-                        fontSize: 14,
-                        color: "#fff",
-                        wordBreak: "break-all"
-                      }}
-                    >
-                      {call.from || "—"}
-                      <Box
-                        component="span"
-                        sx={{ color: "base.05", mx: 0.75, fontWeight: 500 }}
-                      >
-                        →
-                      </Box>
-                      {call.to || "—"}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        display: { xs: "block", sm: "none" },
-                        mt: 0.5,
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: "fit-content",
+                        px: 1.25,
+                        py: 0.5,
+                        borderRadius: "999px",
+                        bgcolor: tone.bg,
+                        color: tone.color,
                         fontSize: 12,
-                        color: "base.05"
+                        fontWeight: 600,
+                        lineHeight: 1.2
                       }}
                     >
-                      {direction} · {type} · {duration}
-                    </Typography>
-                  </Box>
+                      {statusLabel}
+                    </Box>
 
-                  <Typography
-                    sx={{
-                      display: { xs: "none", sm: "block" },
-                      fontSize: 13,
-                      color: "base.03"
-                    }}
-                  >
-                    {direction}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      display: { xs: "none", sm: "block" },
-                      fontSize: 13,
-                      color: "base.03"
-                    }}
-                  >
-                    {type}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      display: { xs: "none", sm: "block" },
-                      fontSize: 13,
-                      fontWeight: 600,
-                      color: "#fff",
-                      fontVariantNumeric: "tabular-nums"
-                    }}
-                  >
-                    {duration}
-                  </Typography>
-                  <Typography
-                    title={call.ref}
-                    sx={{
-                      fontSize: 12,
-                      color: "base.05",
-                      fontFamily:
-                        "ui-monospace, SFMono-Regular, Menlo, monospace",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap"
-                    }}
-                  >
-                    {shortId(call.ref)}
-                  </Typography>
-                </LedgerRow>
-                {open && (
-                  <Box sx={{ px: 2, pb: 2 }}>
-                    <Typography
-                      sx={{
-                        fontSize: 11,
-                        fontWeight: 700,
-                        letterSpacing: "0.08em",
-                        textTransform: "uppercase",
-                        color: "base.05",
-                        mb: 0.75
-                      }}
-                    >
-                      Transcript
-                    </Typography>
-                    <Typography
-                      sx={{
-                        fontSize: 14,
-                        lineHeight: 1.6,
-                        color: "#fff",
-                        whiteSpace: "pre-wrap"
-                      }}
-                    >
-                      {transcript || "No words were captured on this call."}
-                    </Typography>
-                    {recordingUrl ? (
-                      <Typography sx={{ mt: 1, fontSize: 13 }}>
+                    <Box sx={{ minWidth: 0 }}>
+                      <Typography
+                        sx={{
+                          fontWeight: 600,
+                          fontSize: 14,
+                          color: "#fff",
+                          wordBreak: "break-all"
+                        }}
+                      >
+                        {call.from || "—"}
                         <Box
-                          component="a"
-                          href={recordingUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          sx={{ color: "brand.main" }}
+                          component="span"
+                          sx={{ color: "base.05", mx: 0.75, fontWeight: 500 }}
                         >
-                          Open recording
+                          →
                         </Box>
+                        {call.to || "—"}
                       </Typography>
-                    ) : null}
-                  </Box>
-                )}
+                      <Typography
+                        sx={{
+                          display: { xs: "block", sm: "none" },
+                          mt: 0.5,
+                          fontSize: 12,
+                          color: "base.05"
+                        }}
+                      >
+                        {direction} · {type} · {duration}
+                      </Typography>
+                    </Box>
+
+                    <Typography
+                      sx={{
+                        display: { xs: "none", sm: "block" },
+                        fontSize: 13,
+                        color: "base.03"
+                      }}
+                    >
+                      {direction}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        display: { xs: "none", sm: "block" },
+                        fontSize: 13,
+                        color: "base.03"
+                      }}
+                    >
+                      {type}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        display: { xs: "none", sm: "block" },
+                        fontSize: 13,
+                        fontWeight: 600,
+                        color: "#fff",
+                        fontVariantNumeric: "tabular-nums"
+                      }}
+                    >
+                      {duration}
+                    </Typography>
+                    <Typography
+                      title={call.ref}
+                      sx={{
+                        fontSize: 12,
+                        color: "base.05",
+                        fontFamily:
+                          "ui-monospace, SFMono-Regular, Menlo, monospace",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap"
+                      }}
+                    >
+                      {shortId(call.ref)}
+                    </Typography>
+                  </LedgerRow>
+                  {open && (
+                    <CallTranscript
+                      transcript={transcript}
+                      recordingUrl={recordingUrl}
+                      loading={detail.isFetching}
+                      failed={detail.isError}
+                      onRetry={() => {
+                        void detail.refetch();
+                      }}
+                    />
+                  )}
                 </Box>
               );
             })}

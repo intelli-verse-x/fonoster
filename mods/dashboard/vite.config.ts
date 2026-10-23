@@ -25,6 +25,11 @@ export default defineConfig({
   resolve: {
     dedupe: ["react", "react-dom", "react/jsx-runtime"]
   },
+  build: {
+    commonjsOptions: {
+      include: [/node_modules/, /services\/generated\/calls_pb\.cjs$/]
+    }
+  },
   ssr: {
     noExternal: ["@mui/*", "@emotion/*"]
   },

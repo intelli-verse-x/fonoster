@@ -25,6 +25,8 @@ import { getLogger } from "@fonoster/logger";
 import { CallDetailRecord } from "@fonoster/types";
 import { flux } from "@influxdata/influxdb-client";
 
+import { attachCallTranscripts } from "./attachCallTranscripts";
+
 const logger = getLogger({ service: "apiserver", filePath: __filename });
 
 function createFetchSingleCall(influxdb: InfluxDBClient) {
@@ -50,7 +52,9 @@ function createFetchSingleCall(influxdb: InfluxDBClient) {
 
     const items = (await influxdb.collectRows(query)) as CallDetailRecord[];
 
-    return items.length > 0 ? items[0] : null;
+    return items.length > 0
+      ? (await attachCallTranscripts(influxdb, [items[0]]))[0]
+      : null;
   };
 }
 

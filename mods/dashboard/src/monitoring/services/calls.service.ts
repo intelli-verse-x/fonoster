@@ -17,6 +17,7 @@
  * limitations under the License.
  */
 import { type ListCallsRequest as ResourceListRequest } from "@fonoster/types";
+import { callsReader } from "./calls-reader";
 import { useQuery } from "@tanstack/react-query";
 import { useFonoster } from "~/core/sdk/hooks/use-fonoster";
 import { useWorkspaceId } from "~/workspaces/hooks/use-workspace-id";
@@ -39,12 +40,12 @@ export const COLLECTION_QUERY_KEY = ["collection:calls"];
  * @returns A React Query object containing call data and query metadata.
  */
 export const useCalls = (params?: ResourceListRequest) => {
-  const { sdk } = useFonoster();
+  const { client } = useFonoster();
   const workspaceId = useWorkspaceId();
 
   const { data, ...rest } = useQuery({
     queryKey: [...COLLECTION_QUERY_KEY, workspaceId, params],
-    queryFn: async () => await sdk.calls.listCalls({ ...params })
+    queryFn: async () => await callsReader(client).listCalls({ ...params })
   });
 
   return {
@@ -52,4 +53,17 @@ export const useCalls = (params?: ResourceListRequest) => {
     nextPageToken: data?.nextPageToken,
     ...rest
   };
+};
+
+/** Details are cached per workspace/ref; reopening an empty call can pick up delayed ingestion. */
+export const useCall = (ref: string | null) => {
+  const { client } = useFonoster();
+  const workspaceId = useWorkspaceId();
+  return useQuery({
+    queryKey: [...COLLECTION_QUERY_KEY, workspaceId, "detail", ref],
+    queryFn: () => callsReader(client).getCall(ref!),
+    enabled: !!ref,
+    staleTime: 15000,
+    retry: 1
+  });
 };

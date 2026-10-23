@@ -58,7 +58,7 @@ describe("@calls/fetchCalls", function () {
     ];
 
     const influxdb = {
-      collectRows: sandbox.stub().resolves(items)
+      collectRows: sandbox.stub().onFirstCall().resolves(items).onSecondCall().resolves([])
     } as InfluxDBClient;
 
     const fetchCalls = createFetchCalls(influxdb);
@@ -99,7 +99,7 @@ describe("@calls/fetchCalls", function () {
     ];
 
     // Arrange
-    const collectRows = sandbox.stub().resolves(items);
+    const collectRows = sandbox.stub().onFirstCall().resolves(items).onSecondCall().resolves([]);
     const influxdb = {
       collectRows
     } as InfluxDBClient;

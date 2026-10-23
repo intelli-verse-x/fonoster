@@ -49,6 +49,12 @@ export class CallDetailRecord extends jspb.Message {
   getAmdCause(): string;
   setAmdCause(value: string): CallDetailRecord;
 
+  getTranscript(): string;
+  setTranscript(value: string): CallDetailRecord;
+
+  getRecordingUrl(): string;
+  setRecordingUrl(value: string): CallDetailRecord;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): CallDetailRecord.AsObject;
   static toObject(includeInstance: boolean, msg: CallDetailRecord): CallDetailRecord.AsObject;
@@ -74,6 +80,8 @@ export namespace CallDetailRecord {
     amdDetector: string,
     amdLatencyMs: number,
     amdCause: string,
+    transcript: string,
+    recordingUrl: string,
   }
 
   export enum AmdStatus { 

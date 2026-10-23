@@ -56,7 +56,7 @@ describe("@calls/fetchSingleCall", function () {
       amdCause: ""
     };
 
-    const collectRows = sandbox.stub().resolves([item]);
+    const collectRows = sandbox.stub().onFirstCall().resolves([item]).onSecondCall().resolves([]);
     const influxdb = { collectRows } as InfluxDBClient;
 
     const fetchSingleCall = createFetchSingleCall(influxdb);
