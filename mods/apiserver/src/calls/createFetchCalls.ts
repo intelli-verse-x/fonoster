@@ -29,6 +29,8 @@ import {
 } from "@fonoster/types";
 import { flux } from "@influxdata/influxdb-client";
 
+import { attachCallTranscripts } from "./attachCallTranscripts";
+
 const logger = getLogger({ service: "apiserver", filePath: __filename });
 
 function createFetchCalls(influxdb: InfluxDBClient) {
@@ -59,11 +61,12 @@ function createFetchCalls(influxdb: InfluxDBClient) {
 
     const query = flux`from(bucket: "${INFLUXDB_CALLS_BUCKET}")
       |> range(start: ${parsedAfter})
+      |> filter(fn: (r) => r._measurement == "${CALL_DETAIL_RECORD_MEASUREMENT}")
       |> pivot(rowKey: ["callId"], columnKey: ["_field"], valueColumn: "_value")
       |> map(fn: (r) => ({
           r with
           duration: int(v: r.endedAt) - int(v: r.startedAt),
-          startedAtParsed: int(v: r.startedAt) / 1000,
+          startedAtParsed: if int(v: r.startedAt) > 9999999999 then int(v: r.startedAt) / 1000 else int(v: r.startedAt),
         }))
       |> filter(fn: (r) =>
         r._measurement == "${CALL_DETAIL_RECORD_MEASUREMENT}"
@@ -96,43 +99,6 @@ function createFetchCalls(influxdb: InfluxDBClient) {
       items: withTranscripts
     };
   };
-}
-
-async function attachCallTranscripts(
-  influxdb: InfluxDBClient,
-  items: CallDetailRecord[]
-): Promise<CallDetailRecord[]> {
-  if (!items.length) return items;
-  const query = flux`from(bucket: "${INFLUXDB_CALLS_BUCKET}")
-    |> range(start: -30d)
-    |> filter(fn: (r) => r._measurement == "call_transcript")
-    |> pivot(rowKey: ["ref"], columnKey: ["_field"], valueColumn: "_value")`;
-  let rows: Array<{ ref?: string; transcript?: string; recordingUrl?: string }> =
-    [];
-  try {
-    rows = (await influxdb.collectRows(query)) as Array<{
-      ref?: string;
-      transcript?: string;
-      recordingUrl?: string;
-    }>;
-  } catch (error) {
-    logger.warn("call transcripts were not loaded", { error });
-    return items;
-  }
-  const byRef = new Map<string, { transcript?: string; recordingUrl?: string }>();
-  for (const row of rows) {
-    const ref = String(row.ref || "").trim();
-    if (ref) byRef.set(ref, row);
-  }
-  return items.map((item) => {
-    const extra = byRef.get(String(item.ref || ""));
-    if (!extra) return item;
-    return {
-      ...item,
-      transcript: String(extra.transcript || ""),
-      recordingUrl: String(extra.recordingUrl || "")
-    };
-  });
 }
 
 export { createFetchCalls };
