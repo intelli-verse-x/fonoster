@@ -108,8 +108,9 @@ function createInviteUserToWorkspace(
     const { email, name, role } = request;
     // Brand logins are created by our portal. They must be active immediately
     // and must not depend on the invite email being delivered.
-    const serviceLogin =
-      /^[a-z0-9-]+\.voice@users\.intelli-verse-x\.ai$/i.test(email);
+    const serviceLogin = /^[a-z0-9-]+\.voice@users\.intelli-verse-x\.ai$/i.test(
+      email
+    );
 
     logger.verbose("inviting user to workspace", {
       workspaceRef,
