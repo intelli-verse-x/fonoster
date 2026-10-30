@@ -9,7 +9,7 @@
   "types": "dist/index",
   "scripts": {
     "prebuild": "rimraf ./dist tsconfig.tsbuildinfo",
-    "build": "tsc -b tsconfig.json"
+    "build": "node init && tsc -b tsconfig.json"
   },
   "directories": {
     "src": "src",
