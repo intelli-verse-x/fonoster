@@ -143,6 +143,18 @@ import headerPlugin from 'eslint-plugin-header'; export default [
     }
   },
   {
+    files: ['mcp/**/*.js'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      globals: {
+        process: 'readonly',
+        Buffer: 'readonly',
+        console: 'readonly',
+      },
+    },
+  },
+  {
     ignores: [
       '**/dist/**',
       '**/node_modules/**',

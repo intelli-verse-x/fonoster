@@ -96,6 +96,149 @@ const TOOLS = [
   },
 ];
 
+function autopilotApplication(a) {
+  const firstMessage = a.firstMessage || a.firstLine || 'Hello. How can I help you today?';
+  const systemPrompt = a.systemPrompt || 'You are a friendly voice assistant. Keep every reply to one or two short sentences.';
+  return {
+    name: a.name,
+    type: a.type || 'AUTOPILOT',
+    ...(a.endpoint ? { endpoint: a.endpoint } : {}),
+    textToSpeech: a.textToSpeech || {
+      productRef: 'tts.elevenlabs',
+      config: { voice: a.voice || 'Sarah' },
+    },
+    speechToText: a.speechToText || {
+      productRef: 'stt.deepgram',
+      config: { languageCode: a.languageCode || 'en-US', model: a.sttModel || 'nova-3' },
+    },
+    intelligence: a.intelligence || {
+      productRef: a.llmProduct || 'llm.google',
+      config: {
+        conversationSettings: {
+          allowUserBargeIn: a.allowUserBargeIn !== false,
+          firstMessage,
+          goodbyeMessage: a.goodbyeMessage || 'Goodbye! Have a great day!',
+          systemErrorMessage: a.systemErrorMessage || 'An error occurred. Please try again.',
+          systemPrompt,
+          idleOptions: {
+            maxTimeoutCount: 2,
+            message: "I haven't heard from you in a while. Are you still there?",
+            timeout: 30000,
+          },
+          transferOptions: {
+            message: 'Please wait while I transfer you to a live agent.',
+            phoneNumber: a.transferPhone || '',
+            timeout: 30000,
+          },
+        },
+        languageModel: {
+          maxTokens: a.maxTokens || 240,
+          model: a.model || 'gemini-2.0-flash',
+          provider: a.provider || 'google',
+          temperature: a.temperature ?? 0.2,
+          tools: [],
+        },
+      },
+    },
+  };
+}
+
+const applicationFields = {
+  name: { type: 'string', description: 'Application name, shown in Voice Studio.' },
+  firstMessage: { type: 'string', description: 'First spoken line when the call connects.' },
+  firstLine: { type: 'string', description: 'Same as firstMessage.' },
+  systemPrompt: { type: 'string', description: 'Instructions for the voice agent.' },
+  goodbyeMessage: { type: 'string' },
+  voice: { type: 'string', description: 'ElevenLabs voice name. Default Sarah.' },
+  languageCode: { type: 'string', description: 'Speech language. Default en-US.' },
+  model: { type: 'string', description: 'Chat model. Default gemini-2.0-flash.' },
+  provider: { type: 'string', description: 'Chat provider. Default google.' },
+  type: { type: 'string', description: 'AUTOPILOT or EXTERNAL. Default AUTOPILOT.' },
+  endpoint: { type: 'string' },
+  textToSpeech: { type: 'object', description: 'Full text-to-speech block. Overrides voice.' },
+  speechToText: { type: 'object', description: 'Full speech-to-text block.' },
+  intelligence: { type: 'object', description: 'Full intelligence block. Overrides first line and prompt.' },
+};
+
+TOOLS.push(
+  {
+    name: 'fonoster_create_application',
+    description:
+      'Create a voice application. Pass name plus firstMessage and systemPrompt. Voice, speech, and model use the same defaults as Voice Studio when omitted.',
+    inputSchema: {
+      type: 'object',
+      required: ['name'],
+      properties: applicationFields,
+    },
+    run: (c, a) => {
+      if (!a.name) throw new Error('name is required');
+      return new SDK.Applications(c).createApplication(autopilotApplication(a));
+    },
+  },
+  {
+    name: 'fonoster_update_application',
+    description:
+      'Change an existing voice application. Pass ref plus any of name, firstMessage, systemPrompt, voice, or the full config blocks. Unset fields stay as they are.',
+    inputSchema: {
+      type: 'object',
+      required: ['ref'],
+      properties: { ref: { type: 'string' }, ...applicationFields },
+    },
+    run: async (c, a) => {
+      if (!a.ref) throw new Error('ref is required');
+      const apps = new SDK.Applications(c);
+      const current = await apps.getApplication(a.ref);
+      const built = autopilotApplication({ ...a, name: a.name || current.name });
+      const settings = current.intelligence?.config?.conversationSettings || {};
+      const intelligence = a.intelligence || {
+        productRef: current.intelligence?.productRef || built.intelligence.productRef,
+        config: {
+          ...(current.intelligence?.config || {}),
+          conversationSettings: {
+            ...settings,
+            ...built.intelligence.config.conversationSettings,
+            firstMessage: a.firstMessage || a.firstLine || settings.firstMessage,
+            systemPrompt: a.systemPrompt || settings.systemPrompt,
+            goodbyeMessage: a.goodbyeMessage || settings.goodbyeMessage,
+          },
+          languageModel: {
+            ...(current.intelligence?.config?.languageModel || {}),
+            ...(a.model ? { model: a.model } : {}),
+            ...(a.provider ? { provider: a.provider } : {}),
+          },
+        },
+      };
+      return apps.updateApplication({
+        ref: a.ref,
+        name: a.name || current.name,
+        type: a.type || current.type,
+        ...(a.endpoint || current.endpoint ? { endpoint: a.endpoint || current.endpoint } : {}),
+        textToSpeech: a.textToSpeech || (a.voice ? built.textToSpeech : current.textToSpeech),
+        speechToText: a.speechToText || current.speechToText,
+        intelligence,
+      });
+    },
+  },
+  {
+    name: 'fonoster_update_number',
+    description:
+      'Point a phone number at a voice application. Pass the number ref and appRef. This is what lets outbound calls use that app.',
+    inputSchema: {
+      type: 'object',
+      required: ['ref', 'appRef'],
+      properties: {
+        ref: { type: 'string', description: 'Number ref from fonoster_list_numbers.' },
+        appRef: { type: 'string', description: 'Application ref that should handle this number.' },
+        name: { type: 'string' },
+      },
+    },
+    run: (c, a) => {
+      if (!a.ref || !a.appRef) throw new Error('ref and appRef are required');
+      return new SDK.Numbers(c).updateNumber({ ref: a.ref, appRef: a.appRef, ...(a.name ? { name: a.name } : {}) });
+    },
+  },
+);
+
 const toolSpecs = () => TOOLS.map((t) => ({ name: t.name, description: t.description, inputSchema: t.inputSchema }));
 
 async function handleRpc(msg, token) {
