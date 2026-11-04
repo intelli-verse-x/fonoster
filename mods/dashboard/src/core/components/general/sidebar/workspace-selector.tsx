@@ -102,7 +102,7 @@ export const WorkspaceSelector: React.FC<FilterSearchBySelectorProps> = ({
         <Box display="flex" flexDirection="column" gap="2px" minWidth={0}>
           <Typography
             variant="mono-small"
-            sx={{ color: "base.05", letterSpacing: "0.06em", textTransform: "uppercase" }}
+            sx={{ color: "base.04", letterSpacing: "0.06em", textTransform: "uppercase" }}
           >
             Workspace · {region}
           </Typography>

@@ -34,6 +34,12 @@ export const FONOSTER_SERVER_CONFIG = Object.freeze({
   accessToken: ""
 });
 
+/**
+ * Native gRPC (Node SDK) only works against apiserver :50051 (in-cluster / port-forward).
+ * Public ALB + Envoy speaks grpc-web over HTTP/1.1 — Node gRPC gets HTTP 464.
+ */
+export const USE_NATIVE_GRPC = FONOSTER_SERVER_CONFIG.endpoint.includes(":50051");
+
 export const FONOSTER_RESET_PASSWORD_URL: string =
   import.meta.env.DASHBOARD_RESET_PASSWORD_URL ||
   "https://app.fonoster.com/auth/reset-password";

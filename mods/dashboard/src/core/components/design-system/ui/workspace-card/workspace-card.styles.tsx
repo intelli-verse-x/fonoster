@@ -52,7 +52,7 @@ export const WorkspaceCardRoot = styled(Box, {
     border: `1px solid ${theme.palette.brand.main}`,
     transform: "translateY(-2px)",
     backgroundColor: theme.palette.bg.muted,
-    boxShadow: "0 12px 32px rgba(76, 111, 255, 0.12)",
+    boxShadow: "0 12px 32px rgba(36, 87, 214, 0.12)",
     "& .workspace-icon": {
       color: disabled ? "rgba(194, 194, 194, 1)" : theme.palette.brand["05"]
     },
@@ -73,7 +73,7 @@ export const StyledNewWorkSpaceDescription = styled(Typography)<{
   disabled: boolean;
 }>(({ disabled, theme }) => ({
   transition: "all 0.3s ease-in-out",
-  fontFamily: "Poppins",
+  fontFamily: "Inter",
   fontSize: "16px",
   fontWeight: 600,
   lineHeight: "24px",
@@ -99,7 +99,7 @@ export const StyledAddIconContainer = styled("div")<{
 }));
 
 export const StyledDescription = styled(Typography)(({ theme }) => ({
-  fontFamily: "Poppins",
+  fontFamily: "Inter",
   fontSize: "18px",
   fontWeight: 600,
   lineHeight: "26px",

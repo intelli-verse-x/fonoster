@@ -81,7 +81,7 @@ export const HeaderIconButton: React.FC<UserAvatarButtonProps> = ({
           right: 0,
           bottom: 0,
           borderRadius: "50%",
-          backgroundColor: "rgba(0, 0, 0, 0.2)",
+          backgroundColor: "rgba(11, 20, 51, 0.06)",
           zIndex: 1,
           pointerEvents: "none",
           opacity: isMenuOpen ? 1 : 0,

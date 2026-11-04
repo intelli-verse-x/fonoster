@@ -156,8 +156,8 @@ export function CreateAclForm({
                           px: 1.5,
                           py: 1,
                           borderRadius: "10px",
-                          border: "1px solid #333333",
-                          backgroundColor: "#141A24"
+                          border: "1px solid #c7d2e8",
+                          backgroundColor: "#ffffff"
                         }}
                       >
                         <Typography
@@ -167,7 +167,7 @@ export function CreateAclForm({
                             letterSpacing: "0.06em",
                             textTransform: "uppercase",
                             color:
-                              rule.type === "allow" ? "#6EA8FF" : "#C2C2C2",
+                              rule.type === "allow" ? "#5b8cff" : "#5e6b8c",
                             flexShrink: 0
                           }}
                         >
@@ -176,7 +176,7 @@ export function CreateAclForm({
                         <Typography
                           sx={{
                             fontSize: 13,
-                            color: "#fff",
+                            color: "#0b1433",
                             fontWeight: 600,
                             minWidth: 0,
                             overflow: "hidden",
@@ -193,7 +193,7 @@ export function CreateAclForm({
                           sx={{
                             ml: "auto",
                             color: "base.05",
-                            "&:hover": { color: "#fff" }
+                            "&:hover": { color: "#0b1433" }
                           }}
                         >
                           <DeleteOutlineIcon fontSize="small" />

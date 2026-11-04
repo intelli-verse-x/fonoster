@@ -47,11 +47,11 @@ export const PageHeader: FC<PageHeaderProps> = ({
       {onBack && <GoBackButton {...onBack} />}
       <PageHeaderRow>
         <PageHeaderTitleContainer>
-          <PageHeaderTitleText variant="heading-medium" color="base.03">
+          <PageHeaderTitleText variant="heading-medium" color="base.01">
             {title}
           </PageHeaderTitleText>
           {description && (
-            <PageHeaderDescriptionText variant="body-small" color="base.03">
+            <PageHeaderDescriptionText variant="body-small" color="base.04">
               {description}
             </PageHeaderDescriptionText>
           )}

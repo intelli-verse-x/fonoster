@@ -49,7 +49,7 @@ export const links: Route.LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+    href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
   },
   {
     rel: "stylesheet",
@@ -115,18 +115,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
       lang="en"
       translate="no"
       suppressHydrationWarning
-      data-mui-color-scheme="dark"
-      style={{ backgroundColor: "#0C1018", colorScheme: "dark" }}
+      data-mui-color-scheme="light"
+      style={{ backgroundColor: "#f7f9ff", colorScheme: "light" }}
     >
       <head>
         <meta charSet="utf-8" />
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var k='fonoster:theme';var m=localStorage.getItem(k)||'dark';if(m!=='light'&&m!=='dark')m='dark';document.documentElement.setAttribute('data-mui-color-scheme',m);document.documentElement.style.backgroundColor='#0C1018';document.documentElement.style.colorScheme=m;}catch(e){document.documentElement.setAttribute('data-mui-color-scheme','dark');}})();"
+              "(function(){try{var k='fonoster:theme';localStorage.setItem(k,'light');document.documentElement.setAttribute('data-mui-color-scheme','light');document.documentElement.style.backgroundColor='#f7f9ff';document.documentElement.style.colorScheme='light';}catch(e){document.documentElement.setAttribute('data-mui-color-scheme','light');}})();"
           }}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#f7f9ff" />
         <meta name="google" content="notranslate" />
         <meta
           name="format-detection"
@@ -135,7 +136,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body style={{ backgroundColor: "#0C1018", margin: 0 }}>
+      <body style={{ backgroundColor: "#f7f9ff", margin: 0 }}>
         <Providers>{children}</Providers>
         <ScrollRestoration />
         <Scripts />

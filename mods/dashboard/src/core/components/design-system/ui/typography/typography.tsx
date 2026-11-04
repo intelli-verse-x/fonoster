@@ -38,10 +38,20 @@ export function Typography(props: TypographyProps) {
 
   const { variant: mui, style } = VARIANT_MAPPING[variant];
 
+  // Custom palette paths (base.01, brand.main, …) must go through sx —
+  // MUI's `color` prop only understands built-in palette keys.
+  const isPalettePath =
+    typeof color === "string" &&
+    color !== "inherit" &&
+    (color.includes(".") ||
+      color.startsWith("base") ||
+      color.startsWith("brand") ||
+      color.startsWith("bg"));
+
   return (
     <PrimitiveTypography
       {...rest}
-      sx={sx}
+      sx={isPalettePath ? [{ color }, ...(Array.isArray(sx) ? sx : sx ? [sx] : [])] : sx}
       variant={
         mui as OverridableStringUnion<
           TypographyVariant | "inherit",
@@ -49,7 +59,7 @@ export function Typography(props: TypographyProps) {
         >
       }
       style={{ ...style, ...inlineStyles }}
-      color={color}
+      color={isPalettePath ? undefined : color}
     >
       {children}
     </PrimitiveTypography>

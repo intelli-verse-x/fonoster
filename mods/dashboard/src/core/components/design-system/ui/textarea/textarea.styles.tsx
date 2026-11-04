@@ -41,7 +41,7 @@ export const TextareaInput = styled(TextareaAutosize)(({ theme }) => ({
   border: "none",
   outline: "none",
   backgroundColor: "transparent",
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Inter', sans-serif",
   fontWeight: 400,
   fontSize: "12px",
   lineHeight: "normal",
@@ -56,7 +56,7 @@ export const TextareaInput = styled(TextareaAutosize)(({ theme }) => ({
 
 export const TextareaFormControl = styled(FormControl)(({ theme }) => ({
   "& .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-shrink": {
-    fontFamily: "'Poppins', sans-serif",
+    fontFamily: "'Inter', sans-serif",
     fontWeight: 500,
     lineHeight: "normal",
     transform: "translate(16px, -10px) scale(0.66)",
@@ -66,7 +66,7 @@ export const TextareaFormControl = styled(FormControl)(({ theme }) => ({
   },
   "& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused": {
     color: theme.palette.base["02"],
-    fontFamily: "'Poppins', sans-serif",
+    fontFamily: "'Inter', sans-serif",
     fontWeight: 500,
     lineHeight: "normal",
     transform: "translate(16px, -10px) scale(0.66)",
@@ -75,7 +75,7 @@ export const TextareaFormControl = styled(FormControl)(({ theme }) => ({
     padding: "0 8px"
   },
   "& .MuiFormHelperText-root": {
-    fontFamily: "'Poppins', sans-serif",
+    fontFamily: "'Inter', sans-serif",
     fontSize: "10px",
     fontWeight: 500,
     lineHeight: "normal",

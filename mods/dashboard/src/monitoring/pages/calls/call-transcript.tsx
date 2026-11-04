@@ -49,7 +49,7 @@ export function CallTranscript({
         sx={{
           fontSize: 14,
           lineHeight: 1.6,
-          color: "#fff",
+          color: "#0b1433",
           whiteSpace: "pre-wrap"
         }}
       >

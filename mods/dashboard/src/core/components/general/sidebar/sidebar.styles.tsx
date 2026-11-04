@@ -69,7 +69,7 @@ export const SidebarFooter = styled(Box)(({ theme }) => ({
   marginTop: "auto",
   padding: "8px 12px",
   fontSize: "0.7rem",
-  color: theme.palette.base["05"]
+  color: theme.palette.base["04"]
 }));
 
 export const SidebarNavItemRoot = styled("li")(() => ({
@@ -82,7 +82,7 @@ export const SidebarNavItemRoot = styled("li")(() => ({
 }));
 
 export const SidebarNavItemContent = styled(Box)(({ theme }) => ({
-  color: theme.palette.base["04"],
+  color: theme.palette.base["03"],
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
@@ -93,13 +93,13 @@ export const SidebarNavItemContent = styled(Box)(({ theme }) => ({
   transition: "background-color 0.15s ease, color 0.15s ease",
 
   "&:hover": {
-    backgroundColor: "rgba(76,111,255,0.08)",
+    backgroundColor: "rgba(36, 87, 214,0.08)",
     color: theme.palette.base["02"]
   },
 
   "&[data-selected='true']": {
-    color: theme.palette.base["01"],
-    backgroundColor: "rgba(76,111,255,0.16)"
+    color: theme.palette.brand.main,
+    backgroundColor: "#e8efff"
   }
 }));
 
