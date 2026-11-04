@@ -51,21 +51,21 @@ const Trigger = styled(Box)<{ $active?: boolean }>(({ $active, theme }) => ({
   border: "1px solid transparent",
   borderColor: $active ? theme.palette.brand["04"] : theme.palette.base["07"],
   fontSize: "13px",
-  fontFamily: "Poppins",
+  fontFamily: "Inter",
   fontWeight: 500,
   maxHeight: "40px",
-  color: "#F4F7FF"
+  color: "#0b1433"
 }));
 
 const FilterOption = styled(Box)(({ theme }) => ({
   padding: "8px 10px",
   borderRadius: "8px",
-  color: "#F4F7FF",
+  color: "#0b1433",
   fontSize: "13px",
   fontWeight: 500,
   cursor: "pointer",
   "&:hover": {
-    backgroundColor: "rgba(76,111,255,0.12)"
+    backgroundColor: "rgba(36, 87, 214,0.12)"
   }
 }));
 
@@ -77,7 +77,7 @@ const UnifiedDropdown = styled(Paper)(({ theme }) => ({
   zIndex: 1300,
   borderRadius: "12px",
   border: `1px solid ${theme.palette.base["07"]}`,
-  boxShadow: "0px 12px 32px rgba(0, 0, 0, 0.28)",
+  boxShadow: "0 8px 24px rgba(11, 20, 51, 0.12)",
   backgroundColor: theme.palette.bg.muted,
   overflow: "hidden",
   width: "100%",
@@ -91,8 +91,8 @@ const DropdownHeader = styled(Box)(({ theme }) => ({
   marginBottom: "8px",
   fontWeight: 500,
   fontSize: "13px",
-  fontFamily: "Poppins",
-  color: "#F4F7FF"
+  fontFamily: "Inter",
+  color: "#0b1433"
 }));
 
 export const FilterSearchBySelector: React.FC<FilterSearchBySelectorProps> = ({

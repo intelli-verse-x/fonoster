@@ -1,8 +1,8 @@
 node_modules/
-.env*
 !.env.example
 next-env.d.ts
 .npmrc
 .firecrawl/
 # ai-coustics models downloaded by the filter bench
 /models/
+config.bat

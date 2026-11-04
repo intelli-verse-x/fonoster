@@ -58,7 +58,7 @@ const DataRow = ({ row, showSelection, onRowClick }: DataTableBodyRowProps) => {
         cursor: onRowClick ? "pointer" : "default",
         "&:hover": onRowClick
           ? {
-              backgroundColor: "rgba(76,111,255,0.1)"
+              backgroundColor: "rgba(36, 87, 214,0.1)"
             }
           : {},
         transition: "background-color 0.2s ease"
@@ -140,7 +140,7 @@ export function DataTableBody() {
                   height={12}
                   animation="wave"
                   sx={{
-                    bgcolor: "rgba(76,111,255,0.16)",
+                    bgcolor: "rgba(36, 87, 214,0.16)",
                     maxWidth: colIndex === 0 ? 72 : 160,
                     "&::after": {
                       background:

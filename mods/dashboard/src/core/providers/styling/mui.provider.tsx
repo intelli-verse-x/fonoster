@@ -24,7 +24,8 @@ import { theme as DEFAULT_THEME } from "./mui.theme";
 import { CssBaseline, useColorScheme, type Theme } from "@mui/material";
 
 const MODE_STORAGE_KEY = "fonoster:theme";
-const DEFAULT_MODE = "dark";
+/** Voice Studio matches Admin Dashboard — light only. */
+const DEFAULT_MODE = "light";
 const cache = createEmotionCache({ key: "fonoster-mui-cache", prepend: true });
 
 export interface ThemeProviderProps {
@@ -39,6 +40,7 @@ export const ThemeProvider = ({ children, theme }: ThemeProviderProps) => {
         theme={theme || DEFAULT_THEME}
         defaultMode={DEFAULT_MODE}
         modeStorageKey={MODE_STORAGE_KEY}
+        forceThemeRerender
       >
         <CssBaseline enableColorScheme />
         {children}
@@ -50,11 +52,12 @@ export const ThemeProvider = ({ children, theme }: ThemeProviderProps) => {
 export const useThemeMode = () => {
   const { mode, setMode } = useColorScheme();
 
-  const isDarkMode = useMemo(() => mode === "dark", [mode]);
+  const isDarkMode = useMemo(() => false, []);
 
   const changeTheme = useCallback(
-    (newMode: "light" | "dark") => {
-      setMode(newMode);
+    (_newMode: "light" | "dark") => {
+      // Light-only: ignore dark requests so Admin sky stays consistent.
+      setMode("light");
     },
     [setMode]
   );

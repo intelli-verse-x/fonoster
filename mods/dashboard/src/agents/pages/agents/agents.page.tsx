@@ -71,18 +71,18 @@ const Toolbar = styled(Box)(() => ({
 const fieldSelectSx = {
   minWidth: 140,
   height: 40,
-  color: "#fff",
+  color: "#0b1433",
   fontSize: 13,
-  fontFamily: "Poppins",
+  fontFamily: "Inter",
   borderRadius: "10px",
-  backgroundColor: "#141A24",
+  backgroundColor: "#ffffff",
   "& .MuiOutlinedInput-notchedOutline": {
-    borderColor: "#333333"
+    borderColor: "#c7d2e8"
   },
   "&:hover .MuiOutlinedInput-notchedOutline": {
-    borderColor: "#4C6FFF"
+    borderColor: "#2457d6"
   },
-  "& .MuiSvgIcon-root": { color: "#C2C2C2" }
+  "& .MuiSvgIcon-root": { color: "#5e6b8c" }
 };
 
 const searchSx = {
@@ -91,11 +91,11 @@ const searchSx = {
   "& .MuiOutlinedInput-root": {
     height: 40,
     borderRadius: "10px",
-    color: "#fff",
+    color: "#0b1433",
     fontSize: 13,
-    backgroundColor: "#141A24",
-    "& fieldset": { borderColor: "#333333" },
-    "&:hover fieldset": { borderColor: "#4C6FFF" }
+    backgroundColor: "#ffffff",
+    "& fieldset": { borderColor: "#c7d2e8" },
+    "&:hover fieldset": { borderColor: "#2457d6" }
   }
 };
 
@@ -107,11 +107,11 @@ const AgentRow = styled(Box)(() => ({
   borderRadius: 16,
   cursor: "pointer",
   "&:hover": {
-    background: "rgba(76,111,255,0.1)"
+    background: "rgba(36, 87, 214,0.1)"
   },
   "&:hover .agent-open-icon": {
-    color: "#fff",
-    backgroundColor: "rgba(76,111,255,0.16)"
+    color: "#0b1433",
+    backgroundColor: "rgba(36, 87, 214,0.16)"
   },
   "&:active .agent-open-chevron": {
     transform: "translateX(6px)"
@@ -190,11 +190,11 @@ export default function AgentsList() {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Poppins, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: { xs: 28, md: 36 },
               fontWeight: 600,
               letterSpacing: "-0.03em",
-              color: "#fff"
+              color: "#0b1433"
             }}
           >
             Agents
@@ -290,7 +290,7 @@ export default function AgentsList() {
               <Box sx={{ flex: 1, minWidth: 0 }}>
                 <Box sx={{ mb: 1.5 }}>
                   <FieldLabel>Agent name</FieldLabel>
-                  <Typography sx={{ fontWeight: 600, fontSize: 16, color: "#fff" }}>
+                  <Typography sx={{ fontWeight: 600, fontSize: 16, color: "#0b1433" }}>
                     {agent.name}
                   </Typography>
                 </Box>
@@ -303,7 +303,7 @@ export default function AgentsList() {
                 >
                   <Box>
                     <FieldLabel>Username</FieldLabel>
-                    <Typography sx={{ fontSize: 13, color: "#fff", fontWeight: 600 }}>
+                    <Typography sx={{ fontSize: 13, color: "#0b1433", fontWeight: 600 }}>
                       {agent.username || "Not set"}
                     </Typography>
                     <Typography sx={{ fontSize: 12, color: "base.05" }}>
@@ -315,7 +315,7 @@ export default function AgentsList() {
                     <Typography
                       sx={{
                         fontSize: 13,
-                        color: "#fff",
+                        color: "#0b1433",
                         wordBreak: "break-all"
                       }}
                     >
@@ -327,7 +327,7 @@ export default function AgentsList() {
                   </Box>
                   <Box>
                     <FieldLabel>Status</FieldLabel>
-                    <Typography sx={{ fontSize: 13, color: "#fff", fontWeight: 600 }}>
+                    <Typography sx={{ fontSize: 13, color: "#0b1433", fontWeight: 600 }}>
                       {agent.enabled ? "On" : "Off"}
                     </Typography>
                     <Typography sx={{ fontSize: 12, color: "base.05" }}>
@@ -338,7 +338,7 @@ export default function AgentsList() {
                   </Box>
                   <Box>
                     <FieldLabel>Privacy</FieldLabel>
-                    <Typography sx={{ fontSize: 13, color: "#fff" }}>
+                    <Typography sx={{ fontSize: 13, color: "#0b1433" }}>
                       {agent.privacy || "Not set"}
                     </Typography>
                     <Typography sx={{ fontSize: 12, color: "base.05" }}>
@@ -359,8 +359,8 @@ export default function AgentsList() {
                   mt: 0.5,
                   borderRadius: "8px",
                   "&:hover": {
-                    color: "#fff",
-                    bgcolor: "rgba(76,111,255,0.16)"
+                    color: "#0b1433",
+                    bgcolor: "rgba(36, 87, 214,0.16)"
                   }
                 }}
               >

@@ -53,10 +53,10 @@ const InputRoot = styled(TextField)<{ $active?: boolean }>(
     "& .MuiInputBase-input": {
       padding: "10px 12px",
       fontSize: "13px",
-      fontFamily: "Poppins",
+      fontFamily: "Inter",
       fontWeight: 500,
       maxHeight: "40px",
-      color: "#F4F7FF",
+      color: "#0b1433",
 
       "&::placeholder": {
         color: theme.palette.base["03"],

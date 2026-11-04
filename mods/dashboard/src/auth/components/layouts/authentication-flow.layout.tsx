@@ -48,12 +48,12 @@ export default function AuthenticationFlowLayout() {
         </Typography>
         <Typography
           sx={{
-            fontFamily: "Poppins, sans-serif",
+            fontFamily: "Inter, sans-serif",
             fontSize: { xs: 32, md: 44 },
             fontWeight: 600,
             letterSpacing: "-0.03em",
             lineHeight: 1.1,
-            color: "#F4F7FF"
+            color: "#0b1433"
           }}
         >
           {PRODUCT_NAME}
@@ -88,7 +88,7 @@ export const LayoutRoot = styled(Box)(() => ({
   gridTemplateColumns: "minmax(0, 1.05fr) minmax(0, 0.95fr)",
   height: "100%",
   overflow: "hidden",
-  backgroundColor: "#0C1018",
+  backgroundColor: "#f7f9ff",
   "@media (max-width: 899px)": {
     gridTemplateColumns: "1fr"
   }
@@ -100,7 +100,7 @@ const BrandPanel = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   padding: "48px 56px",
   background:
-    "linear-gradient(160deg, rgba(76,111,255,0.28) 0%, #141A24 45%, #0C1018 100%)",
+    "linear-gradient(160deg, rgba(36, 87, 214,0.28) 0%, #ffffff 45%, #f7f9ff 100%)",
   borderRight: `1px solid ${theme.palette.base["07"]}`,
   "@media (max-width: 899px)": {
     display: "none"
@@ -112,7 +112,7 @@ const FormPanel = styled(Box)(() => ({
   flexDirection: "column",
   minHeight: 0,
   overflow: "auto",
-  backgroundColor: "#0C1018"
+  backgroundColor: "#f7f9ff"
 }));
 
 export const LayoutContent = styled("div")(() => ({

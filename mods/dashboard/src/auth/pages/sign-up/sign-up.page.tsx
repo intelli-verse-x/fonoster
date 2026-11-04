@@ -138,7 +138,7 @@ export default function SignupPage() {
     <Box width="100%" gap="20px" display="flex" flexDirection="column">
       <Typography
         variant="heading-large"
-        sx={{ textAlign: "center", color: "#fff", fontWeight: 600 }}
+        sx={{ textAlign: "center", color: "#0b1433", fontWeight: 600 }}
       >
         Create account
       </Typography>

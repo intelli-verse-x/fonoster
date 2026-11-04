@@ -8,7 +8,7 @@ import { Box, Skeleton, styled } from "@mui/material";
 import { Page } from "~/core/components/general/page/page";
 
 const bone = {
-  bgcolor: "rgba(76,111,255,0.16)",
+  bgcolor: "rgba(36, 87, 214,0.16)",
   "&::after": {
     background:
       "linear-gradient(90deg, transparent, rgba(110,168,255,0.22), transparent)"

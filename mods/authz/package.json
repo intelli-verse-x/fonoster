@@ -13,9 +13,9 @@
   },
   "scripts": {
     "prebuild": "rimraf ./dist tsconfig.tsbuildinfo",
-    "build": "tsc -b tsconfig.json",
+    "build": "node init && tsc -b tsconfig.json",
     "clean": "rimraf ./dist node_modules tsconfig.tsbuildinfo",
-    "start:dev": "nodemon --exec tsx --watch src src/server/server.ts"
+    "start:dev": "node init && nodemon --exec tsx --watch src src/server/server.ts"
   },
   "files": [
     "dist"

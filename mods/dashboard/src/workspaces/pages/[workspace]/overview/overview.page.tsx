@@ -33,7 +33,7 @@ const Hero = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   background:
-    "linear-gradient(160deg, rgba(76,111,255,0.28) 0%, #141A24 45%, #0C1018 100%)",
+    "linear-gradient(160deg, rgba(36, 87, 214,0.28) 0%, #ffffff 45%, #f7f9ff 100%)",
   border: `1px solid ${theme.palette.base["07"]}`
 }));
 
@@ -60,7 +60,7 @@ const BoardRow = styled("button")(({ theme }) => ({
   borderRadius: 16,
   fontFamily: "inherit",
   "&:hover": {
-    background: "rgba(76,111,255,0.1)"
+    background: "rgba(36, 87, 214,0.1)"
   }
 }));
 
@@ -115,7 +115,7 @@ export default function Overview() {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Poppins, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: { xs: 32, md: 42 },
               fontWeight: 600,
               letterSpacing: "-0.03em",
@@ -125,7 +125,7 @@ export default function Overview() {
           >
             {title}
           </Typography>
-          <Typography sx={{ mt: 1.5, color: "base.05", fontSize: 14 }}>
+          <Typography sx={{ mt: 1.5, color: "base.04", fontSize: 14 }}>
             {[creator && `Created by ${creator}`, created]
               .filter(Boolean)
               .join(" · ")}
@@ -135,7 +135,7 @@ export default function Overview() {
               <Typography sx={{ fontSize: 28, fontWeight: 600, color: "base.01" }}>
                 {isLoading ? "—" : keyCount}
               </Typography>
-              <Typography sx={{ fontSize: 12, color: "base.05" }}>
+              <Typography sx={{ fontSize: 12, color: "base.04" }}>
                 API keys
               </Typography>
             </Box>
@@ -143,7 +143,7 @@ export default function Overview() {
               <Typography sx={{ fontSize: 28, fontWeight: 600, color: "base.01" }}>
                 {isLoading ? "—" : expiringCount}
               </Typography>
-              <Typography sx={{ fontSize: 12, color: "base.05" }}>
+              <Typography sx={{ fontSize: 12, color: "base.04" }}>
                 Expiring soon
               </Typography>
             </Box>
@@ -190,74 +190,74 @@ export default function Overview() {
               fontWeight: 700,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              color: "base.05"
+              color: "base.04"
             }}
           >
             Workspace board
           </Typography>
           <BoardRow type="button" onClick={() => go("members")}>
             <Box sx={{ flex: 1 }}>
-              <Typography sx={{ fontWeight: 600, fontSize: 15, color: "#fff" }}>
+              <Typography sx={{ fontWeight: 600, fontSize: 15, color: "#0b1433" }}>
                 Members
               </Typography>
-              <Typography sx={{ fontSize: 12, color: "base.05" }}>
+              <Typography sx={{ fontSize: 12, color: "base.04" }}>
                 Invite teammates and roles
               </Typography>
             </Box>
-            <ChevronRightIcon sx={{ color: "base.05", fontSize: 20 }} />
+            <ChevronRightIcon sx={{ color: "base.04", fontSize: 20 }} />
           </BoardRow>
           <BoardRow type="button" onClick={() => go("api-keys")}>
             <Box sx={{ flex: 1 }}>
-              <Typography sx={{ fontWeight: 600, fontSize: 15, color: "#fff" }}>
+              <Typography sx={{ fontWeight: 600, fontSize: 15, color: "#0b1433" }}>
                 API keys
               </Typography>
-              <Typography sx={{ fontSize: 12, color: "base.05" }}>
+              <Typography sx={{ fontSize: 12, color: "base.04" }}>
                 {isLoading ? (
                   <Skeleton
                     variant="rounded"
                     width={88}
                     height={12}
                     animation="wave"
-                    sx={{ bgcolor: "rgba(76,111,255,0.16)" }}
+                    sx={{ bgcolor: "rgba(36, 87, 214,0.16)" }}
                   />
                 ) : (
                   `${keyCount} active`
                 )}
               </Typography>
             </Box>
-            <ChevronRightIcon sx={{ color: "base.05", fontSize: 20 }} />
+            <ChevronRightIcon sx={{ color: "base.04", fontSize: 20 }} />
           </BoardRow>
           <BoardRow type="button" onClick={() => go("api-keys")}>
             <Box sx={{ flex: 1 }}>
-              <Typography sx={{ fontWeight: 600, fontSize: 15, color: "#fff" }}>
+              <Typography sx={{ fontWeight: 600, fontSize: 15, color: "#0b1433" }}>
                 Key alerts
               </Typography>
-              <Typography sx={{ fontSize: 12, color: "base.05" }}>
+              <Typography sx={{ fontSize: 12, color: "base.04" }}>
                 {isLoading ? (
                   <Skeleton
                     variant="rounded"
                     width={140}
                     height={12}
                     animation="wave"
-                    sx={{ bgcolor: "rgba(76,111,255,0.16)" }}
+                    sx={{ bgcolor: "rgba(36, 87, 214,0.16)" }}
                   />
                 ) : expiringCount === 0
                   ? "Nothing expiring in 7 days"
                   : `${expiringCount} expiring in 7 days`}
               </Typography>
             </Box>
-            <ChevronRightIcon sx={{ color: "base.05", fontSize: 20 }} />
+            <ChevronRightIcon sx={{ color: "base.04", fontSize: 20 }} />
           </BoardRow>
           <BoardRow type="button" onClick={() => go("sip-network/numbers")}>
             <Box sx={{ flex: 1 }}>
-              <Typography sx={{ fontWeight: 600, fontSize: 15, color: "#fff" }}>
+              <Typography sx={{ fontWeight: 600, fontSize: 15, color: "#0b1433" }}>
                 SIP network
               </Typography>
-              <Typography sx={{ fontSize: 12, color: "base.05" }}>
+              <Typography sx={{ fontSize: 12, color: "base.04" }}>
                 Numbers, trunks, and agents
               </Typography>
             </Box>
-            <ChevronRightIcon sx={{ color: "base.05", fontSize: 20 }} />
+            <ChevronRightIcon sx={{ color: "base.04", fontSize: 20 }} />
           </BoardRow>
         </Board>
       </Shell>

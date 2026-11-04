@@ -3,7 +3,7 @@ import "react-json-view-lite/dist/index.css";
 import { styled } from "@mui/material/styles";
 
 const JsonViewerContainer = styled("div")(({ theme }) => ({
-  fontFamily: "'Poppins', sans-serif",
+  fontFamily: "'Inter', sans-serif",
   fontSize: "12px",
   lineHeight: "1.5",
   backgroundColor: theme.palette.base["01"],
@@ -15,7 +15,7 @@ const JsonViewerContainer = styled("div")(({ theme }) => ({
   minHeight: "200px",
 
   "& .fonoster-json-container": {
-    fontFamily: "'Poppins', sans-serif !important",
+    fontFamily: "'Inter', sans-serif !important",
     fontSize: "12px !important",
     lineHeight: "1.5 !important",
     color: `${theme.palette.base["07"]} !important`,
