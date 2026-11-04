@@ -9,10 +9,10 @@ export const LogoMark = memo(({ size = 28 }: { size?: number }) => (
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden
   >
-    <rect width="32" height="32" rx="9" fill="#4C6FFF" />
+    <rect width="32" height="32" rx="9" fill="#2457d6" />
     <path
       d="M8 16.5v-1M11.5 20V12M15 22.5V9.5M18.5 20V12M22 16.5v-1"
-      stroke="#F4F7FF"
+      stroke="#ffffff"
       strokeWidth="2.2"
       strokeLinecap="round"
     />

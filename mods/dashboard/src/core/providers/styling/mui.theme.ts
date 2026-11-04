@@ -18,75 +18,59 @@
  */
 import { createTheme } from "@mui/material/styles";
 
+/** Admin sky light tokens — shared with IntelliVerse Admin Console. */
+const skyLight = {
+  bg: {
+    app: "#f7f9ff",
+    surface: "#ffffff",
+    muted: "#f2f6ff"
+  },
+  // Text scale stays dark enough for WCAG on #f7f9ff / #fff.
+  // Borders/surfaces live in 06–08 (do not put border colors in 03–05).
+  base: {
+    "01": "#0b1433",
+    "02": "#16214a",
+    "03": "#3d4a6b",
+    "04": "#5e6b8c",
+    "05": "#6b7a99",
+    "06": "#c7d2e8",
+    "07": "#e6ecf8",
+    "08": "#ffffff",
+    main: "#5e6b8c"
+  },
+  brand: {
+    "01": "#ffffff",
+    "02": "#e8efff",
+    "03": "#9db6f0",
+    "04": "#2457d6",
+    "05": "#7a5bff",
+    "06": "#c63fe0",
+    "07": "#0b1433",
+    main: "#2457d6"
+  },
+  background: {
+    default: "#f7f9ff",
+    paper: "#ffffff"
+  },
+  text: {
+    primary: "#0b1433",
+    secondary: "#5e6b8c"
+  },
+  divider: "#e6ecf8"
+};
+
 export const theme = createTheme({
+  typography: {
+    fontFamily:
+      "'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif"
+  },
   colorSchemes: {
     light: {
-      palette: {
-        bg: {
-          app: "#FFFFFF",
-          surface: "#FFFFFF",
-          muted: "#F4F4F4"
-        },
-        base: {
-          "08": "#FFFFFF",
-          "07": "#F4F4F4",
-          "06": "#E8E8E8",
-          "05": "#C2C2C2",
-          "04": "#8D8D8D",
-          "03": "#555555",
-          "02": "#333333",
-          "01": "#252525",
-          main: "#8D8D8D"
-        },
-        brand: {
-          "01": "#FFFFFF",
-          "02": "#E8EEFF",
-          "03": "#C5D2FF",
-          "04": "#4C6FFF",
-          "05": "#2F4FD6",
-          "06": "#1A2A6B",
-          "07": "#0C1018",
-          main: "#4C6FFF"
-        },
-        background: {
-          default: "#FFFFFF",
-          paper: "#FFFFFF"
-        }
-      }
+      palette: skyLight
     },
+    // Light-only product: keep dark scheme identical so stale localStorage stays readable.
     dark: {
-      palette: {
-        bg: {
-          app: "#0C1018",
-          surface: "#141A24",
-          muted: "#1B2330"
-        },
-        base: {
-          "01": "#FFFFFF",
-          "02": "#F4F4F4",
-          "03": "#E8E8E8",
-          "04": "#C2C2C2",
-          "05": "#8D8D8D",
-          "06": "#555555",
-          "07": "#333333",
-          "08": "#252525",
-          main: "#C2C2C2"
-        },
-        brand: {
-          "07": "#FFFFFF",
-          "06": "#E8EEFF",
-          "05": "#C5D2FF",
-          "04": "#4C6FFF",
-          "03": "#2F4FD6",
-          "02": "#1A2A6B",
-          "01": "#0C1018",
-          main: "#6EA8FF"
-        },
-        background: {
-          default: "#0C1018",
-          paper: "#141A24"
-        }
-      }
+      palette: skyLight
     }
   }
 });

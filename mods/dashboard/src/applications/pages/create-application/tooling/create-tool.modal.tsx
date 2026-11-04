@@ -88,7 +88,7 @@ const Section = ({ title, description }: SectionProps) => (
     <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
       <span
         style={{
-          fontFamily: "Poppins, sans-serif",
+          fontFamily: "Inter, sans-serif",
           fontWeight: 600,
           fontSize: 12,
           color: "var(--mui-palette-base-03)"

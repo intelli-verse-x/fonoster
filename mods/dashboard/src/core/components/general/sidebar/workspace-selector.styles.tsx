@@ -29,7 +29,7 @@ export const WorkspaceTrigger = styled(Box)(({ theme }) => ({
   border: `1px solid ${theme.palette.base["07"]}`,
   backgroundColor: theme.palette.bg.muted,
   fontSize: "10px",
-  fontFamily: "Poppins",
+  fontFamily: "Inter",
   fontWeight: 500,
   color: theme.palette.base["02"],
   whiteSpace: "nowrap",
@@ -56,12 +56,12 @@ export const WorkspaceOption = styled(Box)(({ theme }) => ({
   },
 
   "&:hover": {
-    backgroundColor: "rgba(76,111,255,0.1)"
+    backgroundColor: "#e8efff"
   },
 
   "&[data-selected='true']": {
-    backgroundColor: "rgba(76,111,255,0.16)",
-    color: theme.palette.base["01"]
+    backgroundColor: "#e8efff",
+    color: theme.palette.brand.main
   },
 
   "&[data-selected='true']:before": {
@@ -77,7 +77,7 @@ export const WorkspaceUnifiedDropdown = styled(Paper)(({ theme }) => ({
   zIndex: 1300,
   borderRadius: "14px",
   border: `1px solid ${theme.palette.base["07"]}`,
-  boxShadow: "0px 12px 32px rgba(0, 0, 0, 0.28)",
+  boxShadow: "0 8px 24px rgba(11, 20, 51, 0.12)",
   backgroundColor: theme.palette.bg.muted,
   overflow: "hidden",
   width: "100%",

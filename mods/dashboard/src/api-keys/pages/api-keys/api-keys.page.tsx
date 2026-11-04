@@ -71,18 +71,18 @@ const Toolbar = styled(Box)(() => ({
 const fieldSelectSx = {
   minWidth: 140,
   height: 40,
-  color: "#fff",
+  color: "#0b1433",
   fontSize: 13,
-  fontFamily: "Poppins",
+  fontFamily: "Inter",
   borderRadius: "10px",
-  backgroundColor: "#141A24",
+  backgroundColor: "#ffffff",
   "& .MuiOutlinedInput-notchedOutline": {
-    borderColor: "#333333"
+    borderColor: "#c7d2e8"
   },
   "&:hover .MuiOutlinedInput-notchedOutline": {
-    borderColor: "#4C6FFF"
+    borderColor: "#2457d6"
   },
-  "& .MuiSvgIcon-root": { color: "#C2C2C2" }
+  "& .MuiSvgIcon-root": { color: "#5e6b8c" }
 };
 
 const searchSx = {
@@ -91,11 +91,11 @@ const searchSx = {
   "& .MuiOutlinedInput-root": {
     height: 40,
     borderRadius: "10px",
-    color: "#fff",
+    color: "#0b1433",
     fontSize: 13,
-    backgroundColor: "#141A24",
-    "& fieldset": { borderColor: "#333333" },
-    "&:hover fieldset": { borderColor: "#4C6FFF" }
+    backgroundColor: "#ffffff",
+    "& fieldset": { borderColor: "#c7d2e8" },
+    "&:hover fieldset": { borderColor: "#2457d6" }
   }
 };
 
@@ -106,7 +106,7 @@ const ApiKeyRow = styled(Box)(() => ({
   padding: "16px 8px 16px 16px",
   borderRadius: 16,
   "&:hover": {
-    background: "rgba(76,111,255,0.1)"
+    background: "rgba(36, 87, 214,0.1)"
   }
 }));
 
@@ -171,11 +171,11 @@ export default function ApiKeysList() {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Poppins, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: { xs: 28, md: 36 },
               fontWeight: 600,
               letterSpacing: "-0.03em",
-              color: "#fff"
+              color: "#0b1433"
             }}
           >
             API Keys
@@ -264,7 +264,7 @@ export default function ApiKeysList() {
                     sx={{
                       fontWeight: 600,
                       fontSize: 16,
-                      color: "#fff",
+                      color: "#0b1433",
                       wordBreak: "break-all"
                     }}
                   >
@@ -280,7 +280,7 @@ export default function ApiKeysList() {
                 >
                   <Box>
                     <FieldLabel>Role</FieldLabel>
-                    <Typography sx={{ fontSize: 13, color: "#fff", fontWeight: 600 }}>
+                    <Typography sx={{ fontSize: 13, color: "#0b1433", fontWeight: 600 }}>
                       {ROLE_LABELS[apiKey.role] || apiKey.role || "Not set"}
                     </Typography>
                     <Typography sx={{ fontSize: 12, color: "base.05" }}>
@@ -289,7 +289,7 @@ export default function ApiKeysList() {
                   </Box>
                   <Box>
                     <FieldLabel>Secret</FieldLabel>
-                    <Typography sx={{ fontSize: 13, color: "#fff", fontWeight: 600 }}>
+                    <Typography sx={{ fontSize: 13, color: "#0b1433", fontWeight: 600 }}>
                       Hidden
                     </Typography>
                     <Typography sx={{ fontSize: 12, color: "base.05" }}>
@@ -309,8 +309,8 @@ export default function ApiKeysList() {
                   mt: 0.5,
                   borderRadius: "8px",
                   "&:hover": {
-                    color: "#fff",
-                    bgcolor: "rgba(76,111,255,0.16)"
+                    color: "#0b1433",
+                    bgcolor: "rgba(36, 87, 214,0.16)"
                   }
                 }}
               >

@@ -58,7 +58,7 @@ export const OverviewCard = (props: OverviewCardProps) => {
           <Typography
             variant="body-small"
             sx={{
-              color: "base.05",
+              color: "base.04",
               mt: 0.5,
               overflow: "hidden",
               display: "-webkit-box",
@@ -71,7 +71,7 @@ export const OverviewCard = (props: OverviewCardProps) => {
         )}
       </OverviewCardRootLabel>
 
-      <Icon name="ChevronRight" sx={{ color: "base.05", fontSize: "20px" }} />
+      <Icon name="ChevronRight" sx={{ color: "base.04", fontSize: "20px" }} />
     </OverviewCardRoot>
   );
 };

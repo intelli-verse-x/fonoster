@@ -36,7 +36,7 @@ export const SelectRoot = styled(Select)(({ theme }) => ({
     backgroundColor: "transparent",
     minHeight: "24px !important",
     fontSize: "12px",
-    fontFamily: "'Poppins', sans-serif",
+    fontFamily: "'Inter', sans-serif",
     fontWeight: 400,
     lineHeight: "normal",
     letterSpacing: "0.12px",
@@ -71,7 +71,7 @@ export const SelectRoot = styled(Select)(({ theme }) => ({
   },
   "& .MuiInputLabel-root": {
     transform: "translate(14px, 16px) scale(1)",
-    fontFamily: "'Poppins', sans-serif",
+    fontFamily: "'Inter', sans-serif",
     fontWeight: 500,
     color: theme.palette.brand.main,
     "&.MuiInputLabel-shrink": {
@@ -85,13 +85,13 @@ export const SelectRoot = styled(Select)(({ theme }) => ({
     marginTop: "4px",
     "& .MuiMenuItem-root": {
       fontSize: "12px",
-      fontFamily: "'Poppins', sans-serif",
+      fontFamily: "'Inter', sans-serif",
       padding: "6px 14px",
       minHeight: "32px"
     }
   },
   "& .MuiFormHelperText-root": {
-    fontFamily: "'Poppins', sans-serif",
+    fontFamily: "'Inter', sans-serif",
     fontSize: "10px",
     fontWeight: 500,
     lineHeight: "normal",

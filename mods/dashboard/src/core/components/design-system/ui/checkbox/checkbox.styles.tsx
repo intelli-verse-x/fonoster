@@ -31,7 +31,7 @@ export interface CheckboxProps extends Omit<
 
 export const CheckboxLabel = styled(FormControlLabel)(({ theme }) => ({
   "& .MuiFormControlLabel-label": {
-    fontFamily: "Poppins",
+    fontFamily: "Inter",
     fontFeatureSettings: "'liga' off, 'clig' off",
     fontStyle: "normal",
     fontSize: "12px",

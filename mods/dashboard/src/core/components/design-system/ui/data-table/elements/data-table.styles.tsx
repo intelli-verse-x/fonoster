@@ -46,7 +46,7 @@ export const TableCellRoot = styled(TableCell)(({ theme }) => ({
   color: theme.palette.base["05"],
   borderBottom: `solid 1px ${theme.palette.base["07"]}`,
   textAlign: "left",
-  fontFamily: "Poppins",
+  fontFamily: "Inter",
   lineHeight: "normal",
   letterSpacing: "0.08em",
   textTransform: "uppercase",
@@ -106,9 +106,9 @@ export const DataTableContainerElement = styled(TableContainer)(
           minHeight: "52px",
           height: "52px",
           fontSize: "13px",
-          color: "#F4F7FF",
+          color: "#0b1433",
           borderBottom: `solid 1px ${theme.palette.base["07"]}`,
-          fontFamily: "Poppins",
+          fontFamily: "Inter",
           lineHeight: "normal",
           fontStyle: "normal",
           fontWeight: 500,
@@ -136,9 +136,9 @@ export const DataTableContainerElement = styled(TableContainer)(
         },
 
         "& tr.Mui-selected": {
-          backgroundColor: "rgba(76,111,255,0.12)",
+          backgroundColor: "rgba(36, 87, 214,0.12)",
           "&:hover": {
-            backgroundColor: "rgba(76,111,255,0.16)"
+            backgroundColor: "rgba(36, 87, 214,0.16)"
           }
         }
       }

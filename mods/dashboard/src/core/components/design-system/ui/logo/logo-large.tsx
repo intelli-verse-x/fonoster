@@ -1,26 +1,21 @@
 import { memo } from "react";
 import { Box, Typography } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import { PRODUCT_NAME } from "~/core/brand/product";
 import { LogoMark } from "./logo-mark";
 
 export const LogoLarge = memo(() => {
-  const theme = useTheme();
-  const textColor =
-    theme.palette.mode === "light" ? "#0C1018" : "#F4F7FF";
-
   return (
     <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
       <LogoMark size={28} />
       <Typography
         component="span"
         sx={{
-          fontFamily: "Poppins, sans-serif",
+          fontFamily: "Inter, sans-serif",
           fontWeight: 600,
           fontSize: "18px",
           letterSpacing: "-0.02em",
           lineHeight: 1,
-          color: textColor
+          color: "#0b1433"
         }}
       >
         {PRODUCT_NAME}

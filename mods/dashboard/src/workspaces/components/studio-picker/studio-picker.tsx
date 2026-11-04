@@ -7,7 +7,7 @@ import { LogoMark } from "~/core/components/design-system/ui/logo/logo-mark";
 const FeaturedRoot = styled(Box)(({ theme }) => ({
   border: `1px solid ${theme.palette.base["07"]}`,
   background:
-    "linear-gradient(165deg, rgba(76,111,255,0.22) 0%, #141A24 42%, #0C1018 100%)",
+    "linear-gradient(165deg, rgba(36, 87, 214,0.22) 0%, #ffffff 42%, #f7f9ff 100%)",
   borderRadius: 24,
   padding: "32px 28px",
   minHeight: 420,
@@ -38,7 +38,7 @@ const CompactRoot = styled("button")(({ theme }) => ({
   transition: "border-color 0.2s ease, background-color 0.2s ease",
   "&:hover": {
     borderColor: theme.palette.brand.main,
-    background: "#1F2838"
+    background: "#e8efff"
   }
 }));
 
@@ -59,7 +59,7 @@ const CreateRoot = styled("button")(({ theme }) => ({
   textAlign: "left",
   "&:hover": {
     borderColor: theme.palette.brand.main,
-    background: "rgba(76,111,255,0.08)"
+    background: "rgba(36, 87, 214,0.08)"
   }
 }));
 
@@ -94,7 +94,7 @@ export function FeaturedWorkspace({
       </Box>
       <Typography
         sx={{
-          fontFamily: "Poppins, sans-serif",
+          fontFamily: "Inter, sans-serif",
           fontSize: { xs: 28, md: 36 },
           fontWeight: 600,
           letterSpacing: "-0.03em",
@@ -104,7 +104,7 @@ export function FeaturedWorkspace({
       >
         {name}
       </Typography>
-      <Typography sx={{ mt: 1.5, color: "base.05", fontSize: 14 }}>
+      <Typography sx={{ mt: 1.5, color: "base.04", fontSize: 14 }}>
         Created by {ownerLabel} · {date}
       </Typography>
       <Box sx={{ mt: "auto", pt: 4, display: "flex", gap: 1.5, width: "100%" }}>
@@ -180,7 +180,7 @@ export function CompactWorkspace({
         <Typography
           sx={{
             fontSize: 12,
-            color: "base.05",
+            color: "base.04",
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis"
@@ -196,7 +196,7 @@ export function CompactWorkspace({
           onSettings();
         }}
         sx={{
-          color: "base.05",
+          color: "base.04",
           display: "flex",
           p: 0.5,
           "&:hover": { color: "brand.main" }
@@ -216,7 +216,7 @@ export function CreateWorkspaceRow({ onClick }: { onClick: () => void }) {
           width: 36,
           height: 36,
           borderRadius: "10px",
-          bgcolor: "rgba(76,111,255,0.15)",
+          bgcolor: "rgba(36, 87, 214,0.15)",
           color: "brand.main",
           display: "flex",
           alignItems: "center",
@@ -229,7 +229,7 @@ export function CreateWorkspaceRow({ onClick }: { onClick: () => void }) {
         <Typography sx={{ fontWeight: 600, fontSize: 15, color: "base.02" }}>
           New workspace
         </Typography>
-        <Typography sx={{ fontSize: 12, color: "base.05" }}>
+        <Typography sx={{ fontSize: 12, color: "base.04" }}>
           Start a blank Voice Studio project
         </Typography>
       </Box>

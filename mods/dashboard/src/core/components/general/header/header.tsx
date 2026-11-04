@@ -41,7 +41,7 @@ export const Header = memo(() => {
               fontWeight: 600,
               letterSpacing: "0.08em",
               textTransform: "uppercase",
-              color: "base.05",
+              color: "base.04",
               borderLeft: "1px solid",
               borderColor: "base.07",
               pl: 1.5

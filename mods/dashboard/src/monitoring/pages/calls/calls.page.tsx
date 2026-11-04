@@ -105,7 +105,7 @@ const LedgerRow = styled(Box)(() => ({
     borderBottom: "none"
   },
   "&:hover": {
-    background: "rgba(76,111,255,0.08)"
+    background: "rgba(36, 87, 214,0.08)"
   },
   "@media (min-width: 720px)": {
     gridTemplateColumns:
@@ -119,18 +119,18 @@ const LedgerRow = styled(Box)(() => ({
 const fieldSelectSx = {
   minWidth: 140,
   height: 40,
-  color: "#fff",
+  color: "#0b1433",
   fontSize: 13,
-  fontFamily: "Poppins",
+  fontFamily: "Inter",
   borderRadius: "10px",
-  backgroundColor: "#141A24",
+  backgroundColor: "#ffffff",
   "& .MuiOutlinedInput-notchedOutline": {
-    borderColor: "#333333"
+    borderColor: "#c7d2e8"
   },
   "&:hover .MuiOutlinedInput-notchedOutline": {
-    borderColor: "#4C6FFF"
+    borderColor: "#2457d6"
   },
-  "& .MuiSvgIcon-root": { color: "#C2C2C2" }
+  "& .MuiSvgIcon-root": { color: "#5e6b8c" }
 };
 
 const searchSx = {
@@ -139,31 +139,31 @@ const searchSx = {
   "& .MuiOutlinedInput-root": {
     height: 40,
     borderRadius: "10px",
-    color: "#fff",
+    color: "#0b1433",
     fontSize: 13,
-    backgroundColor: "#141A24",
-    "& fieldset": { borderColor: "#333333" },
-    "&:hover fieldset": { borderColor: "#4C6FFF" }
+    backgroundColor: "#ffffff",
+    "& fieldset": { borderColor: "#c7d2e8" },
+    "&:hover fieldset": { borderColor: "#2457d6" }
   }
 };
 
 function statusTone(status: string): { bg: string; color: string } {
   switch (status) {
     case "NORMAL_CLEARING":
-      return { bg: "rgba(46, 204, 113, 0.16)", color: "#6EE7A8" };
+      return { bg: "#e3f6ee", color: "#1d9a6c" };
     case "NO_ANSWER":
     case "USER_BUSY":
     case "NO_USER_RESPONSE":
-      return { bg: "rgba(245, 166, 35, 0.16)", color: "#F5C16C" };
+      return { bg: "#fff1e5", color: "#e2701f" };
     case "CALL_REJECTED":
     case "UNALLOCATED":
     case "NO_ROUTE_DESTINATION":
     case "NOT_ACCEPTABLE_HERE":
     case "SERVICE_UNAVAILABLE":
     case "INVALID_NUMBER_FORMAT":
-      return { bg: "rgba(255, 99, 99, 0.14)", color: "#FF8E8E" };
+      return { bg: "#fef2f2", color: "#c2410c" };
     default:
-      return { bg: "rgba(141, 141, 141, 0.18)", color: "#C2C2C2" };
+      return { bg: "#f2f6ff", color: "#5e6b8c" };
   }
 }
 
@@ -242,11 +242,11 @@ export default function Calls() {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Poppins, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: { xs: 28, md: 36 },
               fontWeight: 600,
               letterSpacing: "-0.03em",
-              color: "#fff"
+              color: "#0b1433"
             }}
           >
             Monitoring
@@ -272,7 +272,7 @@ export default function Calls() {
             px: 2,
             "&:hover": { bgcolor: "brand.04" },
             "&.Mui-disabled": {
-              bgcolor: "rgba(76,111,255,0.35)",
+              bgcolor: "rgba(36, 87, 214,0.35)",
               color: "rgba(255,255,255,0.7)"
             }
           }}
@@ -436,7 +436,7 @@ export default function Calls() {
                         sx={{
                           fontWeight: 600,
                           fontSize: 14,
-                          color: "#fff",
+                          color: "#0b1433",
                           wordBreak: "break-all"
                         }}
                       >
@@ -484,7 +484,7 @@ export default function Calls() {
                         display: { xs: "none", sm: "block" },
                         fontSize: 13,
                         fontWeight: 600,
-                        color: "#fff",
+                        color: "#0b1433",
                         fontVariantNumeric: "tabular-nums"
                       }}
                     >

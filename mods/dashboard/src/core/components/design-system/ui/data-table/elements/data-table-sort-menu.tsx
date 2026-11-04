@@ -104,7 +104,7 @@ export const SortMenu: React.FC<SortMenuProps<any, any>> = ({
                     fontWeight: 500,
                     color: theme.palette.base["03"],
                     fontFeatureSettings: "'liga' off, 'clig' off",
-                    fontFamily: "Poppins",
+                    fontFamily: "Inter",
                     lineHeight: "normal",
                     fontStyle: "normal"
                   })

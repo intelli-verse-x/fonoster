@@ -48,7 +48,7 @@ export const VARIANT_MAPPING: Record<
   "heading-large": {
     variant: "h2",
     style: {
-      fontFamily: "Poppins",
+      fontFamily: "Inter",
       fontWeight: 600,
       fontStyle: "normal",
       fontSize: "24px",
@@ -59,7 +59,7 @@ export const VARIANT_MAPPING: Record<
   "heading-medium": {
     variant: "h3",
     style: {
-      fontFamily: "Poppins",
+      fontFamily: "Inter",
       fontWeight: 600,
       fontStyle: "normal",
       fontSize: "21px",
@@ -71,7 +71,7 @@ export const VARIANT_MAPPING: Record<
   "heading-small": {
     variant: "h4",
     style: {
-      fontFamily: "Poppins",
+      fontFamily: "Inter",
       fontWeight: 500,
       fontStyle: "normal",
       fontSize: "18px",
@@ -82,7 +82,7 @@ export const VARIANT_MAPPING: Record<
   "heading-micro": {
     variant: "h5",
     style: {
-      fontFamily: "Poppins",
+      fontFamily: "Inter",
       fontWeight: 600,
       fontStyle: "normal",
       fontSize: "16px",
@@ -94,7 +94,7 @@ export const VARIANT_MAPPING: Record<
   "body-large": {
     variant: "body1",
     style: {
-      fontFamily: "Poppins",
+      fontFamily: "Inter",
       fontWeight: 400,
       fontStyle: "normal",
       fontSize: "16px",
@@ -106,7 +106,7 @@ export const VARIANT_MAPPING: Record<
   "body-medium": {
     variant: "body2",
     style: {
-      fontFamily: "Poppins",
+      fontFamily: "Inter",
       fontWeight: 500,
       fontStyle: "normal",
       fontSize: "14px",
@@ -117,7 +117,7 @@ export const VARIANT_MAPPING: Record<
   "body-small": {
     variant: "body2",
     style: {
-      fontFamily: "Poppins",
+      fontFamily: "Inter",
       fontWeight: 400,
       fontStyle: "normal",
       fontSize: "12px",
@@ -128,7 +128,7 @@ export const VARIANT_MAPPING: Record<
   "body-small-underline": {
     variant: "body2",
     style: {
-      fontFamily: "Poppins",
+      fontFamily: "Inter",
       fontWeight: 400,
       fontStyle: "normal",
       fontSize: "12px",
@@ -143,7 +143,7 @@ export const VARIANT_MAPPING: Record<
   "body-micro": {
     variant: "body2",
     style: {
-      fontFamily: "Poppins",
+      fontFamily: "Inter",
       fontWeight: 500,
       fontStyle: "normal",
       fontSize: "10px",
@@ -197,7 +197,7 @@ export const VARIANT_MAPPING: Record<
   "drawer-title": {
     variant: "subtitle1",
     style: {
-      fontFamily: "Poppins",
+      fontFamily: "Inter",
       fontSize: "14px",
       fontWeight: 600,
       fontStyle: "normal",
@@ -208,7 +208,7 @@ export const VARIANT_MAPPING: Record<
   "drawer-label": {
     variant: "body2",
     style: {
-      fontFamily: "Poppins",
+      fontFamily: "Inter",
       fontSize: "11px",
       fontWeight: 500,
       fontStyle: "normal",

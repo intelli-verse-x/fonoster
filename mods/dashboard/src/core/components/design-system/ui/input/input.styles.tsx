@@ -24,7 +24,7 @@ export const InputRoot = styled(TextField)(({ theme, size }) => ({
     padding: size === "small" ? "4px 14px" : "6px 16px",
     height: size === "small" ? "24px" : "28px",
     fontSize: size === "small" ? "11px" : "12px",
-    fontFamily: "'Poppins', sans-serif",
+    fontFamily: "'Inter', sans-serif",
     fontWeight: 400,
     lineHeight: "normal",
     letterSpacing: "0.12px",
@@ -32,14 +32,14 @@ export const InputRoot = styled(TextField)(({ theme, size }) => ({
   },
   "& .MuiFormLabel-root.MuiInputLabel-root.Mui-focused": {
     color: theme.palette.base["02"],
-    fontFamily: "'Poppins', sans-serif",
+    fontFamily: "'Inter', sans-serif",
     fontWeight: 500,
     lineHeight: "normal",
     transform: "translate(16px, -10px) scale(0.66)",
     size: "10px"
   },
   "& .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-shrink": {
-    fontFamily: "'Poppins', sans-serif",
+    fontFamily: "'Inter', sans-serif",
     fontWeight: 500,
     lineHeight: "normal",
     transform: "translate(16px, -10px) scale(0.66)",
@@ -72,7 +72,7 @@ export const InputRoot = styled(TextField)(({ theme, size }) => ({
     }
   },
   "& .MuiFormHelperText-root": {
-    fontFamily: "'Poppins', sans-serif",
+    fontFamily: "'Inter', sans-serif",
     fontSize: "10px",
     fontWeight: 500,
     lineHeight: "normal",
@@ -81,7 +81,7 @@ export const InputRoot = styled(TextField)(({ theme, size }) => ({
     color: theme.palette.base["03"]
   },
   "& .MuiFormLabel-root.MuiInputLabel-root:not(.MuiInputLabel-shrink)": {
-    fontFamily: "'Poppins', sans-serif",
+    fontFamily: "'Inter', sans-serif",
     fontSize: "12px",
     fontWeight: 500,
     lineHeight: "normal",

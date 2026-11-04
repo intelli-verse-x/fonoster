@@ -88,11 +88,11 @@ export function ApplicationStudioLayout({
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Poppins, sans-serif",
+              fontFamily: "Inter, sans-serif",
               fontSize: { xs: 28, md: 36 },
               fontWeight: 600,
               letterSpacing: "-0.03em",
-              color: "#fff"
+              color: "#0b1433"
             }}
           >
             {title}
@@ -147,11 +147,11 @@ export const studioActionButtonSx = {
 
 export const StudioPrimaryButton = styled(Button)(() => ({
   ...studioActionButtonSx,
-  backgroundColor: "#4C6FFF",
-  color: "#fff",
-  "&:hover": { backgroundColor: "#6EA8FF" },
+  backgroundColor: "#2457d6",
+  color: "#0b1433",
+  "&:hover": { backgroundColor: "#5b8cff" },
   "&.Mui-disabled": {
-    backgroundColor: "rgba(76,111,255,0.35)",
+    backgroundColor: "rgba(36, 87, 214,0.35)",
     color: "rgba(255,255,255,0.7)"
   }
 }));

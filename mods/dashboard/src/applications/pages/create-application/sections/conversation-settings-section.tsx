@@ -38,7 +38,7 @@ export const ConversationSettingsSection = ({
 }) => (
   <>
     <Box sx={{ mt: "8px" }}>
-        <Typography variant="mono-medium" sx={{ color: "#fff", letterSpacing: "0.08em" }}>
+        <Typography variant="mono-medium" sx={{ color: "#0b1433", letterSpacing: "0.08em" }}>
           Conversation
         </Typography>
         <Typography variant="body-micro" sx={{ color: "base.05" }}>

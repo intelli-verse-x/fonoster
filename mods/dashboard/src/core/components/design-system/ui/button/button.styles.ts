@@ -117,10 +117,22 @@ const containedStyles = (theme: Theme, danger?: boolean): CSSObject[] => {
   return [
     {
       backgroundColor: theme.palette.brand.main,
-      color: theme.palette.brand["07"],
-      borderColor: theme.palette.brand.main
-    },
-    theme.applyStyles("dark", { color: "white" })
+      backgroundImage:
+        "linear-gradient(90deg, #2457d6 0%, #7a5bff 55%, #c63fe0 100%)",
+      color: "#ffffff",
+      borderColor: "transparent",
+      "&:hover": {
+        backgroundImage:
+          "linear-gradient(90deg, #1a46b8 0%, #6848f0 55%, #b032cc 100%)",
+        boxShadow: "0 8px 24px rgba(11, 20, 51, 0.16)"
+      },
+      "&:disabled": {
+        backgroundImage:
+          "linear-gradient(90deg, #2457d6 0%, #7a5bff 55%, #c63fe0 100%)",
+        color: "#ffffff",
+        opacity: 0.55
+      }
+    }
   ];
 };
 

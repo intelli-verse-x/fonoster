@@ -49,7 +49,7 @@ export const SplashRoot = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   height: "100%",
-  backgroundColor: "#0C1018",
+  backgroundColor: "#f7f9ff",
   gap: theme.spacing(2),
   flexDirection: "column",
 

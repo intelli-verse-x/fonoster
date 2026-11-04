@@ -54,9 +54,13 @@ export default function CreateApiKey() {
                 border: "none",
                 cursor: "pointer",
                 py: 1,
-                backgroundColor: "#4C6FFF",
-                color: "#fff",
-                "&:hover": { backgroundColor: "#6EA8FF" }
+                backgroundImage:
+                  "linear-gradient(90deg, #2457d6 0%, #7a5bff 55%, #c63fe0 100%)",
+                color: "#0b1433",
+                "&:hover": {
+                  backgroundImage:
+                    "linear-gradient(90deg, #1a46b8 0%, #6848f0 55%, #b032cc 100%)"
+                }
               }}
             >
               Done

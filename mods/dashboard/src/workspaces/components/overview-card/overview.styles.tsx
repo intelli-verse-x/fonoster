@@ -41,7 +41,7 @@ export const OverviewCardRoot = styled(Box)(({ theme }) => ({
 
 export const OverviewCardRootIcon = styled(Box)(({ theme }) => ({
   display: "flex",
-  backgroundColor: "rgba(76, 111, 255, 0.18)",
+  backgroundColor: "rgba(36, 87, 214, 0.18)",
   padding: "10px",
   borderRadius: "10px",
   color: theme.palette.brand.main,
