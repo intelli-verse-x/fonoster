@@ -48,7 +48,8 @@ describe("@identity[workspace/inviteUserToWorkspace]", function () {
 
   it("should invite a user to a workspace", async function () {
     // Arrange
-    const sendInvite = sandbox.stub();
+    // sendInvite returns the email delivery Promise the handler awaits.
+    const sendInvite = sandbox.stub().resolves();
     const metadata = new grpc.Metadata();
     metadata.set("token", TEST_TOKEN);
 
@@ -65,16 +66,28 @@ describe("@identity[workspace/inviteUserToWorkspace]", function () {
         sender: "Fonoster <info@fonoster.local>",
         auth: {}
       },
-      privateKey: TEST_PRIVATE_KEY
+      privateKey: TEST_PRIVATE_KEY,
+      issuer: "https://fonoster.local",
+      audience: "api",
+      workspaceInviteExpiration: "1d",
+      workspaceInviteUrl: "https://fonoster.local/invite"
     } as IdentityConfig;
 
     const prisma = {
       user: {
         findUnique: sandbox.stub().resolves(),
-        create: sandbox.stub().resolves({ ref: TEST_UUID })
+        create: sandbox.stub().resolves({
+          ref: TEST_UUID,
+          accessKeyId: "US14wj8q6qlirw331gfswusfblie6h78uz"
+        })
       },
       workspaceMember: {
-        create: sandbox.stub().resolves({ workspace: { name: workspaceName } }),
+        // Brand/voice invite path looks up PENDING rows before insert.
+        findUnique: sandbox.stub().resolves(null),
+        create: sandbox.stub().resolves({
+          ref: TEST_UUID,
+          workspace: { name: workspaceName }
+        }),
         findFirst: sandbox.stub().resolves()
       },
       workspace: {
@@ -92,16 +105,17 @@ describe("@identity[workspace/inviteUserToWorkspace]", function () {
     );
 
     // Act
+    const callback = sandbox.stub();
     await createInviteUserToWorkspace(
       prisma,
       identityConfig,
       sendInvite
-    )(call, () => {});
+    )(call, callback);
 
     // Assert
+    expect(callback).to.have.been.calledOnce;
+    expect(callback.firstCall.args[0]).to.equal(null);
     expect(sendInvite).to.have.been.calledOnce;
-    // expect(prisma.user.create).to.have.been.calledOnce;
-    // expect(prisma.workspaceMember.create).to.have.been.calledOnce;
   });
 
   it("should return an error if the user is already a member", async function () {
