@@ -36,5 +36,7 @@ FROM node:20-alpine
 COPY ./package.json /app/
 COPY --from=prod-deps /app/node_modules /app/node_modules
 COPY --from=build /app/build /app/build
+# SSR bundle requires generated call protobuf at runtime (not inlined).
+COPY --from=build /app/src/monitoring/services/generated /app/src/monitoring/services/generated
 WORKDIR /app
 CMD ["npm", "start"]
