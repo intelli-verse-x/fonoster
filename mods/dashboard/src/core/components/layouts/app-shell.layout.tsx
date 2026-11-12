@@ -16,11 +16,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Outlet } from "react-router";
+import { Outlet, useLocation, useNavigate } from "react-router";
 import { styled } from "@mui/material";
+import { useEffect } from "react";
 import { AppShellSidebar } from "./app-shell.sidebar";
+import { useAuth } from "~/auth/hooks/use-auth";
+import { isBrandHiddenPath } from "~/core/brand/hidden-voice-studio-nav";
+import { useWorkspaceId } from "~/workspaces/hooks/use-workspace-id";
 
 export default function AppShellLayout() {
+  const { user } = useAuth();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const workspaceId = useWorkspaceId();
+
+  useEffect(() => {
+    if (!workspaceId || !isBrandHiddenPath(pathname, user?.email)) return;
+    navigate(`/workspaces/${workspaceId}/monitoring`, { replace: true });
+  }, [pathname, workspaceId, user?.email, navigate]);
+
   return (
     <AppShellContainer>
       <AppShellSidebar />

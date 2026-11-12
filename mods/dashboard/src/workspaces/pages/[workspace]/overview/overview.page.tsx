@@ -9,6 +9,7 @@ import { useCallback, useMemo } from "react";
 import { useAuth } from "~/auth/hooks/use-auth";
 import { useApiKeys } from "~/api-keys/services/api-keys.service";
 import { PRODUCT_NAME } from "~/core/brand/product";
+import { isVoiceStudioAdmin } from "~/core/brand/hidden-voice-studio-nav";
 import { workspaceCreatorName } from "~/workspaces/helpers/workspace-creator";
 
 export function meta(_: Route.MetaArgs) {
@@ -96,6 +97,7 @@ export default function Overview() {
       ).length,
     [data]
   );
+  const showAdvancedBoard = isVoiceStudioAdmin(user?.email);
 
   return (
     <Page>
@@ -132,7 +134,9 @@ export default function Overview() {
           </Typography>
           <Box sx={{ display: "flex", gap: 3, mt: 4 }}>
             <Box>
-              <Typography sx={{ fontSize: 28, fontWeight: 600, color: "base.01" }}>
+              <Typography
+                sx={{ fontSize: 28, fontWeight: 600, color: "base.01" }}
+              >
                 {isLoading ? "—" : keyCount}
               </Typography>
               <Typography sx={{ fontSize: 12, color: "base.04" }}>
@@ -140,7 +144,9 @@ export default function Overview() {
               </Typography>
             </Box>
             <Box>
-              <Typography sx={{ fontSize: 28, fontWeight: 600, color: "base.01" }}>
+              <Typography
+                sx={{ fontSize: 28, fontWeight: 600, color: "base.01" }}
+              >
                 {isLoading ? "—" : expiringCount}
               </Typography>
               <Typography sx={{ fontSize: 12, color: "base.04" }}>
@@ -148,7 +154,15 @@ export default function Overview() {
               </Typography>
             </Box>
           </Box>
-          <Box sx={{ mt: "auto", pt: 4, display: "flex", gap: 1.5, flexWrap: "wrap" }}>
+          <Box
+            sx={{
+              mt: "auto",
+              pt: 4,
+              display: "flex",
+              gap: 1.5,
+              flexWrap: "wrap"
+            }}
+          >
             <Button
               variant="contained"
               endIcon={<ArrowForwardIcon />}
@@ -197,7 +211,9 @@ export default function Overview() {
           </Typography>
           <BoardRow type="button" onClick={() => go("members")}>
             <Box sx={{ flex: 1 }}>
-              <Typography sx={{ fontWeight: 600, fontSize: 15, color: "#0b1433" }}>
+              <Typography
+                sx={{ fontWeight: 600, fontSize: 15, color: "#0b1433" }}
+              >
                 Members
               </Typography>
               <Typography sx={{ fontSize: 12, color: "base.04" }}>
@@ -206,59 +222,71 @@ export default function Overview() {
             </Box>
             <ChevronRightIcon sx={{ color: "base.04", fontSize: 20 }} />
           </BoardRow>
-          <BoardRow type="button" onClick={() => go("api-keys")}>
-            <Box sx={{ flex: 1 }}>
-              <Typography sx={{ fontWeight: 600, fontSize: 15, color: "#0b1433" }}>
-                API keys
-              </Typography>
-              <Typography sx={{ fontSize: 12, color: "base.04" }}>
-                {isLoading ? (
-                  <Skeleton
-                    variant="rounded"
-                    width={88}
-                    height={12}
-                    animation="wave"
-                    sx={{ bgcolor: "rgba(36, 87, 214,0.16)" }}
-                  />
-                ) : (
-                  `${keyCount} active`
-                )}
-              </Typography>
-            </Box>
-            <ChevronRightIcon sx={{ color: "base.04", fontSize: 20 }} />
-          </BoardRow>
-          <BoardRow type="button" onClick={() => go("api-keys")}>
-            <Box sx={{ flex: 1 }}>
-              <Typography sx={{ fontWeight: 600, fontSize: 15, color: "#0b1433" }}>
-                Key alerts
-              </Typography>
-              <Typography sx={{ fontSize: 12, color: "base.04" }}>
-                {isLoading ? (
-                  <Skeleton
-                    variant="rounded"
-                    width={140}
-                    height={12}
-                    animation="wave"
-                    sx={{ bgcolor: "rgba(36, 87, 214,0.16)" }}
-                  />
-                ) : expiringCount === 0
-                  ? "Nothing expiring in 7 days"
-                  : `${expiringCount} expiring in 7 days`}
-              </Typography>
-            </Box>
-            <ChevronRightIcon sx={{ color: "base.04", fontSize: 20 }} />
-          </BoardRow>
-          <BoardRow type="button" onClick={() => go("sip-network/numbers")}>
-            <Box sx={{ flex: 1 }}>
-              <Typography sx={{ fontWeight: 600, fontSize: 15, color: "#0b1433" }}>
-                SIP network
-              </Typography>
-              <Typography sx={{ fontSize: 12, color: "base.04" }}>
-                Numbers, trunks, and agents
-              </Typography>
-            </Box>
-            <ChevronRightIcon sx={{ color: "base.04", fontSize: 20 }} />
-          </BoardRow>
+          {showAdvancedBoard ? (
+            <>
+              <BoardRow type="button" onClick={() => go("api-keys")}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography
+                    sx={{ fontWeight: 600, fontSize: 15, color: "#0b1433" }}
+                  >
+                    API keys
+                  </Typography>
+                  <Typography sx={{ fontSize: 12, color: "base.04" }}>
+                    {isLoading ? (
+                      <Skeleton
+                        variant="rounded"
+                        width={88}
+                        height={12}
+                        animation="wave"
+                        sx={{ bgcolor: "rgba(36, 87, 214,0.16)" }}
+                      />
+                    ) : (
+                      `${keyCount} active`
+                    )}
+                  </Typography>
+                </Box>
+                <ChevronRightIcon sx={{ color: "base.04", fontSize: 20 }} />
+              </BoardRow>
+              <BoardRow type="button" onClick={() => go("api-keys")}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography
+                    sx={{ fontWeight: 600, fontSize: 15, color: "#0b1433" }}
+                  >
+                    Key alerts
+                  </Typography>
+                  <Typography sx={{ fontSize: 12, color: "base.04" }}>
+                    {isLoading ? (
+                      <Skeleton
+                        variant="rounded"
+                        width={140}
+                        height={12}
+                        animation="wave"
+                        sx={{ bgcolor: "rgba(36, 87, 214,0.16)" }}
+                      />
+                    ) : expiringCount === 0 ? (
+                      "Nothing expiring in 7 days"
+                    ) : (
+                      `${expiringCount} expiring in 7 days`
+                    )}
+                  </Typography>
+                </Box>
+                <ChevronRightIcon sx={{ color: "base.04", fontSize: 20 }} />
+              </BoardRow>
+              <BoardRow type="button" onClick={() => go("sip-network/numbers")}>
+                <Box sx={{ flex: 1 }}>
+                  <Typography
+                    sx={{ fontWeight: 600, fontSize: 15, color: "#0b1433" }}
+                  >
+                    SIP network
+                  </Typography>
+                  <Typography sx={{ fontSize: 12, color: "base.04" }}>
+                    Numbers, trunks, and agents
+                  </Typography>
+                </Box>
+                <ChevronRightIcon sx={{ color: "base.04", fontSize: 20 }} />
+              </BoardRow>
+            </>
+          ) : null}
         </Board>
       </Shell>
     </Page>
