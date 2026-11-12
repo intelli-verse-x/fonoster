@@ -18,7 +18,9 @@
  */
 import { useWorkspaceId } from "~/workspaces/hooks/use-workspace-id";
 import type { SidebarItem } from "./sidebar.interfaces";
-import { useMemo } from "react";
+import { useContext, useMemo } from "react";
+import { AuthenticatedContext } from "~/auth/stores/authenticated.store";
+import { isBrandHiddenNavLabel } from "~/core/brand/hidden-voice-studio-nav";
 
 export const SIDEBAR_ITEMS = Object.freeze<SidebarItem[]>([
   { label: "Overview", href: "/workspaces/[workspaceId]" },
@@ -65,10 +67,14 @@ export const withWorkspaceId = (url: string, workspaceId: string) => {
 
 export const useSidebarItems = () => {
   const workspaceId = useWorkspaceId();
+  const auth = useContext(AuthenticatedContext);
+  const userEmail = auth?.user?.email;
 
   return useMemo(
     () =>
-      SIDEBAR_ITEMS.map((item) => {
+      SIDEBAR_ITEMS.filter(
+        (item) => !isBrandHiddenNavLabel(item.label, userEmail)
+      ).map((item) => {
         if (item.items) {
           return {
             ...item,
@@ -81,6 +87,6 @@ export const useSidebarItems = () => {
 
         return { ...item, href: withWorkspaceId(item.href, workspaceId) };
       }),
-    [workspaceId]
+    [workspaceId, userEmail]
   );
 };

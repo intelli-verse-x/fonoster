@@ -36,7 +36,7 @@
     "copy:prisma-clients": "sh ./.scripts/copy-prisma-clients.sh",
     "db:migrate": "npx prisma migrate dev --schema mods/apiserver/schema.prisma --name changeme --preview-feature && npx prisma migrate dev --schema mods/identity/schema.prisma --name changeme --preview-feature",
     "db:seed": "tsx mods/apiserver/src/core/seed.ts",
-    "format": "prettier --write mods/**/src",
+    "format": "prettier --write \"mods/*/src/**/*.{ts,tsx,js,jsx,mjs,cjs,json,md}\"",
     "generate:keypair": ".scripts/gen-keypair.sh",
     "generate:prisma-clients": "npx prisma generate --schema mods/apiserver/schema.prisma && npx prisma generate --schema mods/identity/schema.prisma",
     "generate:protos": ".scripts/gen-code-proto.sh",
