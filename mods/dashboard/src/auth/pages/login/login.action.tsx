@@ -23,7 +23,7 @@ import {
   commitSession,
   getSessionCookie
 } from "~/auth/services/sessions/session.server";
-import { getClient } from "~/core/sdk/client/fonoster.server";
+import { loginWithPasswordOnServer } from "~/auth/services/sessions/server-login.server";
 
 /**
  * Action handler for processing the login form submission.
@@ -36,9 +36,6 @@ import { getClient } from "~/core/sdk/client/fonoster.server";
  * or back to the login page with an error message on failure.
  */
 export async function action({ request }: Route.ActionArgs) {
-  /** Initialize the API client for Fonoster authentication. */
-  const client = getClient();
-
   /** Retrieve the session cookie from the incoming request headers. */
   const cookie = await getSessionCookie(request.headers.get("Cookie"));
 
@@ -52,6 +49,8 @@ export async function action({ request }: Route.ActionArgs) {
     /**
      * Local/public preview: browser already exchanged credentials via
      * grpc-web; just persist the refresh token (avoids ALB HTTP 464).
+     * Portal auto-login POSTs email/password — use in-cluster gRPC
+     * (FONOSTER_GRPC_ENDPOINT) instead of the public edge.
      */
     if (refreshTokenFromClient) {
       cookie.set("refreshToken", refreshTokenFromClient.toString());
@@ -62,9 +61,11 @@ export async function action({ request }: Route.ActionArgs) {
         );
       }
 
-      /** In-cluster / port-forward: native gRPC login on the server. */
-      await client.login(email.toString(), password.toString());
-      cookie.set("refreshToken", client.getRefreshToken());
+      const refreshToken = await loginWithPasswordOnServer(
+        email.toString(),
+        password.toString()
+      );
+      cookie.set("refreshToken", refreshToken);
     }
 
     /** Redirect to the home page after successful login, with updated cookies. */

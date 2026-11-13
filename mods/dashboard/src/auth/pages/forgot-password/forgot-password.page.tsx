@@ -29,10 +29,10 @@ import { Logger } from "~/core/shared/logger";
 import { useForgotPassword } from "~/auth/services/auth.service";
 import { toast } from "~/core/components/design-system/ui/toaster/toaster";
 import { useNavigate } from "react-router";
-import { FONOSTER_RESET_PASSWORD_URL } from "~/core/sdk/stores/fonoster.config";
+import { resolveResetPasswordUrl } from "~/core/sdk/stores/fonoster.config";
 
 export function meta(_: Route.MetaArgs) {
-  return [{ title: "Forgot Password | Fonoster" }];
+  return [{ title: "Forgot Password | Voice Studio" }];
 }
 
 export default function ForgotPasswordPage() {
@@ -45,20 +45,28 @@ export default function ForgotPasswordPage() {
         "[<ForgotPasswordPage />]: Submitting forgot password form with data:",
         { username }
       );
-      await mutateAsync({
-        username,
-        resetPasswordUrl: FONOSTER_RESET_PASSWORD_URL
-      });
+      try {
+        await mutateAsync({
+          username,
+          resetPasswordUrl: resolveResetPasswordUrl()
+        });
 
-      toast(
-        "Ahoy! If that email is registered, we sent you a link to reset your password. Now check your inbox!"
-      );
+        toast(
+          "If that email is registered, we sent a reset link. Check your inbox (and spam)."
+        );
 
-      form.reset();
+        form.reset();
 
-      navigate("/auth/login", { replace: true });
+        navigate("/auth/login", { replace: true });
+      } catch (error) {
+        Logger.error(
+          "[<ForgotPasswordPage />]: reset code request failed",
+          error
+        );
+        // useForgotPassword already toasts; stay on this page so the user can retry.
+      }
     },
-    []
+    [mutateAsync, navigate]
   );
 
   return (
