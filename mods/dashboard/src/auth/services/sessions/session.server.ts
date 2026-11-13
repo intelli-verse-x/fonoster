@@ -116,14 +116,44 @@ export const getRequiredSession = async (
    */
   if (!session) {
     throw redirect("/auth/login", {
-      headers: {
-        "Set-Cookie": await destroySession(sessionCookie)
-      }
+      headers: await destroySessionFully(sessionCookie)
     });
   }
 
   return { session, ...rest };
 };
+
+/**
+ * Portal SSO transplants the session with Domain=.intelli-verse-x.ai.
+ * Remix destroySession only expires the host-only cookie; without also
+ * clearing the parent-domain copy, logout still leaves isAuthenticated=true.
+ */
+const PARENT_COOKIE_DOMAIN =
+  process.env.DASHBOARD_SESSION_COOKIE_DOMAIN?.trim() || ".intelli-verse-x.ai";
+
+export function clearParentDomainSessionCookie(): string {
+  const name = SESSION_IS_SECURE ? "__Secure-Session" : "__Session";
+  const parts = [
+    `${name}=`,
+    `Domain=${PARENT_COOKIE_DOMAIN}`,
+    "Path=/",
+    "HttpOnly",
+    "SameSite=None",
+    "Max-Age=0"
+  ];
+  if (SESSION_IS_SECURE) parts.push("Secure");
+  return parts.join("; ");
+}
+
+/** Host destroySession + parent-domain expiry (multi Set-Cookie). */
+export async function destroySessionFully(
+  sessionCookie: Awaited<ReturnType<typeof getSessionCookie>>
+): Promise<Headers> {
+  const headers = new Headers();
+  headers.append("Set-Cookie", await destroySession(sessionCookie));
+  headers.append("Set-Cookie", clearParentDomainSessionCookie());
+  return headers;
+}
 
 /**
  * Retrieves the session for unauthenticated users.

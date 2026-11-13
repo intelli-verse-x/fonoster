@@ -52,6 +52,11 @@ export const useAuthenticatedClient = (initialSession?: CookieSession) => {
           Logger.debug(
             "[useAuthenticatedClient()] Client authenticated successfully with initial session."
           );
+          try {
+            sessionStorage?.removeItem("fonoster.auth.auto_logout");
+          } catch {
+            /* ignore */
+          }
         })
         .catch((error) => {
           Logger.error(
@@ -59,6 +64,26 @@ export const useAuthenticatedClient = (initialSession?: CookieSession) => {
             error
           );
 
+          // One logout pass clears host + parent-domain cookies. Avoid stacking
+          // auto_logout navigations while ExchangeRefreshToken is failing.
+          const key = "fonoster.auth.auto_logout";
+          if (
+            typeof sessionStorage !== "undefined" &&
+            sessionStorage.getItem(key)
+          ) {
+            navigate(
+              "/auth/login?error=" +
+                encodeURIComponent(
+                  "Session expired. Close Voice Studio and open it once from the portal."
+                )
+            );
+            return;
+          }
+          try {
+            sessionStorage?.setItem(key, "1");
+          } catch {
+            /* ignore */
+          }
           navigate("/auth/logout?auto_logout=true");
         });
     }

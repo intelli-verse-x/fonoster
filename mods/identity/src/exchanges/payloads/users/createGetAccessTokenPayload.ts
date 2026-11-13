@@ -55,11 +55,17 @@ function createGetAccessTokenPayload(
     }));
 
     memberships.forEach((membership) => {
-      membership.status === WorkspaceMemberStatus.ACTIVE &&
+      // Orphan membership rows (no workspace) used to throw here and surface as
+      // grpc-status 13 Internal on ExchangeRefreshToken → Voice Studio logout loop.
+      if (
+        membership.status === WorkspaceMemberStatus.ACTIVE &&
+        membership.workspace?.accessKeyId
+      ) {
         access.push({
           accessKeyId: membership.workspace.accessKeyId,
           role: membership.role as Role
         });
+      }
     });
 
     return {
