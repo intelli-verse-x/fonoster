@@ -19,7 +19,7 @@
 import { data } from "react-router";
 import {
   commitSession,
-  destroySession,
+  destroySessionFully,
   getSession,
   getSessionCookie
 } from "./session.server";
@@ -55,7 +55,7 @@ export const rootAuthLoader = async ({ request }: Route.LoaderArgs) => {
   } catch (error) {
     return data(
       { session: null, ...rest },
-      { headers: { "Set-Cookie": await destroySession(sessionCookie) } }
+      { headers: await destroySessionFully(sessionCookie) }
     );
   }
 
