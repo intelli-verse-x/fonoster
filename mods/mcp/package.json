@@ -16,10 +16,10 @@
   },
   "scripts": {
     "prebuild": "rimraf ./dist tsconfig.tsbuildinfo",
-    "build": "tsc -b tsconfig.json",
+    "build": "node init && tsc -b tsconfig.json",
     "postbuild": "chmod +x ./dist/index.js",
     "clean": "rimraf ./dist node_modules tsconfig.tsbuildinfo",
-    "start:dev": "nodemon --exec tsx --watch src src/index.ts"
+    "start:dev": "node init && nodemon --exec tsx --watch src src/index.ts"
   },
   "dependencies": {
     "@fonoster/common": "^0.27.0",

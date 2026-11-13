@@ -17,8 +17,11 @@
  * limitations under the License.
  */
 
+// IVX Voice Studio self-host: never fall back to Fonoster Cloud.
+// Production images must also bake DASHBOARD_API_URL, and the kube
+// selfhost-patch rewrites any leftover api.fonoster.com in the bundle.
 const { origin, hostname, port } = new URL(
-  import.meta.env.DASHBOARD_API_URL || "https://api.fonoster.com"
+  import.meta.env.DASHBOARD_API_URL || "https://fonoster.intelli-verse-x.ai"
 );
 
 export const FONOSTER_CLIENT_CONFIG = Object.freeze({
