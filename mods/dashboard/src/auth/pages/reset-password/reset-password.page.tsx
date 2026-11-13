@@ -37,7 +37,7 @@ export interface ResetPasswordTokenPayload {
 }
 
 export function meta(_: Route.MetaArgs) {
-  return [{ title: "Reset Password | Fonoster" }];
+  return [{ title: "Reset Password | Voice Studio" }];
 }
 
 export default function ResetPasswordPage() {

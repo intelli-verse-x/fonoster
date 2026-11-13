@@ -38,11 +38,28 @@ export const FONOSTER_SERVER_CONFIG = Object.freeze({
  * Native gRPC (Node SDK) only works against apiserver :50051 (in-cluster / port-forward).
  * Public ALB + Envoy speaks grpc-web over HTTP/1.1 — Node gRPC gets HTTP 464.
  */
-export const USE_NATIVE_GRPC = FONOSTER_SERVER_CONFIG.endpoint.includes(":50051");
+export const USE_NATIVE_GRPC =
+  FONOSTER_SERVER_CONFIG.endpoint.includes(":50051");
 
+/**
+ * Self-hosted Voice Studio must not fall back to app.fonoster.com — that
+ * sends reset emails to the wrong product. Prefer build arg, then this host.
+ */
 export const FONOSTER_RESET_PASSWORD_URL: string =
   import.meta.env.DASHBOARD_RESET_PASSWORD_URL ||
-  "https://app.fonoster.com/auth/reset-password";
+  "https://fonoster.intelli-verse-x.ai/auth/reset-password";
+
+/** Prefer the live dashboard origin so local / preview hosts still work. */
+export function resolveResetPasswordUrl(): string {
+  const fromEnv = String(
+    import.meta.env.DASHBOARD_RESET_PASSWORD_URL || ""
+  ).trim();
+  if (fromEnv) return fromEnv;
+  if (typeof window !== "undefined" && window.location?.origin) {
+    return `${window.location.origin}/auth/reset-password`;
+  }
+  return FONOSTER_RESET_PASSWORD_URL;
+}
 
 export const IS_CLOUD = Boolean(import.meta.env.DASHBOARD_EDITION === "cloud");
 export const IS_PRIVATE_BETA = Boolean(
