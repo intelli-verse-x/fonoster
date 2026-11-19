@@ -16,7 +16,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { useNavigate, useSearchParams, useSubmit } from "react-router";
+import {
+  data,
+  useLoaderData,
+  useNavigate,
+  useSearchParams,
+  useSubmit
+} from "react-router";
 import { Splash } from "~/core/components/general/splash/splash";
 import { useFonoster } from "~/core/sdk/hooks/use-fonoster";
 import { useCallback, useLayoutEffect } from "react";
@@ -24,16 +30,40 @@ import { Box } from "@mui/material";
 import { Typography } from "~/core/components/design-system/ui/typography/typography";
 import { Logo } from "~/core/components/design-system/ui/logo/logo";
 import { Button } from "~/core/components/design-system/ui/button/button";
+import {
+  destroySessionFully,
+  getSessionCookie
+} from "~/auth/services/sessions/session.server";
+import type { Route } from "./+types/logout.page";
 
 /** Exports the logout action, which handles the server-side logout process. */
 export { action } from "./logout.action";
+
+/**
+ * Portal SSO loads this URL in a hidden iframe (GET) before minting a fresh
+ * session. Cookie wipe must happen on GET — a confirm page or a late POST
+ * either leaves stale host cookies or races and clears the new SSO cookie.
+ */
+export async function loader({ request }: Route.LoaderArgs) {
+  const url = new URL(request.url);
+  if (url.searchParams.get("auto_logout") !== "true") {
+    return { serverCleared: false };
+  }
+
+  const sessionCookie = await getSessionCookie(request.headers.get("Cookie"));
+  return data(
+    { serverCleared: true },
+    { headers: await destroySessionFully(sessionCookie) }
+  );
+}
 
 /**
  * Logout page component.
  *
  * Handles the client-side and server-side logout processes:
  * - Calls the logout function from the Fonoster SDK to clear tokens.
- * - Submits a POST request to the server to destroy the session.
+ * - Submits a POST request to the server to destroy the session
+ *   (skipped when the loader already cleared cookies for auto_logout).
  * - Shows a splash screen while the logout is in progress.
  *
  * @returns {JSX.Element} The rendered logout page.
@@ -41,6 +71,7 @@ export { action } from "./logout.action";
 export default function Logout() {
   /** Retrieves the current URL search parameters from react-router. */
   const [searchParams] = useSearchParams();
+  const { serverCleared } = useLoaderData<typeof loader>();
 
   /**
    * Determines if the logout was triggered automatically.
@@ -60,12 +91,18 @@ export default function Logout() {
   /**
    * Handles the logout process:
    * - Clears the client-side session using the SDK.
-   * - Submits a POST request to trigger the server-side logout.
+   * - Submits a POST request to trigger the server-side logout (manual path).
+   * - When the loader already wiped cookies, only clear SDK + go to login
+   *   so a portal SSO iframe cannot race a POST against establish-session.
    */
   const onLogout = useCallback(() => {
     logout();
+    if (serverCleared) {
+      navigate("/auth/login", { replace: true });
+      return;
+    }
     submit(null, { method: "post" });
-  }, [logout, submit]);
+  }, [logout, navigate, serverCleared, submit]);
 
   /**
    * Automatically triggers logout if 'auto_logout' is set to true in the query string.
